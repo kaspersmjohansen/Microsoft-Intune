@@ -1,10 +1,43 @@
-Connect-MSGraph
-$GroupNames = "Remote-Desktop"
-
-ForEach ($Group in $GroupNames)
+function New-IntuneGroup
 {
-    $Name = "App-Install-$Group"
-    New-Groups -displayName "$Name" -mailEnabled $false -mailNickname "$Name" -securityEnabled $true    
-}
+    param(
+        [Parameter(Mandatory=$true)]
+         $Name,
+         [string]$Prefix,
+         [string]$Affix
+    )
+        Import-Module -Name Microsoft.Graph.Intune
+        ForEach ($Group in $Name)
+        {
+            If ($Prefix -and [string]::IsNullOrEmpty($Affix))
+            {
+                $GroupName = $Prefix + $Group
+                New-Groups -displayName "$GroupName" -mailEnabled $false -mailNickname "$GroupName" -securityEnabled $true    
+            }            
+                If ($Affix -and [string]::IsNullOrEmpty($Prefix))
+                {
+                    $GroupName = $Group + $Affix
+                    New-Groups -displayName "$GroupName" -mailEnabled $false -mailNickname "$GroupName" -securityEnabled $true     
+                }
+                    If ($Prefix -and $Affix)
+                    {
+                        $GroupName = $Prefix + $Group + $Affix
+                        New-Groups -displayName "$GroupName" -mailEnabled $false -mailNickname "$GroupName" -securityEnabled $true     
+                    }                    
+                        If ([string]::IsNullOrEmpty($Prefix) -and [string]::IsNullOrEmpty($Affix))
+                        {
+                            New-Groups -displayName "$Group" -mailEnabled $false -mailNickname "$Group" -securityEnabled $true
+                        }
+        }
 
-Get-Groups | where {$_.Displayname -like "App-install*"} | select DisplayName, id, MailNickName | Sort-Object DisplayName
+}
+Connect-MSGraph
+New-IntuneGroup -Name Test
+
+New-IntuneGroup -Name Test -Prefix "Prefix-"
+
+New-IntuneGroup -Name Test -Affix "-Affix"
+
+New-IntuneGroup -Name Test -Prefix "Prefix-" -Affix "-Affix"
+
+Get-Groups | where {$_.Displayname -like "*Test*"} | select DisplayName, id, MailNickName | Sort-Object DisplayName
