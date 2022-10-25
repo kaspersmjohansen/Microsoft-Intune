@@ -1,7 +1,13 @@
 {
     "IntuneConfig": {
                         "TenantID": "",
-                        "GroupPrefix":  "",
-                        "GroupAffix":  ""
+                        "GroupName": "Intune-PoC",
+                        "GroupPrefix":  "WS-",
+                        "GroupAffix":  "",
+                        "AppGroup1": "Install-App1",
+                        "AppGroup2": "Install-App2",
+                        "AppGroup3": "Install-App3",
+                        "AppGroup4": "Install-App4",
+                        "AppGroup5": "Install-App5"
                     }
 }
