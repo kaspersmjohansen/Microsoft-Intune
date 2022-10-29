@@ -7,6 +7,8 @@ function New-IntuneGroup
          [string]$Affix
     )
         Import-Module -Name Microsoft.Graph.Intune
+        Connect-MSGraph
+        
         ForEach ($Group in $Name)
         {
             If ($Prefix -and [string]::IsNullOrEmpty($Affix))
@@ -31,13 +33,16 @@ function New-IntuneGroup
         }
 
 }
-Connect-MSGraph
-New-IntuneGroup -Name Test
 
-New-IntuneGroup -Name Test -Prefix "Prefix-"
+$GroupName = "Git-for-Windows"
+$GroupPrefix = "App-Install-"
+$GroupAffix = ""
 
-New-IntuneGroup -Name Test -Affix "-Affix"
 
-New-IntuneGroup -Name Test -Prefix "Prefix-" -Affix "-Affix"
+New-IntuneGroup -Name $GroupName -Prefix $GroupPrefix
+
+New-IntuneGroup -Name $GroupName -Affix $GroupAffix
+
+New-IntuneGroup -Name $GroupName -Prefix $GroupPrefix -Affix $GroupAffix
 
 Get-Groups | where {$_.Displayname -like "*Test*"} | select DisplayName, id, MailNickName | Sort-Object DisplayName
