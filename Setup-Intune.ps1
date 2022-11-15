@@ -1,10 +1,24 @@
+# Configure Microsoft Powershell Gallery (PSGallery) as a trusted source
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
 
 # Install required Powershell Modules
 # Install-Module AzureAD -Repository PSGallery -Scope CurrentUser -Force
-Install-Module Microsoft.Graph.Intune -Repository PSGallery -Scope CurrentUser -Force
-Install-Module Microsoft.Graph.Groups -Repository PSGallery -Scope CurrentUser -Force
+Install-PackageProvider -Name NuGet -Force
+Install-Module -Name Microsoft.Graph.DeviceManagement -Force #-Scope CurrentUser
+Install-Module -Name Microsoft.Graph.DeviceManagement.Actions -Force 
+Install-Module -Name Microsoft.Graph.DeviceManagement.Administration -Force
+Install-Module -Name Microsoft.Graph.DeviceManagement.Enrolment -Force
+Install-Module -Name Microsoft.Graph.DeviceManagement.Functions -Force
+Install-Module -Name Microsoft.Graph.Authentication -Force
+#Install-Module Microsoft.Graph.Intune -Repository PSGallery -Scope CurrentUser -Force
+#Install-Module Microsoft.Graph.Groups -Repository PSGallery -Scope CurrentUser -Force
 # Install-Module AzureAD -Repository PSGallery -Scope CurrentUser -Force
+
+Import-Module -Name Microsoft.Graph.DeviceManagement
+Import-Module -Name Microsoft.Graph.DeviceManagement.Actions
+Import-Module -Name Microsoft.Graph.DeviceManagement.Administration
+Import-Module -Name Microsoft.Graph.DeviceManagement.Enrolment
+Import-Module -Name Microsoft.Graph.DeviceManagement.Functions
 
 
 # Function to create Intune groups
@@ -43,8 +57,13 @@ function New-IntuneGroup
 }
 
 # Connect-AzureAD -TenantID warlockstudy.net
-Connect-MSGraph
-Connect-AzureAD -TenantId warlockstudy.net
+$Scopes = "DeviceManagementApps.Read.All","DeviceManagementConfiguration.Read.All",
+          "DeviceManagementManagedDevices.Read.All","DeviceManagementRBAC.Read.All",
+          "DeviceManagementServiceConfig.Read.All"
+Connect-MgGraph -Scopes $Scopes
+Select-MgProfile beta
+
+#Connect-AzureAD -TenantId warlockstudy.net
 
 # Get Intuneconfig.json contents
 $ConfigFilePath = "." + "\" + "IntuneConfig.json"
@@ -80,3 +99,6 @@ Update-Groups -groupId "bc997475-95b9-41dc-8622-ed23ea6fa496" -memberOf "12557b2
 # Create Compliance Policies
 
 # Create Apps
+
+
+Invoke-RestMethod -UseBasicParsing -Uri https://graph.microsoft.com/beta/deviceManagement/configurationPolicies
