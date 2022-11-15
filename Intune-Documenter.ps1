@@ -23,7 +23,7 @@ $Scopes = "DeviceManagementServiceConfig.Read.All", "DeviceManagementConfigurati
 Connect-MgGraph -Scopes $Scopes
 Select-MgProfile beta
 
-Find-MgGraphCommand -command Get-MgDeviceManagementDeviceCompliancePolicy | Select -First 1 -ExpandProperty Permissions
+Find-MgGraphCommand -command Get-MgApplication | Select -First 1 -ExpandProperty Permissions
 
 # Document Configuration Policies
 
