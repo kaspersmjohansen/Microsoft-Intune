@@ -7,12 +7,14 @@ Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
 function Install-GraphModules {
 # Install required Powershell Modules
 Install-PackageProvider -Name NuGet -Force
+Install-Module -Name Microsoft.Graph.Authentication -Force
+Install-Module -Name Microsoft.Graph.Applications -Force
 Install-Module -Name Microsoft.Graph.DeviceManagement -Force
 Install-Module -Name Microsoft.Graph.DeviceManagement.Actions -Force
 Install-Module -Name Microsoft.Graph.DeviceManagement.Administration -Force
 Install-Module -Name Microsoft.Graph.DeviceManagement.Enrolment -Force
 Install-Module -Name Microsoft.Graph.DeviceManagement.Functions -Force
-Install-Module -Name Microsoft.Graph.Authentication -Force
+Install-Module -Name Microsoft.Graph.WindowsUpdates -Force
 
 }
 $Scopes = "DeviceManagementApps.Read.All","DeviceManagementConfiguration.Read.All",
@@ -23,21 +25,44 @@ $Scopes = "DeviceManagementServiceConfig.Read.All", "DeviceManagementConfigurati
 Connect-MgGraph -Scopes $Scopes
 Select-MgProfile beta
 
-Find-MgGraphCommand -command Get-MgApplication | Select -First 1 -ExpandProperty Permissions
+Find-MgGraphCommand -command Get-MgDeviceManagementDeviceCompliancePolicy | Select -First 1 -ExpandProperty Permissions
 
 # Document Configuration Policies
+ForEach ($policy in Get-MgDeviceManagementDeviceConfiguration)
+{
+    $Policy.DisplayName
+    #$Policy.AdditionalProperties
+}
 
 # Document Compliance Policies
+ForEach ($policy in Get-MgDeviceManagementDeviceCompliancePolicy)
+{
+    $Policy.DisplayName
+    #$Policy.AdditionalProperties
+}
 
 # Document Windows Update for Business
+ForEach ($policy in Get-MgDeviceManagementWindowFeatureUpdateProfile)
+{
+    $Policy.DisplayName
+    #$Policy.AdditionalProperties
+}
 
 # Document Windows Autopatch
 
 # Document Enrollment Configuration
-(Get-MgDeviceManagementDeviceEnrollmentConfiguration -DeviceEnrollmentConfigurationId 70908e37-35ff-45a1-88d5-16bc5cd3b9b8_Windows10EnrollmentCompletionPageConfiguration).AdditionalProperties
+ForEach ($policy in Get-MgDeviceManagementDeviceEnrollmentConfiguration)
+{
+    $Policy.DisplayName
+    #$Policy.AdditionalProperties
+}
 
 # Document Apps
 
 # Document Scripts
-
+ForEach ($policy in Get-MgDeviceManagementDeviceShellScript)
+{
+    $Policy.DisplayName
+    #$Policy.AdditionalProperties
+}
 # Document Proactive Remediation
