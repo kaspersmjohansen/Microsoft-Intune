@@ -8,7 +8,6 @@ function Install-GraphModules {
 # Install required Powershell Modules
 Install-PackageProvider -Name NuGet -Force
 Install-Module -Name Microsoft.Graph.Authentication -Force
-Install-Module -Name Microsoft.Graph.Applications -Force
 Install-Module -Name Microsoft.Graph.DeviceManagement -Force
 Install-Module -Name Microsoft.Graph.DeviceManagement.Actions -Force
 Install-Module -Name Microsoft.Graph.DeviceManagement.Administration -Force
@@ -21,11 +20,11 @@ $Scopes = "DeviceManagementApps.Read.All","DeviceManagementConfiguration.Read.Al
           "DeviceManagementManagedDevices.Read.All","DeviceManagementRBAC.Read.All",
           "DeviceManagementServiceConfig.Read.All"
 
-$Scopes = "DeviceManagementServiceConfig.Read.All", "DeviceManagementConfiguration.Read.All"
+$Scopes = "DeviceManagementServiceConfig.Read.All","DeviceManagementConfiguration.Read.All"
 Connect-MgGraph -Scopes $Scopes
 Select-MgProfile beta
 
-Find-MgGraphCommand -command Get-MgDeviceManagementDeviceCompliancePolicy | Select -First 1 -ExpandProperty Permissions
+Find-MgGraphCommand -command Get-MgApplication | Select -First 1 -ExpandProperty Permissions
 
 # Document Configuration Policies
 ForEach ($policy in Get-MgDeviceManagementDeviceConfiguration)
