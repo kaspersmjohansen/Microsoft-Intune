@@ -20,10 +20,9 @@ $CompanyName = ""
 $Scriptversion = "1.0"
 $TeamsUploadFolder = "$env:APPDATA\Microsoft\Teams\Backgrounds\Uploads"
 
-<#
 # Configure log file and log file path
 $LogFile = "Set-TeamsBackground.log"
-$LogPath = "$env:ProgramData\Microsoft\IntuneManagementExtension\Logs"
+$LogPath = "$env:APPDATA\Microsoft\Teams\logs"
 
 If (!(Test-Path -Path $LogPath))
     {
@@ -37,7 +36,6 @@ If (!(Test-Path -Path $TeamsUploadFolder))
 {
     New-Item -Path $TeamsUploadFolder -ItemType Directory -Verbose
 }
-#>
 
 # Copy Files to Teams upload folder directory
 Get-ChildItem -Path .\* -Include *.jpg,*,jpeg,*.png,*bmp | Copy-Item -Destination $TeamsUploadFolder -Force -Verbose
@@ -59,4 +57,4 @@ else {
     New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "String" -Verbose
 }
 
-# Stop-Transcript
+Stop-Transcript
