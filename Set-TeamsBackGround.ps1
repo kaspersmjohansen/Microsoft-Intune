@@ -22,7 +22,7 @@ $TeamsUploadFolder = "$env:APPDATA\Microsoft\Teams\Backgrounds\Uploads"
 
 # Configure log file and log file path
 $LogFile = "Set-TeamsBackground.log"
-$LogPath = "$env:APPDATA\Microsoft\Teams\logs"
+$LogPath = "$env:ProgramData\Microsoft\IntuneManagementExtension\Logs"
 
 If (!(Test-Path -Path $LogPath))
     {
