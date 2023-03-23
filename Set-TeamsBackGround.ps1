@@ -38,7 +38,7 @@ If (!(Test-Path -Path $TeamsUploadFolder))
 }
 
 # Copy Files to Teams upload folder directory
-Get-ChildItem -Path .\* -Include *.jpg,*,jpeg,*.png,*bmp | Copy-Item -Destination $TeamsUploadFolder -Force -Verbose
+Get-ChildItem -Path .\ -Include ("*.jpg","*,jpeg","*.png","*.bmp") -Recurse | Copy-Item -Destination $TeamsUploadFolder -Force -Verbose
 
 # Create registry key and value to detect if Teams backgrounds are installed/copied
 $RegKey = "HKCU:Software\$CompanyName\Intune\TeamsBackgrounds"
