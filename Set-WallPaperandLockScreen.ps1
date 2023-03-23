@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------- 
-# Name: HappyAdmin Customization
-# install.ps1, June 2022
+# Name: virtualwarlock.net - Kasper Johansen
+# SetWallPaperandLockScreen, March 2023
 # Thanks to: https://www.thelazyadministrator.com
 # ------------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ If ($ENV:PROCESSOR_ARCHITEW6432 -eq "AMD64") {
 }
 
 # Variables
-$CompanyName = "warlockstudy.net"
+$CompanyName = ""
 $Scriptversion = "1.0"
 $RegPath = "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP"
 $ImageDestinationFolder = "C:\Windows\Customization"
@@ -77,10 +77,10 @@ If (!(Test-Path -Path $RegKey))
     New-Item -Path "HKLM:Software\$CompanyName\Intune" -Verbose
     New-Item -Path "HKLM:Software\$CompanyName\Intune\WindowsBackgroundImage" -Verbose
 
-    New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "DWORD" -Verbose
+    New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "String" -Verbose
 }
 else {
-    New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "DWORD" -Verbose
+    New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "String" -Verbose
 }
 
 # Create registry key and value to detect if lockscreen is installed
@@ -94,10 +94,10 @@ If (!(Test-Path -Path $RegKey))
     New-Item -Path "HKLM:Software\$CompanyName\Intune" -Verbose
     New-Item -Path "HKLM:Software\$CompanyName\Intune\WindowsLockScreenImage" -Verbose
 
-    New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "DWORD" -Verbose
+    New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "String" -Verbose
 }
 else {
-    New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "DWORD" -Verbose
+    New-ItemProperty -Path $RegKey -Name $RegValue -Value $RegData -PropertyType "String" -Verbose
 }
 
 Stop-Transcript
