@@ -7,7 +7,13 @@
 
 .DESCRIPTION
     To be able to use custom Office templates, the template files have to be copied to the Custom Office Templates folder in the user's Documents folder. 
-    This script copies .dotx, .xltx and .potx files to the Custom Office Templates folder.
+    This script copies .dotx, .xltx and .potx files to the Custom Office Templates folder. All files have to be places in a folder called Office.
+
+    File/Folder structure:
+
+    Containing Folder:
+    \Office
+    Set-OfficeTemplates.ps1
 
     Excel, Powerpoint and Word are then configured to allow Personal templates to be available when creating af new document. 
     This configuration is delivered as registry changes for Excel, Powerpoint and Word in the HKCU:SOFTWARE\Microsoft\Office\16.0\ registry key
