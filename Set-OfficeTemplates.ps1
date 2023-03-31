@@ -24,6 +24,7 @@
     Variable documentation:
 
     $CompanyName should contain the current companyname, or something unique to identify the company
+    
     $ScriptVersion should contain a version identifier such as "1.0", "1.1" etc.
 
     $OfficeTemplatesPath contains the path of Custom Office Templates folder
