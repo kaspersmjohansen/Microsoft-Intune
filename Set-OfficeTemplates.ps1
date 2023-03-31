@@ -33,7 +33,7 @@
 .NOTES
     Author:             Kasper Johansen
     Website:            https://virtualwarlock.net
-    Last modified Date: 30-03-2022
+    Last modified Date: 31-03-2022
 #>
 
 # Relaunch script in 64-bit context
@@ -51,7 +51,8 @@ If ($ENV:PROCESSOR_ARCHITEW6432 -eq "AMD64") {
 $CompanyName = ""
 $Scriptversion = "1.0"
 
-$OfficeTemplatesPath = "$($env:USERPROFILE)\Documents" + "\Custom Office Templates"
+$DocumentsFolder = [Environment]::GetFolderPath("MyDocuments")
+$OfficeTemplatesPath = "$DocumentsFolder" + "\Custom Office Templates"
 
 # Configure log file and log file path
 $LogFile = "Set-OfficeTemplates.log"
@@ -71,7 +72,7 @@ If (!(Test-Path -Path $OfficeTemplatesPath))
 }
 
 # Copy Office templates to Custom Office Templates folder
-Get-ChildItem -Path .\Office -Include ("*.dotx","*.xltx","*.potx") -Recurse | Copy-Item -Destination $OfficeTemplatesPath -Force -Verbose
+Get-ChildItem -Path "$PSSCRIPTROOT\Office" -Include ("*.dotx","*.xltx","*.potx") -Recurse | Copy-Item -Destination $OfficeTemplatesPath -Force -Verbose
 
 # Create Excel, Powerpoint and Word Personal Templates Path registry value
 $OfficeApps = "Excel","Powerpoint","Word"
