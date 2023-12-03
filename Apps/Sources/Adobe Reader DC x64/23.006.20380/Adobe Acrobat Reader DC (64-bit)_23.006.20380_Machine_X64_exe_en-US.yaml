@@ -1,0 +1,59 @@
+PackageIdentifier: Adobe.Acrobat.Reader.64-bit
+PackageVersion: 23.006.20380
+Moniker: acrobatreader
+Tags:
+- acrobat
+- adobe
+- dc
+- reader
+PackageLocale: en-US
+Author: Adobe Systems Incorporated
+Copyright: Copyright (c) Adobe
+CopyrightUrl: https://www.adobe.com/content/dam/cc/en/legal/licenses-terms/pdf/Reader-EULA-en_US-20181207.pdf
+Description: "Adobe Acrobat Reader DC software is the free, trusted global standard
+  for viewing, printing, signing, sharing, and annotating PDFs. It's the only PDF
+  viewer that can open and interact with all types of PDF content \u2013 including
+  forms and multimedia."
+ShortDescription: The free global standard for reliably viewing, printing, signing,
+  and commenting on PDF documents.
+License: Proprietary, Freeware
+LicenseUrl: https://www.adobe.com/content/dam/cc/en/legal/licenses-terms/pdf/Reader-EULA-en_US-20181207.pdf
+PackageName: Adobe Acrobat Reader DC (64-bit)
+PackageUrl: https://acrobat.adobe.com/us/en/acrobat/pdf-reader.html
+PrivacyUrl: https://www.adobe.com/privacy.html
+Publisher: Adobe
+PublisherSupportUrl: https://helpx.adobe.com/support.html
+PublisherUrl: https://www.adobe.com
+Installers:
+- Architecture: x64
+  InstallerType: exe
+  InstallerSha256: 11d4487e308b8c10f657e194a45661ea93d24a55441415c3ced75a7815db94de
+  InstallerUrl: https://ardownload2.adobe.com/pub/adobe/acrobat/win/AcrobatDC/2300620380/AcroRdrDCx642300620380_MUI.exe
+  Scope: machine
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  MinimumOSVersion: 10.0.0.0
+  ProductCode: '{AC76BA86-1033-FF00-7760-BC15014EA700}'
+  UpgradeBehavior: install
+  FileExtensions:
+  - pdf
+  - pdfa
+  - pdfx
+  - xfx
+  AppsAndFeaturesEntries:
+  - DisplayName: Adobe Acrobat DC (64-bit)
+    InstallerType: msi
+    ProductCode: '{AC76BA86-1033-FF00-7760-BC15014EA700}'
+    Publisher: Adobe
+  InstallerSwitches:
+    Silent: /sAll /rs /rps /l /re
+    SilentWithProgress: /sAll /rs /rps /l /re
+  InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+ManifestVersion: 1.5.0
+ManifestType: merged

@@ -1,5 +1,5 @@
-$CSVFile = ".\AppsCSV.csv"
-$DownloadFolder = ".\Sources"
+$CSVFile = "$PSScriptRoot\AppsCSV.csv"
+$DownloadFolder = "$PSScriptRoot\Sources"
 
 Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
     $AppName = $_.AppName
@@ -9,7 +9,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
     $WinGetAppMetaExport = "$DownloadFolder\WinGetMetaExport-$AppName.txt"
     Start-Process -FilePath "winget.exe" -ArgumentList "show --id $AppID --exact --accept-source-agreements" -WindowStyle Hidden -Wait -RedirectStandardOutput $WinGetAppMetaExport
     $winGetOutput = Get-Content -Path $WinGetAppMetaExport
-    # Remove-Item -Path $WinGetAppMetaExport -Force
+    Remove-Item -Path $WinGetAppMetaExport -Force
 
     $Version = $winGetOutput | Select-String -Pattern "version:" | ForEach-Object { $_.Line -replace '.*version:\s*(.*)', '$1' }
 
