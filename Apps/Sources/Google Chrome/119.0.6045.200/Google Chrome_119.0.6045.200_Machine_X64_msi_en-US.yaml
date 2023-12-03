@@ -62,7 +62,7 @@ Installers:
   InstallerType: msi
   InstallerSha256: daece3317edcdc030fb6815afd56b8cf5d4b9293d65e6c3a40a6060c37a12e27
   InstallerUrl: https://dl.google.com/dl/chrome/install/googlechromestandaloneenterprise64.msi
-  Scope: user
+  Scope: machine
   InstallerLocale: en-US
   InstallerAbortsTerminal: false
   InstallLocationRequired: false

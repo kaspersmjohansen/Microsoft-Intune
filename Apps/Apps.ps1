@@ -21,7 +21,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
     If (!(Test-Path -Path "$DownloadFolder\$AppName\$Version"))
     {
         New-Item -Path "$DownloadFolder\$AppName" -name $Version -ItemType Directory
-        Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$DownloadFolder\$AppName\$Version`" --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+        Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$DownloadFolder\$AppName\$Version`" --scope machine --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
     }
     else {
         Write-Host "$AppName is already at latest version"
