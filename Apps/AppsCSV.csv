@@ -4,3 +4,6 @@ Adobe Reader DC x86;Adobe.Acrobat.Reader.32-bit;x86
 Google Chrome;Google.Chrome;x64
 Microsoft Edge Webview2 Runtime;Microsoft.EdgeWebView2Runtime;x64
 Teamviewer;TeamViewer.TeamViewer;x64
+7.Zip;7zip.7zip;x64
+Git;Git.Git;x64
+Microsoft Visual Studio Code;Microsoft.VisualStudioCode;x64
