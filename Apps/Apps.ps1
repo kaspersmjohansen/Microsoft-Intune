@@ -24,6 +24,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
         Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$DownloadFolder\$AppName\$Version`" --scope machine --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
     }
     else {
-        Write-Host "$AppName is already at latest version"
+        Write-Host "$AppName is already at latest version" -ForegroundColor Cyan
+        Write-Host ""
     }
 }
