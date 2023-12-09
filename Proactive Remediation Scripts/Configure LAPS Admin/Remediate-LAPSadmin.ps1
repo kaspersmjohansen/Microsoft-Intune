@@ -1,6 +1,9 @@
+# Credit to T-Bone, for the $AccountMember variable - https://tbone.se/2023/10/24/how-to-use-windows-laps-to-secure-local-administrator-accounts/
 $AccountName = "lapsadmin"
+$AdminGroupSID  = "S-1-5-32-544"
+$AdminGroupName = (Get-LocalGroup -SID $AdminGroupSID).Name
 $AccountExist = (Get-LocalUser).Name -Contains $AccountName
-$AccountMember = (Get-LocalGroupMember -Name "Administrators").Name -Contains "$env:COMPUTERNAME\$AccountName"
+$AccountMember  = if ($AccountName -in (([ADSI]"WinNT://./$AdminGroupName").psbase.Invoke('Members') | ForEach-Object {$_.GetType().InvokeMember("Name","GetProperty",$Null,$_,$Null)})){$true}else{$false}
 
 # Create LAPS admin user account
 If (!$AccountExist)
@@ -20,6 +23,7 @@ if (!$AccountMember)
     Add-LocalGroupMember -Name Administrators -Member $AccountName
 }
 
+# Detect user and group membership
 $AccountExist = (Get-LocalUser).Name -Contains $AccountName
 $AccountMember = (Get-LocalGroupMember -Name "Administrators").Name -Contains "$env:COMPUTERNAME\$AccountName"
 
