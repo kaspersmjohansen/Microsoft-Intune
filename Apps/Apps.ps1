@@ -36,7 +36,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
     {
         New-Item -Path $DestinationFolder -Name $AppFolder -ItemType Directory
         New-Item -Path "$DestinationFolder\$AppFolder" -Name Media -ItemType Directory
-        Copy-Item -Path "$DestinationFolder\PSADT Template\*" -Destination "$DestinationFolder\$AppFolder\Media"
+        Copy-Item -Path "$DestinationFolder\PSADT Template\*" -Recurse -Destination "$DestinationFolder\$AppFolder\Media"
         Copy-Item -Path "$DestinationFolder\DetectionScript.ps1" -Destination "$DestinationFolder\$AppFolder"
     }
 }

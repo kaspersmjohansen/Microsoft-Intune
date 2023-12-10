@@ -107,7 +107,7 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = ''Foxit
+    [String]$appVendor = 'Foxit'
     [String]$appName = 'PDF Reader'
     [String]$appVersion = '2023.3.0.23028'
     [String]$appArch = 'x86'
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Foxit PDF Reader_2023.3.0.23028_Machine_X86_exe_en-US.exe' -Parameters '/COMPONENTS="pdfviewer,ffse" CPDF_DISABLE=1 /DisableInternet /verysilent'
+        Execute-Process -Path 'Foxit PDF Reader_2023.3.0.23028_Machine_X86_exe_en-US.exe' -Parameters '/DisableInternet /noshortcut /lang en /quiet'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -249,7 +249,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path "${env:ProgramFiles(x86)}\Foxit Software\Foxit PDF Reader\unins000.exe" -Parameters '/clean /verysilent'
+        Remove-MSIApplications -Name "Foxit PDF Reader"
 
         ##*===============================================
         ##* POST-UNINSTALLATION
@@ -257,6 +257,7 @@ Try {
         [String]$installPhase = 'Post-Uninstallation'
 
         ## <Perform Post-Uninstallation tasks here>
+        Remove-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Foxit Software' -Recurse
 
 
     }
