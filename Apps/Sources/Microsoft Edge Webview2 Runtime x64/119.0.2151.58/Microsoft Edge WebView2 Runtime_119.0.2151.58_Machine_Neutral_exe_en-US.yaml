@@ -20,7 +20,7 @@ Installers:
   InstallerType: exe
   InstallerSha256: 5b01d964ced28c1ff850b4de05a71f386addd815a30c4a9ee210ef90619df58e
   InstallerUrl: https://go.microsoft.com/fwlink/p/?LinkId=2124703
-  Scope: user
+  Scope: machine
   InstallerAbortsTerminal: false
   InstallLocationRequired: false
   RequireExplicitUpgrade: false

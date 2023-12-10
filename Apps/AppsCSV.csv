@@ -1,9 +1,10 @@
-﻿AppName;AppID;AppArchitecture
-Adobe Reader DC x64;Adobe.Acrobat.Reader.64-bit;x64
-Adobe Reader DC x86;Adobe.Acrobat.Reader.32-bit;x86
-Google Chrome;Google.Chrome;x64
-Microsoft Edge Webview2 Runtime;Microsoft.EdgeWebView2Runtime;x64
-Teamviewer;TeamViewer.TeamViewer;x64
-7.Zip;7zip.7zip;x64
-Git;Git.Git;x64
-Microsoft Visual Studio Code;Microsoft.VisualStudioCode;x64
+﻿Vendor;Product;Language;AppID;Architecture
+Adobe;Acrobat Reader DC;en-us;Adobe.Acrobat.Reader.64-bit;x64
+Adobe;Acrobat Reader DC;en-us;Adobe.Acrobat.Reader.32-bit;x86
+Google;Chrome;en-us;Google.Chrome;x64
+Microsoft;Edge Webview2 Runtime;en-us;Microsoft.EdgeWebView2Runtime;x64
+Teamviewer GmbH;Teamviewer;en-us;TeamViewer.TeamViewer;x64
+Igor Pavlov;7-Zip;en-us;7zip.7zip;x64
+Git;Git;en-us;Git.Git;x64
+Microsoft;Visual Studio Code;en-us;Microsoft.VisualStudioCode;x64
+Foxit;PDF Reader;en-us;Foxit.FoxitReader;x86
