@@ -5,9 +5,8 @@ $DestinationFolder = "$PSScriptRoot"
 Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
     $Vendor = $_.Vendor
     $Product = $_.Product
-    $AppID = $_.AppID
     $Architecture = $_.Architecture
-    
+    $AppID = $_.AppID
     $AppFolder = "$Vendor $Product $Architecture"
     
     $WinGetAppMetaExport = "$SourceFolder\WinGetMetaExport-$AppName.txt"
@@ -38,5 +37,6 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
         New-Item -Path "$DestinationFolder\$AppFolder" -Name Media -ItemType Directory
         Copy-Item -Path "$DestinationFolder\PSADT Template\*" -Recurse -Destination "$DestinationFolder\$AppFolder\Media"
         Copy-Item -Path "$DestinationFolder\DetectionScript.ps1" -Destination "$DestinationFolder\$AppFolder"
+        Get-ChildItem -Path "$SourceFolder\$AppFolder\$Version" -Include *.exe *.msi | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files"
     }
 }
