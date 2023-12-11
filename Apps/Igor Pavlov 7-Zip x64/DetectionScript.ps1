@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files\7-Zip"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "7zFM.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "23.01"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

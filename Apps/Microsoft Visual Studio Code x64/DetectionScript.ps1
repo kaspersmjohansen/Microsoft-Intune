@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files\Microsoft VS Code"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "Code.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "1.84.2"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Foxit PDF Reader_2023.3.0.23028_Machine_X86_exe_en-US.exe' -Parameters '/DisableInternet /noshortcut /lang en /quiet'
+        Execute-Process -Path 'Foxit PDF Reader*.exe' -Parameters '/DisableInternet /noshortcut /lang en /quiet'
 
         ##*===============================================
         ##* POST-INSTALLATION

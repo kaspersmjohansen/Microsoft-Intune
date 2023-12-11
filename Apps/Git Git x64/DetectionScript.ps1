@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files\Git"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "git-cmd.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "2.43.0.windows.1"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
