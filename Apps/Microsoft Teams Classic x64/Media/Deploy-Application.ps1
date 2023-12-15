@@ -107,9 +107,9 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Adobe'
-    [String]$appName = 'Acrobat Reader DC'
-    [String]$appVersion = '23.008.2042'
+    [String]$appVendor = 'Microsoft'
+    [String]$appName = 'Teams Classic'
+    [String]$appVersion = '1.6.00.33567'
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path "Adobe Acrobat Reader DC*.exe" -Parameter '/sAll /rs /msi EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1'
+        Execute-MSI -Action Install -Path 'Microsoft Teams Classic_1.6.00.33567_Machine_X64_wix_en-US.msi' -Parameter '/qn /norestart ALLUSERS=1'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -214,7 +214,6 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Remove-File -Path "$env:PUBLIC\Desktop\Adobe Acrobat.lnk"
 
         ## Display a message at the end of the install
         #If (-not $useDefaultMsi) {
@@ -250,7 +249,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Remove-MSIApplications -Name 'Adobe Acrobat*' -Wildcard
+        Remove-MSIApplications -Name 'Teams Machine-Wide Installer'
 
         ##*===============================================
         ##* POST-UNINSTALLATION

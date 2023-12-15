@@ -109,7 +109,7 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Google'
     [String]$appName = 'Chrome'
-    [String]$appVersion = '120.0.6099.71'
+    [String]$appVersion = '120.0.6099.109'
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-MSI Install -Path 'Google Chrome_120.0.6099.71_Machine_X64_msi_en-US.msi' -Parameters '/qn /norestart'
+        Execute-MSI Install -Path 'Google Chrome_120.0.6099.109_Machine_X64_msi_en-US.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION
