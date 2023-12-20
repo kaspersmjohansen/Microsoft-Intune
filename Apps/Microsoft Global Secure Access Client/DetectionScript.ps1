@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\TeamViewer"
+$ProgramPath = "C:\Program Files\Global Secure Access Client"
 
 # File to be detected
-$ProgramFile = "TeamViewer.exe"
+$ProgramFile = "GlobalSecureAccessClient.exe"
 
 # File version
-$ProgramFileVersion = "15.47.3.0"
+$ProgramFileVersion = "1.7.376..1214"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
