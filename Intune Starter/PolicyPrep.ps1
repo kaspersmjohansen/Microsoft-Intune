@@ -1,4 +1,4 @@
-#Requires -version 5.1
+#Requires -version 7.0
 <#
 .NAME
     PolicyPrep
@@ -17,27 +17,22 @@
 
     Author:             Kasper Johansen
     Website:            https://virtualwarlock.net
-    Last modified Date: 22-10-2022
+    Last modified Date: 09-01-2024
 
 #>
 
 param (
         [Parameter(Mandatory = $true)]
         [string]$NamePrefix,
-        [Parameter(Mandatory = $true)]
-        [string]$TenantID,
+        #[Parameter(Mandatory = $true)]
+        #[string]$TenantID,
         [string]$SourcePath = "$env:PSSCRIPTROOT\Source",
         [Parameter(Mandatory = $true)]
         [string]$DestinationPath
 )
 
-<#
-$TemplatePrefix = "VWL"
-$SourcePath = "C:\temp\PolicyExport\Source"
-$DestinationPath = "C:\temp\PolicyExport\Destination"
-$NamePrefix = "TMP"
-$TenantID = "72239bb3-9a09-4dde-8a96-3c4b629327f7"
-#>
+$TemplatePrefix = "TMP"
+#$NamePrefix = "VWL"
 
 #Region - Functions
 # Function to copy the policy JSON files form a source folder to at destination folder
@@ -55,29 +50,30 @@ function Copy-Json-Files {
             Break
         }
     }
-            Write-Host "Copying policy files" -ForegroundColor Cyan
+            Write-Host "Copying policy JSON files to $DestinationPath" -ForegroundColor Cyan
+            Write-Host ""
             Copy-Item -Path "$SourcePath\*" -Recurse -Destination $DestinationPath
 }
 
 # function to rename the JSON policy file.
 function Rename-Json-Files {
-    $DestinationPath = "\\?\$DestinationPath"
     $Jsons = Get-ChildItem -LiteralPath $DestinationPath -Filter *.json -Recurse
     
         ForEach ($Json in $Jsons){
             $ParentFolderPath = $Json.Directory
+            $CurrentName = $Json.Name
             $NewName = $Json.Name -Replace "$TemplatePrefix","$NamePrefix"
-            Write-Host "Renaming JSON policy files" -ForegroundColor Cyan
-            Rename-Item -Path "$ParentFolderPath\$($Json.Name)" "$NewName"        
+            # Write-Host "Renaming JSON policy files" -ForegroundColor Cyan
+            Write-Host "Renaming $CurrentName" -ForegroundColor Cyan
+            Rename-Item -Path "$ParentFolderPath\$CurrentName" "$NewName"        
         }
 }
 
-
-<#
 # function to rename the policy. It updates the Displayname property within the JSON file
 function Update-Policy-Name {
     $Jsons = Get-ChildItem -Path $DestinationPath -Filter "$NamePrefix*.json" -Exclude *_Settings.json -Recurse
         ForEach ($Json in $Jsons){
+            Write-Host "Updating policy name in $Json" -ForegroundColor Cyan
             $config = Get-Content -Path $Json.Fullname -Raw | ConvertFrom-Json
                 If ($config.Name)                {
                         $config.name = $Json.Name.TrimEnd(".json")
@@ -85,20 +81,18 @@ function Update-Policy-Name {
                 else {
                         $config.displayname = $Json.Name.TrimEnd(".json")
                 }
-            Write-Host "Renaming policy" -ForegroundColor Cyan            
             $config | ConvertTo-Json -Depth 25 | Out-File $($Json.FullName)
         }
 }
-#>
 
 <#
 # Function to do a search/replace of the tenant ID 
 function Search-Replace-String {
-    $Jsons = Get-ChildItem -Path $DestinationPath -Filter "$NamePrefix*.json" -Exclude *_Settings.json -Recurse
+    $Jsons = Get-ChildItem -Path $DestinationPath -Filter "$NamePrefix*OneDrive*.json" -Exclude *_Settings.json -Recurse
         ForEach ($Json in $Jsons){
             $config = Get-Content -Path $Json.Fullname -Raw | ConvertFrom-Json
             Write-Host "Replacing the tenant ID value" -ForegroundColor Cyan
-            $config -replace "xxTENANTIDxx","$TenantID" | Out-File $($Json.FullName)
+            $config -replace "xxTENANTIDxx","$TenantID" | ConvertTo-Json -Depth 25 | Out-File $($Json.FullName)
         }
 }
 #>
@@ -109,6 +103,8 @@ function Search-Replace-String {
 Copy-Json-Files
 
 Rename-Json-Files
+
+Update-Policy-Name
 
 # Search-Replace-String
 
