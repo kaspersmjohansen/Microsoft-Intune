@@ -107,14 +107,14 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Teamviewer Germany GmbH'
-    [String]$appName = 'Teamviewer Host'
-    [String]$appVersion = '15.47.3'
+    [String]$appVendor = 'Microsoft'
+    [String]$appName = 'Teams'
+    [String]$appVersion = '23320.3027.2591.1505'
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '03/12/2023'
+    [String]$appScriptDate = '14/01/2024'
     [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -182,7 +182,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
+        Show-InstallationWelcome -CloseApps 'Teams' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'TeamViewer*.exe' -Parameters '/S /ACCEPTEULA=1'
+        Add-AppPackage -Path "$dirFiles\Microsoft Teams_23320.3027.2591.1505_User_X64_msix_en-US.msix"
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -214,12 +214,6 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'Autostart_GUI' -Value '0' -Type 'DWord'
-        Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'IntroShown' -Value '1' -Type 'DWord'
-        # Changes the UI version. To enable the "old" Teamviewer UI, configure the value to '2'.
-        Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'UIVersion' -Value '4' -Type 'DWord'
-        Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'WhatsNewShownVersion' -Value "$appVersion" -Type 'String'
-        Remove-File -Path "$env:PUBLIC\Desktop\Teamviewer.lnk"
 
         ## Display a message at the end of the install
         #If (-not $useDefaultMsi) {
@@ -255,7 +249,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path "$env:ProgramFiles\TeamViewer\Uninstall.exe" -Parameters '/S'
+        Remove-AppPackage -Package "MSTeams_23320.3027.2591.1505_x64__8wekyb3d8bbwe" -AllUsers
 
         ##*===============================================
         ##* POST-UNINSTALLATION
