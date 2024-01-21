@@ -188,7 +188,7 @@ Try {
         Show-InstallationProgress
 
         ## <Perform Pre-Installation tasks here>
-        Execute-Process -Path "$dirSupportFiles\Microsoft Edge WebView2 Runtime_120.0.2210.121_Machine_Neutral_exe_en-US.exe" -Parameters '/silent /install'
+        Execute-Process -Path "$dirSupportFiles\Microsoft Edge WebView2 Runtime_*.exe" -Parameters '/silent /install'
 
         ##*===============================================
         ##* INSTALLATION

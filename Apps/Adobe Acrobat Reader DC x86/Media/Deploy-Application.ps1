@@ -109,12 +109,12 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Adobe'
     [String]$appName = 'Acrobat Reader DC'
-    [String]$appVersion = '23.008.2042'
+    [String]$appVersion = '23.008.20470'
     [String]$appArch = 'x864'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '15/12/2023'
+    [String]$appScriptDate = '19/01/2024'
     [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)

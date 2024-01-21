@@ -107,15 +107,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Google'
-    [String]$appName = 'Chrome'
-    [String]$appVersion = '120.0.6099.225'
-    [String]$appArch = 'x64'
+    [String]$appVendor = ''
+    [String]$appName = ''
+    [String]$appVersion = ''
+    [String]$appArch = ''
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '19/01/2024'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptDate = 'XX/XX/20XX'
+    [String]$appScriptAuthor = '<author name>'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -182,7 +182,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'chrome' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
+        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -206,7 +206,16 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-MSI Install -Path 'Google Chrome_120.0.6099.225_Machine_X64_msi_en-US.msi' -Parameters '/qn /norestart'
+
+        # Resolve winget.exe
+        $winget_exe = Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_*__8wekyb3d8bbwe\winget.exe"
+        if ($winget_exe){
+                $winget_exe = $winget_exe[-1].Path
+        }
+        if (!$winget_exe){Write-Error "Winget not installed"}
+
+        # Installation via winget
+        & $winget_exe install "Git.Git" --silent --accept-source-agreements --accept-package-agreements
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -214,8 +223,6 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Copy-File -Path "$dirSupportFiles\master_preferences" -Destination "$env:ProgramFiles\Google\Chrome\Application"
-        Remove-File -Path "$env:PUBLIC\Desktop\Google Chrome.lnk"
 
         ## Display a message at the end of the install
         #If (-not $useDefaultMsi) {
@@ -251,7 +258,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Remove-MSIApplications -Name "Google Chrome"
+
 
         ##*===============================================
         ##* POST-UNINSTALLATION
@@ -259,7 +266,7 @@ Try {
         [String]$installPhase = 'Post-Uninstallation'
 
         ## <Perform Post-Uninstallation tasks here>
-        
+
 
     }
     ElseIf ($deploymentType -ieq 'Repair') {
