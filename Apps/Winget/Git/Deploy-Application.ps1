@@ -215,7 +215,7 @@ Try {
         if (!$winget_exe){Write-Error "Winget not installed"}
 
         # Installation via winget
-        & $winget_exe install "Git.Git" --silent --accept-source-agreements --accept-package-agreements
+        & $winget_exe install --id "Git.Git" --silent --accept-source-agreements --accept-package-agreements
 
         ##*===============================================
         ##* POST-INSTALLATION
