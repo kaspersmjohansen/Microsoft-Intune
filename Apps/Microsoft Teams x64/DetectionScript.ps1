@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\WindowsApps\MSTeams_23320.3027.2591.1505_x64__8wekyb3d8bbwe"
+$ProgramPath = "C:\Program Files\WindowsApps\MSTeams_*"
 
 # File to be detected
 $ProgramFile = "ms-teams.exe"
 
 # File version
-$ProgramFileVersion = "23320.3027.2591.1505"
+$ProgramFileVersion = "23335.232.2637.4844"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
@@ -47,6 +47,7 @@ If ($FileVersionDetect -eq "equal")
 # Specific file with version equal to or greater exists
 If ($FileVersionDetect -eq "equalgreater")
 {
+    $ProgramPath = Get-ChildItem $ProgramPath
     $ProgramFileVersionCurrent = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$ProgramPath\$ProgramFile").FileVersion
     If($ProgramFileVersionCurrent -ge $ProgramFileVersion)
     {

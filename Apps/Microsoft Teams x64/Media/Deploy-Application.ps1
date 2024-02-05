@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
 
 PSApppDeployToolkit - This script performs the installation or uninstallation of an application(s).
@@ -109,13 +109,13 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Microsoft'
     [String]$appName = 'Teams'
-    [String]$appVersion = '23320.3027.2591.1505'
+    [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '14/01/2024'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptDate = '02/02/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen - Apento: kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -188,7 +188,7 @@ Try {
         Show-InstallationProgress
 
         ## <Perform Pre-Installation tasks here>
-        Execute-Process -Path "$dirSupportFiles\Microsoft Edge WebView2 Runtime_*.exe" -Parameters '/silent /install'
+        # Execute-Process -Path "$dirSupportFiles\Microsoft Edge WebView2 Runtime_120.0.2210.121_Machine_Neutral_exe_en-US.exe" -Parameters '/silent /install'
 
         ##*===============================================
         ##* INSTALLATION
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Add-AppPackage -Path "$dirFiles\Microsoft Teams_23320.3027.2591.1505_User_X64_msix_en-US.msix"
+        Execute-Process -Path 'teamsbootstrapper.exe' -Parameters '-p'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -249,7 +249,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Remove-AppPackage -Package "MSTeams_23320.3027.2591.1505_x64__8wekyb3d8bbwe" -AllUsers
+        Execute-Process -Path 'teamsbootstrapper.exe' -Parameters '-x'
 
         ##*===============================================
         ##* POST-UNINSTALLATION

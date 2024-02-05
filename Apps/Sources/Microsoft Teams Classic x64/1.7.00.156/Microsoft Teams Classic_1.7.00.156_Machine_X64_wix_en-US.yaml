@@ -1,0 +1,97 @@
+PackageIdentifier: Microsoft.Teams.Classic
+PackageVersion: 1.7.00.156
+Moniker: teams
+Tags:
+- call
+- calling
+- chat
+- collaborate
+- collaboration
+- conferencing
+- meet
+- meetings
+- team
+- teams
+- video
+- video-conferencing
+- voice
+- voip
+- webinars
+PackageLocale: en-US
+Author: Microsoft Corporation
+Copyright: (c) Microsoft Corporation. All rights reserved.
+CopyrightUrl: https://www.microsoft.com/en-us/legal/terms-of-use
+Description: Make amazing things happen together at home, work, and school.
+ShortDescription: Make amazing things happen together at home, work, and school.
+License: Proprietary
+LicenseUrl: https://www.microsoft.com/en-us/legal/terms-of-use
+PackageName: Microsoft Teams Classic
+PackageUrl: https://www.microsoft.com/en-us/microsoft-teams/group-chat-software
+PrivacyUrl: https://privacy.microsoft.com/en-us/privacystatement
+Publisher: Microsoft Corporation
+PublisherSupportUrl: https://support.microsoft.com/en-us/teams
+PublisherUrl: https://www.microsoft.com/en-us
+Installers:
+- Architecture: x64
+  InstallerType: wix
+  InstallerSha256: 60ac6885b8b0a4d3764f3f0d294c2a0076c71da51a02d8951a9f8ac564da2163
+  InstallerUrl: https://statics.teams.cdn.office.net/production-windows-x64/1.7.00.156/Teams_windows_x64.msi
+  Scope: machine
+  InstallerLocale: en-US
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: true
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  ProductCode: '{731F6BAA-A986-45A4-8936-7C3AAAAA760B}'
+  UpgradeBehavior: install
+  AppsAndFeaturesEntries:
+  - DisplayName: Teams Machine-Wide Installer
+    DisplayVersion: 1.7.00.156
+    UpgradeCode: '{4009BE0E-5D51-5D91-B94C-D00D7B5FE829}'
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 87
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 112
+    ReturnResponse: diskFull
+  - InstallerReturnCode: 1601
+    ReturnResponse: contactSupport
+  - InstallerReturnCode: 1602
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 1618
+    ReturnResponse: installInProgress
+  - InstallerReturnCode: 1623
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1625
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1628
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1633
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1638
+    ReturnResponse: alreadyInstalled
+  - InstallerReturnCode: 1639
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1640
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1641
+    ReturnResponse: rebootInitiated
+  - InstallerReturnCode: 1643
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1644
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1649
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1650
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1654
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 3010
+    ReturnResponse: rebootRequiredToFinish
+  InstallerSwitches:
+    Silent: /quiet /norestart
+    SilentWithProgress: /passive /norestart
+    Log: /log "<LOGPATH>"
+    InstallLocation: TARGETDIR="<INSTALLPATH>"
+ManifestVersion: 1.5.0
+ManifestType: merged

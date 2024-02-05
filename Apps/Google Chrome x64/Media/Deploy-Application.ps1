@@ -109,12 +109,12 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Google'
     [String]$appName = 'Chrome'
-    [String]$appVersion = '120.0.6099.225'
+    [String]$appVersion = '120.0.6099.276'
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '19/01/2024'
+    [String]$appScriptDate = '03/02/2024'
     [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-MSI Install -Path 'Google Chrome_120.0.6099.225_Machine_X64_msi_en-US.msi' -Parameters '/qn /norestart'
+        Execute-MSI Install -Path 'Google Chrome_120.0.6099.276_Machine_X64_msi_en-US.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION
