@@ -1,0 +1,66 @@
+PackageIdentifier: ProtonTechnologies.ProtonVPN
+PackageVersion: 3.2.8
+Moniker: protonvpn
+Tags:
+- network
+- open-source
+- privacy
+- private
+- private-network
+- security
+- vpn
+PackageLocale: en-US
+Author: Proton Technologies AG
+Copyright: Copyright (C) 2007 Free Software Foundation, Inc.
+CopyrightUrl: https://raw.githubusercontent.com/ProtonVPN/win-app/master/LICENSE
+Description: 'We built ProtonVPN with extra security features to make it better at
+  protecting your privacy than an ordinary VPN.
+
+  When you use ProtonVPN to browse the web, your Internet connection is encrypted.
+
+  By routing your connection through encrypted tunnels, ProtonVPNs advanced security
+  features ensure that an attacker cannot eavesdrop on your connection.
+
+  It also allows you to access websites that might be blocked in your country.'
+ShortDescription: High-speed Swiss VPN that safeguards your privacy.
+License: GNU General Public License Version 3 (GPLv3)
+LicenseUrl: https://raw.githubusercontent.com/ProtonVPN/win-app/master/LICENSE
+PackageName: ProtonVPN
+PackageUrl: https://protonvpn.com
+PrivacyUrl: https://protonvpn.com/privacy-policy
+Publisher: Proton Technologies AG
+PublisherSupportUrl: https://protonvpn.com/support
+PublisherUrl: https://protonvpn.com
+ReleaseNotes: '- Minor security improvements.'
+ReleaseNotesUrl: https://github.com/ProtonVPN/win-app/releases/tag/3.2.8
+Installers:
+- Architecture: x86
+  InstallerType: inno
+  InstallerSha256: d69305dda26e4e4cf9a84593570be29cdbafb9f9ff0de17e78dfabf6e0fbcf50
+  InstallerUrl: https://github.com/ProtonVPN/win-app/releases/download/3.2.8/ProtonVPN_v3.2.8.exe
+  Scope: machine
+  ReleaseDate: 2023-12-15
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  UpgradeBehavior: install
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 2
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 5
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 8
+    ReturnResponse: rebootRequiredForInstall
+  InstallerSwitches:
+    Silent: /VERYSILENT /NORESTART
+    SilentWithProgress: /SILENT /NORESTART
+    Log: /LOG="<LOGPATH>"
+    InstallLocation: /DIR="<INSTALLPATH>"
+  InstallModes:
+  - interactive
+  Platform:
+  - Windows.Desktop
+ManifestVersion: 1.5.0
+ManifestType: merged

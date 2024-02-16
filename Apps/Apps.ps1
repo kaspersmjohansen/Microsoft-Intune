@@ -7,6 +7,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
     $Product = $_.Product
     $Architecture = $_.Architecture
     $AppID = $_.AppID
+    $Scope = $_.Scope
     $AppFolder = "$Vendor $Product $Architecture"
     
     $WinGetAppMetaExport = "$SourceFolder\WinGetMetaExport-$AppName.txt"
@@ -24,7 +25,19 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
     If (!(Test-Path -Path "$SourceFolder\$AppFolder\$Version"))
     {
         New-Item -Path "$SourceFolder\$AppFolder" -name $Version -ItemType Directory
-        Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope machine --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+        If ($Scope -eq "None")
+        {
+            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+        }
+        elseif ($Scope -eq "Machine"){
+            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope $Scope --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+        }
+        elseif ($SCope -eq "User"){
+            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope $Scope --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+        }
+        else {
+            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope Machine --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+        }
     }
     else {
         Write-Host "$AppFolder is already at latest version" -ForegroundColor Cyan

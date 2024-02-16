@@ -1,14 +1,15 @@
-﻿Vendor;Product;Language;AppID;Architecture
-Adobe;Acrobat Reader DC;en-us;Adobe.Acrobat.Reader.64-bit;x64
-Adobe;Acrobat Reader DC;en-us;Adobe.Acrobat.Reader.32-bit;x86
-Google;Chrome;en-us;Google.Chrome;x64
-Microsoft;Edge Webview2 Runtime;en-us;Microsoft.EdgeWebView2Runtime;x64
-Teamviewer GmbH;Teamviewer;en-us;TeamViewer.TeamViewer;x64
-Igor Pavlov;7-Zip;en-us;7zip.7zip;x64
-Git;Git;en-us;Git.Git;x64
-Microsoft;Visual Studio Code;en-us;Microsoft.VisualStudioCode;x64
-Foxit;PDF Reader;en-us;Foxit.FoxitReader;x86
-dotPDNLLC;Paint.Net;en-us;dotPDNLLC.paintdotnet;x64
-Microsoft;Teams Classic;en-us;Microsoft.Teams.Classic;x64
-Microsoft;Teams;en-us;Microsoft.Teams;x64
-RoyalApp GmbH;Royal TS;en-us;RoyalApps.RoyalTS.V7;x64
+﻿Vendor;Product;Language;AppID;Architecture;Scope
+Adobe;Acrobat Reader DC;en-us;Adobe.Acrobat.Reader.64-bit;x64;Machine
+Adobe;Acrobat Reader DC;en-us;Adobe.Acrobat.Reader.32-bit;x86;Machine
+Google;Chrome;en-us;Google.Chrome;x64;Machine
+Microsoft;Edge Webview2 Runtime;en-us;Microsoft.EdgeWebView2Runtime;x64;Machine
+Teamviewer GmbH;Teamviewer;en-us;TeamViewer.TeamViewer;x64;Machine
+Igor Pavlov;7-Zip;en-us;7zip.7zip;x64;Machine
+Git;Git;en-us;Git.Git;x64;Machine
+Microsoft;Visual Studio Code;en-us;Microsoft.VisualStudioCode;x64;Machine
+Foxit;PDF Reader;en-us;Foxit.FoxitReader;x86;Machine
+dotPDNLLC;Paint.Net;en-us;dotPDNLLC.paintdotnet;x64;Machine
+Microsoft;Teams Classic;en-us;Microsoft.Teams.Classic;x64;Machine
+Microsoft;Teams;en-us;Microsoft.Teams;x64;Machine
+RoyalApp GmbH;Royal TS;en-us;RoyalApps.RoyalTS.V7;x64;None
+Proton;Proton VPN;en-us;ProtonTechnologies.ProtonVPN;x64;Machine

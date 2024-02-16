@@ -107,15 +107,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = ''
-    [String]$appName = ''
-    [String]$appVersion = ''
-    [String]$appArch = ''
+    [String]$appVendor = 'Proton'
+    [String]$appName = 'Proton VPN'
+    [String]$appVersion = '3.2.8.0'
+    [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = 'XX/XX/20XX'
-    [String]$appScriptAuthor = '<author name>'
+    [String]$appScriptDate = '13/02/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, virtualwarlock.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -182,7 +182,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
+        Show-InstallationWelcome -CloseApps 'protonvpn' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -206,20 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-
-        # Resolve winget.exe
-        $winget_exe = Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_*__8wekyb3d8bbwe\winget.exe"
-        #if ($winget_exe){
-        $resolveWingetPath = Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe"
-        Write-Host "$resolveWingetPath"
-        Set-Location $resolveWingetPath
-        Start-Process -FilePath "winget.exe" -ArgumentList "--id Git.Git --silent --accept-source-agreements --accept-package-agreements"
-                #$winget_exe = $winget_exe[-1].Path
-        #}
-        #if (!$winget_exe){Write-Error "Winget not installed"}
-
-        # Installation via winget
-        #& $winget_exe install --id "Git.Git" --silent --accept-source-agreements --accept-package-agreements
+        Execute-Process -Path 'ProtonVPN_3.2.8_Machine_X86_inno_en-US.exe' -Parameters '/VERYSILENT /NORESTART /FORCECLOSEAPPLICATIONS'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -227,6 +214,7 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
+        Remove-File -Path 'C:\Users\Public\Desktop\Proton VPN.lnk'
 
         ## Display a message at the end of the install
         #If (-not $useDefaultMsi) {
@@ -262,7 +250,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-
+        Execute-Process -Path 'C:\Program Files\Proton\VPN\unins000.exe' -Parameters '/VERYSILENT /NORESTART'
 
         ##*===============================================
         ##* POST-UNINSTALLATION
