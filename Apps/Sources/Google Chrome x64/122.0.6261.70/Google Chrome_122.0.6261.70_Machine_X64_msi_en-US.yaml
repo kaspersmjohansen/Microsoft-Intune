@@ -1,5 +1,5 @@
 PackageIdentifier: Google.Chrome
-PackageVersion: 121.0.6167.184
+PackageVersion: 122.0.6261.70
 Moniker: chrome
 Tags:
 - browser
@@ -60,7 +60,7 @@ Localization:
 Installers:
 - Architecture: x64
   InstallerType: msi
-  InstallerSha256: 2845fa3aff6a773c4e523ab7cb88372c160a612aedfa9367f135c2aaecea2a5d
+  InstallerSha256: e44e57035ef2a1490afcbc0ff36541c78d19dea83b9c6be88e1c43f98c5a87a2
   InstallerUrl: https://dl.google.com/dl/chrome/install/googlechromestandaloneenterprise64.msi
   Scope: machine
   InstallerLocale: en-US
@@ -69,7 +69,7 @@ Installers:
   RequireExplicitUpgrade: false
   DisplayInstallWarnings: false
   DownloadCommandProhibited: false
-  ProductCode: '{2973D1E7-DE82-3E05-9DBD-245F3B51E8A8}'
+  ProductCode: '{833D52CC-AEFF-3DF3-AE28-372C5BC15088}'
   UpgradeBehavior: install
   FileExtensions:
   - htm
@@ -132,5 +132,5 @@ Installers:
     SilentWithProgress: /passive /norestart
     Log: /log "<LOGPATH>"
     InstallLocation: TARGETDIR="<INSTALLPATH>"
-ManifestVersion: 1.5.0
+ManifestVersion: 1.6.0
 ManifestType: merged

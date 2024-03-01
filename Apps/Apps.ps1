@@ -2,7 +2,7 @@ $CSVFile = "$PSScriptRoot\AppsCSV.csv"
 $SourceFolder = "$PSScriptRoot\Sources"
 $DestinationFolder = "$PSScriptRoot"
 
-Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
+Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
     $Vendor = $_.Vendor
     $Product = $_.Product
     $Architecture = $_.Architecture
@@ -32,7 +32,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object{
         elseif ($Scope -eq "Machine"){
             Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope $Scope --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
         }
-        elseif ($SCope -eq "User"){
+        elseif ($Scope -eq "User"){
             Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope $Scope --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
         }
         else {

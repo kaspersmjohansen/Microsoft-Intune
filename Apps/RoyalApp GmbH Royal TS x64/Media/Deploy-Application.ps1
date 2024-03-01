@@ -107,15 +107,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = ''
-    [String]$appName = ''
-    [String]$appVersion = ''
+    [String]$appVendor = 'Royal Apps GmbH'
+    [String]$appName = 'Royal TS'
+    [String]$appVersion = '7.00.50817.0_7.02.50111'
     [String]$appArch = ''
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = 'XX/XX/20XX'
-    [String]$appScriptAuthor = '<author name>'
+    [String]$appScriptDate = '25/02/2024'
+    [String]$appScriptAuthor = 'Kasper Johanse, virtualwarlock.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-
+        Execute-MSI -Action Install -Path 'Royal TS 7.00.50817.0_7.02.50111.0_X64_wix_en-US.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -249,7 +249,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-
+        Remove-MSIApplications -Name "Royal TS*"
 
         ##*===============================================
         ##* POST-UNINSTALLATION

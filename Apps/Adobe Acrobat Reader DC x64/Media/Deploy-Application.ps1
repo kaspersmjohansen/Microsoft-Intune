@@ -109,7 +109,7 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Adobe'
     [String]$appName = 'Acrobat Reader DC'
-    [String]$appVersion = '23.008.20470'
+    [String]$appVersion = '23.008.20533'
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'

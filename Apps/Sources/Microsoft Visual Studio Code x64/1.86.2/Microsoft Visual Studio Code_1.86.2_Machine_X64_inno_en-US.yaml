@@ -1,5 +1,5 @@
 PackageIdentifier: Microsoft.VisualStudioCode
-PackageVersion: 1.86.1
+PackageVersion: 1.86.2
 Moniker: vscode
 Tags:
 - developer-tools
@@ -18,8 +18,8 @@ PublisherUrl: https://www.microsoft.com/
 Installers:
 - Architecture: x64
   InstallerType: inno
-  InstallerSha256: a2342fb33fa5a9d91db4a913a1d2516fa4442e6dd85615d9796137f9ccc66453
-  InstallerUrl: https://vscode.download.prss.microsoft.com/dbazure/download/stable/31c37ee8f63491495ac49e43b8544550fbae4533/VSCodeSetup-x64-1.86.1.exe
+  InstallerSha256: b8524d2e12d6c16a7ff80442acdfab63e8063791c6c35668d401b02cb90436ed
+  InstallerUrl: https://vscode.download.prss.microsoft.com/dbazure/download/stable/903b1e9d8990623e3d7da1df3d33db3e42d80eda/VSCodeSetup-x64-1.86.2.exe
   Scope: machine
   InstallerAbortsTerminal: false
   InstallLocationRequired: false
