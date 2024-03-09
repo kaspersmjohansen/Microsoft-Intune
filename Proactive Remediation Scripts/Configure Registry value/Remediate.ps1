@@ -1,7 +1,7 @@
 $RegKey = "HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Outlook\Setup"
 $RegValueName = "DisableRoamingSignaturesTemporaryToggle"
 $RegValueData = "1"
-$RegValueType = "DWORD"
+$RegValueType = "DWORD" # https://learn.microsoft.com/en-us/dotnet/api/microsoft.win32.registryvaluekind?view=net-8.0&redirectedfrom=MSDN#fields
 
 $CheckRegValueData = (Get-ItemProperty -Path Registry::$RegKey -Name $RegValueName -ErrorAction SilentlyContinue).$RegValueName
 If ($CheckRegValueData -eq $RegValueData)
