@@ -3,6 +3,7 @@ $SourceFolder = "$PSScriptRoot\Sources"
 $DestinationFolder = "$PSScriptRoot"
 
 Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
+    
     $Vendor = $_.Vendor
     $Product = $_.Product
     $Architecture = $_.Architecture
@@ -10,7 +11,8 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
     $Scope = $_.Scope
     $AppFolder = "$Vendor $Product $Architecture"
     
-    $WinGetAppMetaExport = "$SourceFolder\WinGetMetaExport-$AppName.txt"
+    
+    $WinGetAppMetaExport = "$SourceFolder\WinGetMetaExport-$AppID.txt"
     Start-Process -FilePath "winget.exe" -ArgumentList "show --id $AppID --exact --accept-source-agreements" -WindowStyle Hidden -Wait -RedirectStandardOutput $WinGetAppMetaExport
     $winGetOutput = Get-Content -Path $WinGetAppMetaExport
     Remove-Item -Path $WinGetAppMetaExport -Force
