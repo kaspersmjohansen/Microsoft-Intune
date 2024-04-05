@@ -1,0 +1,101 @@
+PackageIdentifier: TeamViewer.TeamViewer
+PackageVersion: 15.52.4
+Moniker: teamviewer
+Tags:
+- conferencing
+- control
+- remote
+- remote-access
+- remote-control
+- remote-desktop
+- web-conferencing
+PackageLocale: en-US
+Author: TeamViewer AG
+Copyright: Copyright Teamviewer
+CopyrightUrl: https://www.teamviewer.com/en/eula
+Description: 'TeamViewer is a comprehensive, remote access, remote control and remote
+  support solution that works with almost every desktop and mobile platform, including
+  Windows, macOS, Android, and iOS.
+
+
+  TeamViewer lets you remote in to computers or mobile devices located anywhere in
+  the world and use them as though you were there.'
+ShortDescription: TeamViewer connects people, places and things around the world on
+  the widest array of platforms and technologies.
+License: Free For Private, Non-Commercial Use.
+LicenseUrl: https://www.teamviewer.com/en/eula
+PackageName: TeamViewer
+PackageUrl: https://www.teamviewer.com
+PrivacyUrl: https://www.teamviewer.com/en/privacy-policy
+Publisher: TeamViewer
+PublisherSupportUrl: https://www.teamviewer.com/en/customer-support
+PublisherUrl: https://www.teamviewer.com
+Localization:
+- Tags:
+  - fernsteuerung
+  - fernzugriff
+  - konferenzen
+  - remote-control
+  - remote-desktop
+  - webkonferenz
+  PackageLocale: de-DE
+  Author: TeamViewer AG
+  Copyright: Copyright (c) Teamviewer
+  CopyrightUrl: https://www.teamviewer.com/de/eula
+  Description: "TeamViewer ist eine umfassende L\xF6sung f\xFCr Fernzugriff, Fernsteuerung
+    und Fernsupport, die mit fast jeder Desktop- und Mobilplattform funktioniert,
+    einschlie\xDFlich Windows, macOS, Android und iOS.\n\nMit TeamViewer k\xF6nnen
+    Sie sich per Fernzugriff auf Computer oder mobile Ger\xE4te an jedem Ort der Welt
+    einw\xE4hlen und sie so nutzen, als w\xE4ren Sie vor Ort."
+  ShortDescription: "TeamViewer verbindet Menschen, Orte und Dinge auf der ganzen
+    Welt \xFCber verschiedenste Plattformen und Technologien."
+  License: "Kostenlos f\xFCr private, nicht-kommerzielle Nutzung."
+  LicenseUrl: https://www.teamviewer.com/de/eula
+  PackageName: TeamViewer
+  PackageUrl: https://www.teamviewer.com/de
+  PrivacyUrl: https://www.teamviewer.com/de/datenschutzerklaerung
+  Publisher: TeamViewer
+  PublisherSupportUrl: https://www.teamviewer.com/de/kundenservice
+  PublisherUrl: https://www.teamviewer.com/de
+  Tags:
+  - "\u89C6\u9891\u4F1A\u8BAE"
+  - "\u8FDC\u7A0B\u63A7\u5236"
+  - "\u8FDC\u7A0B\u684C\u9762"
+  - "\u8FDC\u7A0B\u8FDE\u63A5"
+  PackageLocale: zh-CN
+  Author: TeamViewer AG
+  Copyright: Copyrighter @ 2022 TeamViewer Germany GmbH
+  Description: "TeamViewer\u8FDC\u7A0B\u8FDE\u63A5\u63A7\u5236\u8F6F\u4EF6\u662F\u4E00\u6B3E\u968F\u65F6\u968F\u5730\u8FDE\u63A5\u5230\u8FDC\u7A0B\u684C\u9762\u7535\u8111\u3001\u79FB\u52A8\u8BBE\u5907\u53CAIot,\u8BA9\u8FDC\u7A0B\u8FDE\u63A5\u8FC7\u7A0B\u66F4\u52A0\u7684\u5FEB\u901F\u548C\u5B89\u5168,\u8F7B\u677E\u5B9E\u73B0\u5BF9\u6587\u4EF6\u3001\u7F51\u7EDC\u53CA\u7A0B\u5E8F\u7684\u5B9E\u65F6\u652F\u6301\u6216\u8BBF\u95EE\u3002"
+  ShortDescription: "\u8FDC\u7A0B\u8FDE\u63A5\u63A7\u5236\u8F6F\u4EF6"
+  License: "\u4E2A\u4EBA\u4F7F\u7528\u514D\u8D39,\u53EA\u80FD\u7528\u4E8E\u975E\u5546\u4E1A\u7528\u9014"
+  LicenseUrl: https://www.teamviewer.com/en/eula
+  PackageName: TeamViewer
+  PackageUrl: https://www.teamviewer.cn/cn
+  PrivacyUrl: https://www.teamviewer.com/en/privacy-policy
+  Publisher: TeamViewer
+  PublisherSupportUrl: https://www.teamviewer.cn/cn/support
+  PublisherUrl: https://www.teamviewer.com
+Installers:
+- Architecture: x64
+  InstallerType: nullsoft
+  InstallerSha256: daa566a45a1f0bd5759e4f138e738bde6994d272c5373936abfa3db6b1f1fec8
+  InstallerUrl: https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
+  Scope: machine
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  InstallerSwitches:
+    Silent: /S
+    SilentWithProgress: /S
+    InstallLocation: /D=<INSTALLPATH>
+  InstallModes:
+  - interactive
+  - silent
+  Platform:
+  - Windows.Desktop
+ManifestVersion: 1.6.0
+ManifestType: merged
