@@ -109,12 +109,12 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Microsoft'
     [String]$appName = 'Visual Studio Code'
-    [String]$appVersion = '1.86.2'
+    [String]$appVersion = '1.88.0'
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '25/02/2023'
+    [String]$appScriptDate = '06/04/2023'
     [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Microsoft Visual Studio Code_1.86.2_Machine_X64_inno_en-US.exe' -Parameters '/VERYSILENT /NOCANCEL /NORESTART /mergetasks=!runcode'
+        Execute-Process -Path 'Microsoft Visual Studio Code_1.88.0_Machine_X64_inno_en-US.exe' -Parameters '/VERYSILENT /NOCANCEL /NORESTART /mergetasks=!runcode'
 
         ##*===============================================
         ##* POST-INSTALLATION
