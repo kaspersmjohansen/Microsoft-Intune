@@ -4,12 +4,15 @@ param(
     [string]$SourcePath,
     [Parameter(Mandatory = $false)]
     [string]$OutputAppFolder = $SourcePath + "\" + "_Output",
-    [Parameter(Mandatory = $false)]
+    [Parameter(Mandatory = $True)]
     [string]$TenantID,
     [Parameter(Mandatory = $false)]
     [string]$InstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType install",
     [Parameter(Mandatory = $false)]
-    [string]$UninstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType uninstall"
+    [string]$UninstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType uninstall",
+    [Parameter(Mandatory = $false)][ValidateSet("Short","UltraShort")]
+    [string]$IntuneAppName = "Short",
+    [switch]$NewApp
 )
 
 # Get contents of the source path folder
@@ -35,34 +38,46 @@ ForEach ($App in $AppSources)
     $ConfigFilePath = $AppRootPath  + "\" + "AppConfig.json"
         
     # Check if Media folder exists, if not, app is not packaged to intunewin
-    If (Test-Path -Path $MediaPath)
+    If ((Test-Path -Path $MediaPath) -and (Test-Path -Path $ConfigFilePath))
     {
         # Set app variables based on AppConfig.json file
         $config = Get-Content -Path $ConfigFilePath -Raw -Encoding UTF8 | ConvertFrom-Json
         $Vendor = $config.AppConfig.Vendor
         $Product = $config.AppConfig.Product
         $Version = $config.AppConfig.Version
-        $AppName = $Vendor + " " + $Product + " " + $Version
-        $AppNameShort = $Product #$Vendor + " " + $Product
+        
+        # Set IntuneWin package folder anem
+        $PackageFolderName = $Vendor + " " + $Product + " " + $Version
+
+            # Set Intune app name
+            If ($IntuneAppName -eq "Short")
+            {
+                $AppName = $Vendor + " " + $Product        
+            }
+
+            If ($IntuneAppName -eq "UltraShort")
+            {
+                $AppName = $Product        
+            }
 
             # Set additional variables
             $SetupFile = "Deploy-Application.exe"
-            $OutputFolder = $OutputAppFolder + "\" + "$AppName"  
+            $OutputFolder = $OutputAppFolder + "\" + "$PackageFolderName"  
 
                 #Region Import intunewin to Intune
                 # Update existing Win32 app
                 # Get current app information
-                $App = Get-IntuneWin32App | Where-Object {$_.DisplayName -eq "$AppNameShort"}
+                $App = Get-IntuneWin32App | Where-Object {$_.DisplayName -eq "$AppName"}
                 
                 # Skip app, if app exist in Intune and is the same version as source app
                 If ($App -and $App.displayVersion -eq $Version)                
                 {
-                    Write-Verbose "$AppNameShort is the latest version" -Verbose
+                    Write-Verbose "$AppName is the latest version" -Verbose
                 }
                     # Update app, if app exist in Intune and version is older than source app 
                     If ($App -and $App.displayVersion -ne $Version)
                     {
-                        Write-Verbose "Updating" $App.DisplayName -Verbose
+                        Write-Verbose "Updating $($App.DisplayName)" -Verbose
 
                         # Create Output folder, if not exist
                         If (!(Test-Path $OutputAppFolder))
@@ -159,6 +174,17 @@ ForEach ($App in $AppSources)
                                             }
                         } 
                 #Endregion Import intunewin to Intune
+    }
+    else {
+            If (!(Test-Path -Path $MediaPath))
+            {
+                Write-Host "$MediaPath is not found" -ForegroundColor Red
+            }
+
+            If (!(Test-Path -Path $ConfigFilePath))
+            {
+                Write-Host "$ConfigFilePath is not found" -ForegroundColor Red
+            }
     }
 }
 #Endregion convert app to Win32 App
