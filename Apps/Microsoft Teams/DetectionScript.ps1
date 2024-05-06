@@ -31,8 +31,6 @@ $ProgramRegVersion = ""
 # Appx application name to be detected
 $AppXName = "MSteams"
 
-
-
 # Specific file exists
 If ($FileDetect -eq "True")
 {
