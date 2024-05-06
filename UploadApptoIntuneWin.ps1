@@ -10,6 +10,8 @@ param(
     [string]$InstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType install",
     [Parameter(Mandatory = $false)]
     [string]$UninstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType uninstall",
+    [Parameter(Mandatory = $false)]
+    [string]$SetupFile = "Deploy-Application.exe",
     [Parameter(Mandatory = $false)][ValidateSet("Short","UltraShort")]
     [string]$IntuneAppName = "Short",
     [switch]$NewApp
@@ -25,6 +27,11 @@ If (!(Get-Module -ListAvailable -Name NuGet)) { Install-PackageProvider -Name Nu
 If (!(Get-Module -ListAvailable -Name IntuneWin32App)) { Install-Module IntuneWin32App -Force -Scope CurrentUser | Import-Module IntuneWin32App | Out-Null }
 If (!(Get-Module -ListAvailable -Name Microsoft.Graph.Intune)) { Install-Module Microsoft.Graph.Intune -Force -Scope CurrentUser | Import-Module Microsoft.Graph.Intune | Out-Null }
 #Endregion Module Import
+
+# App registration konfiguration
+# $ClientID = ""
+# $ClientSecret = ""
+# Connect-MSIntuneGraph -TenantID $TenantID -ClientID $ClientID -ClientSecret $ClientSecret | Out-Null
 
 # Connect to MSGraph
 Connect-MSIntuneGraph -TenantID $TenantID
@@ -60,9 +67,8 @@ ForEach ($App in $AppSources)
                 $AppName = $Product        
             }
 
-            # Set additional variables
-            $SetupFile = "Deploy-Application.exe"
-            $OutputFolder = $OutputAppFolder + "\" + "$PackageFolderName"  
+            # Set output folder variable
+            $OutputFolder = $OutputAppFolder + "\" + $PackageFolderName
 
                 #Region Import intunewin to Intune
                 # Update existing Win32 app
@@ -156,10 +162,10 @@ ForEach ($App in $AppSources)
                                     If ($RequirementRuleScript)
                                     {
                                         $RequirementRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
-                                        $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppNameShort -Description $AppNameShort -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -Verbose -UseAzCopy -AdditionalRequirementRule $RequirementRuleScript
+                                        $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -Verbose -UseAzCopy -AdditionalRequirementRule $RequirementRuleScript
                                     } else
                                         {
-                                            $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppNameShort -Description $AppNameShort -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -Verbose -UseAzCopy
+                                            $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -Verbose -UseAzCopy
                                         }
                                                         
                                         # Configure a Intune Available group if specified                
