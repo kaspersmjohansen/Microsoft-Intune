@@ -1,0 +1,94 @@
+PackageIdentifier: Microsoft.VCRedist.2015+.x86
+PackageVersion: 14.38.33135.0
+Moniker: vcredistx86
+Tags:
+- c++
+- redist
+- redistributable
+- visual
+- visual-c++
+PackageLocale: en-US
+Author: Microsoft Corporation
+Copyright: Copyright (c) Microsoft Corporation
+Description: The Microsoft Visual C++ 2015-2022 Redistributable Package (x86) installs
+  runtime components of Visual C++ Libraries required to run 32-bit applications developed
+  with Visual C++ 2015, 2017, 2019 and 2022 on a computer that does not have Visual
+  C++ 2015, 2017, 2019 and 2022 installed.
+ShortDescription: The Microsoft Visual C++ 2015-2022 Redistributable Package (x86)
+License: Proprietary
+PackageName: Microsoft Visual C++ 2015-2022 Redistributable (x86)
+PrivacyUrl: https://privacy.microsoft.com/en-us/privacystatement
+Publisher: Microsoft Corporation
+PublisherSupportUrl: https://support.microsoft.com/en-us
+PublisherUrl: https://www.microsoft.com/en-us
+Installers:
+- Architecture: x86
+  InstallerType: burn
+  InstallerSha256: 510fc8c2112e2bc544fb29a72191eabcc68d3a5a7468d35d7694493bc8593a79
+  InstallerUrl: https://download.visualstudio.microsoft.com/download/pr/71c6392f-8df5-4b61-8d50-dba6a525fb9d/510FC8C2112E2BC544FB29A72191EABCC68D3A5A7468D35D7694493BC8593A79/VC_redist.x86.exe
+  Scope: machine
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  ProductCode: '{6ba9fb5e-8366-4cc4-bf65-25fe9819b2fc}'
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  AppsAndFeaturesEntries:
+  - DisplayName: Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.36.32532
+    ProductCode: '{6ba9fb5e-8366-4cc4-bf65-25fe9819b2fc}'
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 87
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 112
+    ReturnResponse: diskFull
+  - InstallerReturnCode: 1601
+    ReturnResponse: contactSupport
+  - InstallerReturnCode: 1602
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 1618
+    ReturnResponse: installInProgress
+  - InstallerReturnCode: 1623
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1625
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1628
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1633
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1638
+    ReturnResponse: alreadyInstalled
+  - InstallerReturnCode: 1639
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1640
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1641
+    ReturnResponse: rebootInitiated
+  - InstallerReturnCode: 1643
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1644
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1649
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1650
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1654
+    ReturnResponse: systemNotSupported
+  InstallerSwitches:
+    Custom: /norestart
+    Silent: /quiet /install
+    SilentWithProgress: /passive /install
+    Log: /log "<LOGPATH>"
+    InstallLocation: TARGETDIR="<INSTALLPATH>"
+    Upgrade: /norestart
+  InstallerSuccessCodes:
+  - 3010
+  InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+  Platform:
+  - Windows.Desktop
+ManifestVersion: 1.6.0
+ManifestType: merged

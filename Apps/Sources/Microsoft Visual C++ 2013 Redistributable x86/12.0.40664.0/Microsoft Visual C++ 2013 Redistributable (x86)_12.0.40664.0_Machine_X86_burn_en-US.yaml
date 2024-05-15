@@ -1,0 +1,97 @@
+PackageIdentifier: Microsoft.VCRedist.2013.x86
+PackageVersion: 12.0.40664.0
+Moniker: vcredist2013x86
+Tags:
+- c++
+- redist
+- redistributable
+- vcredist
+- visual
+- visual-c++
+PackageLocale: en-US
+Author: Microsoft Corporation
+Copyright: Copyright (c) Microsoft Corporation
+Description: The Microsoft Visual C++ 2013 Redistributable Package (x86) installs
+  runtime components of Visual C++ Libraries required to run 64-bit applications developed
+  with Visual C++ 2013 on a computer that does not have Visual C++ 2013 installed.
+ShortDescription: The Microsoft Visual C++ 2013 Redistributable Package (x86)
+License: Proprietary
+PackageName: Microsoft Visual C++ 2013 Redistributable (x86)
+PackageUrl: https://support.microsoft.com/en-us/help/4032938/update-for-visual-c-2013-redistributable-package
+PrivacyUrl: https://privacy.microsoft.com/en-us/privacystatement
+Publisher: Microsoft Corporation
+PublisherSupportUrl: https://support.microsoft.com/en-us
+PublisherUrl: https://www.microsoft.com/en-us/
+Installers:
+- Architecture: x86
+  InstallerType: burn
+  InstallerSha256: 53b605d1100ab0a88b867447bbf9274b5938125024ba01f5105a9e178a3dcdbd
+  InstallerUrl: https://download.visualstudio.microsoft.com/download/pr/10912113/5da66ddebb0ad32ebd4b922fd82e8e25/vcredist_x86.exe
+  Scope: machine
+  InstallerLocale: en-US
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  MinimumOSVersion: 10.0.0.0
+  ProductCode: '{9dff3540-fc85-4ed5-ac84-9e3c7fd8bece}'
+  UpgradeBehavior: uninstallPrevious
+  RepairBehavior: unknown
+  AppsAndFeaturesEntries:
+  - DisplayName: Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.40664
+    ProductCode: '{9dff3540-fc85-4ed5-ac84-9e3c7fd8bece}'
+    Publisher: Microsoft Corporation
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 87
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 112
+    ReturnResponse: diskFull
+  - InstallerReturnCode: 1601
+    ReturnResponse: contactSupport
+  - InstallerReturnCode: 1602
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 1618
+    ReturnResponse: installInProgress
+  - InstallerReturnCode: 1623
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1625
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1628
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1633
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1638
+    ReturnResponse: alreadyInstalled
+  - InstallerReturnCode: 1639
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1640
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1641
+    ReturnResponse: rebootInitiated
+  - InstallerReturnCode: 1643
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1644
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1649
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1650
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1654
+    ReturnResponse: systemNotSupported
+  InstallerSwitches:
+    Custom: /install /norestart
+    Silent: /quiet
+    SilentWithProgress: /passive
+    Log: /log "<LOGPATH>"
+    InstallLocation: TARGETDIR="<INSTALLPATH>"
+  InstallerSuccessCodes:
+  - 3010
+  InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+  Platform:
+  - Windows.Desktop
+ManifestVersion: 1.2.0
+ManifestType: merged
