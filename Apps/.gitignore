@@ -1,4 +1,4 @@
-**/*.exe
-**/*.msi
+*.exe
+*.msi
 **/*.intunewin
 **/*.msix
