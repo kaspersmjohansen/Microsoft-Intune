@@ -1,0 +1,85 @@
+PackageIdentifier: Microsoft.VCRedist.2005.x86
+PackageVersion: 8.0.61001
+Moniker: vcredist2005x86
+Tags:
+- msvc
+- vc
+- vc++
+- visual-c++
+PackageLocale: en-US
+Author: Microsoft Corporation
+Copyright: "\xA9 Microsoft Corporation.  All rights reserved."
+CopyrightUrl: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
+ShortDescription: The Microsoft Visual C++ 2005 SP1 Redistributable Package (x86)
+  installs runtime components of Visual C++ Libraries required to run 32-bit applications
+  developed with Visual C++ 2005 SP1 on a computer that does not have Visual C++ 2005
+  SP1 installed.
+License: Freeware
+LicenseUrl: https://www.microsoft.com/en-us/legal/terms-of-use
+PackageName: Microsoft Visual C++ 2005 Redistributable
+PackageUrl: https://www.microsoft.com/en-US/download/details.aspx?id=26347
+PrivacyUrl: https://privacy.microsoft.com/en-US/privacystatement
+Publisher: Microsoft Corporation
+PublisherSupportUrl: https://support.microsoft.com/en-US
+PublisherUrl: https://www.microsoft.com/en-us/
+Localization:
+- Tags:
+  - msvc
+  - vc
+  - vc++
+  - visual-c++
+  PackageLocale: zh-CN
+  Author: Microsoft Corporation
+  Copyright: "\xA9 Microsoft Corporation.  All rights reserved."
+  CopyrightUrl: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
+  ShortDescription: "Microsoft Visual C++ 2005 Redistributable Package (x86) \u5B89\u88C5\u5728\u672A\u5B89\u88C5
+    Visual C++ 2005 \u7684\u8BA1\u7B97\u673A\u4E0A\u8FD0\u884C\u4F7F\u7528 Visual
+    C++ \u5F00\u53D1\u7684\u5E94\u7528\u7A0B\u5E8F\u6240\u9700\u7684 Visual C++ \u5E93\u7684\u8FD0\u884C\u65F6\u7EC4\u4EF6\u3002"
+  License: "\u514D\u8D39\u8F6F\u4EF6"
+  LicenseUrl: https://www.microsoft.com/zh-cn/legal/terms-of-use
+  PackageName: Microsoft Visual C++ 2005 Redistributable
+  PackageUrl: https://www.microsoft.com/zh-CN/download/details.aspx?id=26347
+  PrivacyUrl: https://privacy.microsoft.com/zh-CN/privacystatement
+  Publisher: Microsoft Corporation
+  PublisherSupportUrl: https://support.microsoft.com/zh-CN
+  PublisherUrl: https://www.microsoft.com/zh-cn/
+Installers:
+- Architecture: x86
+  InstallerType: exe
+  InstallerSha256: 8648c5fc29c44b9112fe52f9a33f80e7fc42d10f3b5b42b2121542a13e44adfd
+  InstallerUrl: https://download.microsoft.com/download/8/B/4/8B42259F-5D70-43F4-AC2E-4B208FD8D66A/vcredist_x86.EXE
+  Scope: machine
+  ElevationRequirement: elevationRequired
+  ReleaseDate: 2021-05-12
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  MinimumOSVersion: 10.0.0.0
+  ProductCode: '{710f4c1c-cc18-4c49-8cbf-51240c89a1a2}'
+  UpgradeBehavior: uninstallPrevious
+  RepairBehavior: unknown
+  AppsAndFeaturesEntries:
+  - DisplayName: Microsoft Visual C++ 2005 Redistributable
+    InstallerType: msi
+    ProductCode: '{710f4c1c-cc18-4c49-8cbf-51240c89a1a2}'
+    Publisher: Microsoft Corporation
+    UpgradeCode: '{86C9D5AA-F00C-4921-B3F2-C60AF92E2844}'
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 2147943467
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 2147943623
+    ReturnResponse: cancelledByUser
+  InstallerSwitches:
+    Custom: /norestart"
+    Silent: /Q /C:"msiexec /i ""vcredist.msi"" /quiet
+    SilentWithProgress: /Q /C:"msiexec /i ""vcredist.msi"" /passive
+    Interactive: /C:"msiexec /i ""vcredist.msi""
+    Log: /log ""<LOGPATH>""
+  InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+ManifestVersion: 1.2.0
+ManifestType: merged
