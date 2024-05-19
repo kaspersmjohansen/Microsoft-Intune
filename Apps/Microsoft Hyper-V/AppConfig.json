@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Microsoft",
+                    "Product":  "Hyper-V",
+                    "Version":  "1.0",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"HyperVLogo.png",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

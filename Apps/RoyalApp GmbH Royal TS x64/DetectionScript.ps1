@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files\Royal TS V7"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "RoyalTS.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "7.2.50424"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

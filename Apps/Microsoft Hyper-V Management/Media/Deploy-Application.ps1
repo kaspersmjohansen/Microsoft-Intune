@@ -115,7 +115,7 @@ Try {
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
     [String]$appScriptDate = '26/11/2023'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -182,7 +182,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
+        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -206,10 +206,10 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        If (!(Get-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V-All').State -eq 'Installed')
+        If (!(Get-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-Management-Clients' -Online).State -eq 'Enabled')
         {
 	        Write-Log "Enable Hyper-V Management Clients"
-	        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-Management-Clients -All -NoRestart
+	        Enable-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-Management-Clients' -Online -All -NoRestart -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"DISM"+"_"+"Install"+".log") -LogLevel Debug
         }
 
         ##*===============================================
@@ -218,10 +218,10 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        # Hyper-V server hostnames
-        $HyperVServers = "srvhv01.johansen.local"
+        # Hyper-V server hostnames, multiple servers are separated by a comma
+        $HyperVServers = "srvhv01.johansen.local" # "hv01.domain.local","hv02.domain.local"
 
-        # Configure network profile to private
+        # Configure network profile to private, if network profile is public because of Windows Firewall rules
         $NetworkProfile = Get-NetConnectionProfile
         If ($NetworkProfile.NetworkCategory -eq "Public")
         {
@@ -235,25 +235,24 @@ Try {
         # Configure Hyper-V Servers as trusted hosts
         ForEach ($Server in $HyperVServers)
         {
+            Write-Log "Enable Credential Security Support Provider for $Server"
             Set-Item WSMan:\localhost\Client\TrustedHosts -Value "$Server" -Force
             Enable-WSManCredSSP -Role client -DelegateComputer "$Server" -Force
         }
 
-        # Configure registry values to allow credential delegation
-        If (!(Test-Path -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation))
-        {
-            New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\" -Name 'CredentialsDelegation'
-        }
-
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation\" -Name 'AllowFreshCredentialsWhenNTLMOnly'
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation\" -Name 'AllowFreshCredentialsWhenNTLMOnly' -PropertyType DWord -Value "00000001"
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation\" -Name 'ConcatenateDefaults_AllowFreshNTLMOnly' -PropertyType DWord -Value "00000001"
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation\" -Name 'AllowFreshCredentials'
+        Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation' -Name 'AllowFreshCredentialsWhenNTLMOnly' -Type 'DWord' -Value '1'
+        Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation' -Name 'ConcatenateDefaults_AllowFreshNTLMOnly' -Type 'String' -Value '1'
 
         ForEach ($Server in $HyperVServers)
         {
-            New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation\AllowFreshCredentialsWhenNTLMOnly\" -Name '1' -Value "wsman/$Server"
+            Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation\AllowFreshCredentialsWhenNTLMOnly' -Name '1' -Type 'String' -Value "wsman/$Server"
         }
+
+        If ((Get-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-Management-Clients' -Online).State -eq 'Enabled')
+        {
+            Show-InstallationRestartPrompt -Countdownseconds 300
+        }
+
         ## Display a message at the end of the install
         #If (-not $useDefaultMsi) {
         #    Show-InstallationPrompt -Message 'You can customize text to appear at the end of an install or remove it completely for unattended installations.' -ButtonRightText 'OK' -Icon Information -NoWait
@@ -289,10 +288,10 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        If ((Get-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V-All').State -eq 'Installed')
+        If ((Get-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-Management-Clients' -Online).State -eq 'Installed')
         {
 	        Write-Log "Disable Hyper-V Management Clients"
-            Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-Management-Clients -NoRestart
+            Disable-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-Management-Clients' -Online -NoRestart -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"DISM"+"_"+"Uninstall"+".log") -LogLevel Debug
         }
 
         ##*===============================================
@@ -300,9 +299,9 @@ Try {
         ##*===============================================
         [String]$installPhase = 'Post-Uninstallation'
 
-        ## <Perform Post-Uninstallation tasks here>
-
-
+        ## <Perform Post-Uninstallation tasks here>             
+        Remove-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation' -Recurse
+        
     }
     ElseIf ($deploymentType -ieq 'Repair') {
         ##*===============================================

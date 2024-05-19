@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files\paint.net"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "paintdotnet.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "5.12.8735.38135"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

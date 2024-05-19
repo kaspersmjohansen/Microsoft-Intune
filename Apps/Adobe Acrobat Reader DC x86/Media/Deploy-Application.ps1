@@ -109,13 +109,13 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Adobe'
     [String]$appName = 'Acrobat Reader DC'
-    [String]$appVersion = '23.008.20533'
-    [String]$appArch = 'x864'
+    [String]$appVersion = ''
+    [String]$appArch = 'x86'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '19/01/2024'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptDate = '15/05/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -214,7 +214,7 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Remove-File -Path "$env:PUBLIC\Desktop\Adobe Acrobat.lnk"
+        Remove-Folder -Path 'C:\Program Files (x86)\Adobe\Acrobat Reader DC'
 
         ## Display a message at the end of the install
         #If (-not $useDefaultMsi) {

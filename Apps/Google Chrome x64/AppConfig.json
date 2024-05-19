@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Google",
+                    "Product":  "Chrome",
+                    "Version":  "125.0.6422.61",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

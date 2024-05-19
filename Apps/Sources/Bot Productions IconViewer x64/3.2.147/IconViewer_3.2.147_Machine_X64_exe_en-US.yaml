@@ -1,0 +1,29 @@
+PackageIdentifier: BotProductions.IconViewer
+PackageVersion: 3.2.147
+PackageLocale: en-US
+ShortDescription: IconViewer is a free Windows Explorer extension that lets you easily
+  view, copy, and save icons contained within programs and libraries. Open a file's
+  Properties box, select the "Icons" tab, and view the icons contained in the file.
+License: IconViewer License
+LicenseUrl: https://www.botproductions.com/iconview/license.html
+PackageName: IconViewer
+PackageUrl: https://www.botproductions.com/iconview/iconview.html
+Publisher: Bot Productions
+Installers:
+- Architecture: x64
+  InstallerType: exe
+  InstallerSha256: 3be3664cfac0b9270da161c2c4c323499b4fe40a8e68a2d34cd4425b12ef223f
+  InstallerUrl: https://www.botproductions.com/iconview/download/IconViewer3.02-Setup-x64.exe
+  Scope: machine
+  ElevationRequirement: elevatesSelf
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  InstallerSwitches:
+    Silent: /quiet
+ManifestVersion: 1.1.0
+ManifestType: merged

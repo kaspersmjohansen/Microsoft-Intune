@@ -2,7 +2,7 @@
 $RegDetect             = "False"
 
 # Detect version value in Displayname
-$RegValueVersionDetect = "False" # equal #equalgreater
+$RegValueVersionDetect = "equalgreater" # equal #equalgreater
 
 # Detect file
 $FileDetect            = "False"
@@ -20,10 +20,10 @@ $ProgramFile = ""
 $ProgramFileVersion = ""
 
 # Application uninstall registry key
-$ProgramRegKey = ""
+$ProgramRegKey = "HKLM:SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{ca67548a-5ebe-413a-b50c-4b9ceb6d66c6}"
 
 # Application version registry value
-$ProgramRegVersion = ""
+$ProgramRegVersion = "11.0.61030"
 
 # Specific file exists
 If ($FileDetect -eq "True")

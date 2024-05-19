@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files\7-Zip"
 $ProgramFile = "7zFM.exe"
 
 # File version
-$ProgramFileVersion = "23.01"
+$ProgramFileVersion = "24.05"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

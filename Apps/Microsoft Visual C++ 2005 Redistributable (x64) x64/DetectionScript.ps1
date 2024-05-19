@@ -2,7 +2,7 @@
 $RegDetect             = "False"
 
 # Detect version value in Displayname
-$RegValueVersionDetect = "False" # equal #equalgreater
+$RegValueVersionDetect = "equalgreater" # equal #equalgreater
 
 # Detect file
 $FileDetect            = "False"
@@ -20,10 +20,10 @@ $ProgramFile = ""
 $ProgramFileVersion = ""
 
 # Application uninstall registry key
-$ProgramRegKey = ""
+$ProgramRegKey = "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{ad8a2fa1-06e7-4b0d-927d-6e54b3d31028}"
 
 # Application version registry value
-$ProgramRegVersion = ""
+$ProgramRegVersion = "8.0.61000"
 
 # Specific file exists
 If ($FileDetect -eq "True")

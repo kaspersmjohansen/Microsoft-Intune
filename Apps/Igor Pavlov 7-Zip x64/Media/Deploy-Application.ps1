@@ -109,13 +109,13 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Igor Pavlov'
     [String]$appName = '7-Zip'
-    [String]$appVersion = '23.01'
+    [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '07/12/2023'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptDate = '19/05/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -182,7 +182,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
+        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-MSI -Action Install -Path '7-Zip_23.01_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart'
+        Execute-MSI -Action Install -Path '7-Zip_24.05_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION

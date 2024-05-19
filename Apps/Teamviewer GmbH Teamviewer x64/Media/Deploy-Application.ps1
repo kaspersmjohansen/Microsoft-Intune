@@ -109,13 +109,13 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Teamviewer Germany GmbH'
     [String]$appName = 'Teamviewer Host'
-    [String]$appVersion = '15.47.3'
+    [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '03/12/2023'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptDate = '19/05/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -188,7 +188,7 @@ Try {
         Show-InstallationProgress
 
         ## <Perform Pre-Installation tasks here>
-        Execute-Process -Path "$dirSupportFiles\Microsoft Edge WebView2 Runtime_120.0.2210.121_Machine_Neutral_exe_en-US.exe" -Parameters '/silent /install'
+        Execute-Process -Path "$dirSupportFiles\MicrosoftEdgeWebview2Setup.exe" -Parameters '/silent /install'
 
         ##*===============================================
         ##* INSTALLATION
@@ -214,11 +214,12 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'Autostart_GUI' -Value '0' -Type 'DWord'
-        Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'IntroShown' -Value '1' -Type 'DWord'
+        # Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'Autostart_GUI' -Value '0' -Type 'DWord'
+        # Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'IntroShown' -Value '1' -Type 'DWord'
+
         # Changes the UI version. To enable the "old" Teamviewer UI, configure the value to '2'.
-        Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'UIVersion' -Value '4' -Type 'DWord'
-        Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'WhatsNewShownVersion' -Value "$appVersion" -Type 'String'
+        # Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'UIVersion' -Value '4' -Type 'DWord'
+        # Set-RegistryKey 'HKLM\SOFTWARE\TeamViewer\DefaultSettings' -Name 'WhatsNewShownVersion' -Value "$appVersion" -Type 'String'
         Remove-File -Path "$env:PUBLIC\Desktop\Teamviewer.lnk"
 
         ## Display a message at the end of the install

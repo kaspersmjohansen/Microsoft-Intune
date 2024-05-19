@@ -109,13 +109,13 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'dotPDN LLC'
     [String]$appName = 'Paint .NET'
-    [String]$appVersion = '5.0.12'
+    [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
     [String]$appScriptDate = '11/12/2023'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'paint.net.5.0.12.install.x64.exe' -Parameters '/auto DESKTOPSHORTCUT=0 CHECKFORUPDATES=0'
+        Execute-Process -Path 'paint.net*.exe' -Parameters '/auto DESKTOPSHORTCUT=0 CHECKFORUPDATES=0'
 
         ##*===============================================
         ##* POST-INSTALLATION

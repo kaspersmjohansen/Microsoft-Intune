@@ -109,13 +109,13 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Microsoft'
     [String]$appName = 'Visual Studio Code'
-    [String]$appVersion = '1.88.0'
+    [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '06/04/2023'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptDate = '18/05/2023'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -182,7 +182,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
+        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Microsoft Visual Studio Code_1.88.0_Machine_X64_inno_en-US.exe' -Parameters '/VERYSILENT /NOCANCEL /NORESTART /mergetasks=!runcode'
+        Execute-Process -Path 'Microsoft Visual Studio Code*.exe' -Parameters '/VERYSILENT /NOCANCEL /NORESTART /mergetasks=!runcode'
 
         ##*===============================================
         ##* POST-INSTALLATION

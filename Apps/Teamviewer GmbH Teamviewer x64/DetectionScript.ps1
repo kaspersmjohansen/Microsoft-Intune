@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files\TeamViewer"
 $ProgramFile = "TeamViewer.exe"
 
 # File version
-$ProgramFileVersion = "15.47.3.0"
+$ProgramFileVersion = "15.53.7.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

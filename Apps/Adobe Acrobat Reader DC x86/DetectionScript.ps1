@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader"
 $ProgramFile = "AcroRd32.exe"
 
 # File version
-$ProgramFileVersion = "23.6.20380.0"
+$ProgramFileVersion = "24.2.20759.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

@@ -109,13 +109,13 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Git'
     [String]$appName = 'Git'
-    [String]$appVersion = '2.43'
+    [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '07/12/2023'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptDate = '15/05/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Git_2.43.0_Machine_X64_inno_en-US.exe' -Parameters '/VERYSILENT /NOCANCEL /NORESTART'
+        Execute-Process -Path 'Git_*.exe' -Parameters '/VERYSILENT /NOCANCEL /NORESTART'
 
         ##*===============================================
         ##* POST-INSTALLATION

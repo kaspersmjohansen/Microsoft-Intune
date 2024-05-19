@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Igor Pavlov",
+                    "Product":  "7-Zip",
+                    "Version":  "24.05",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"7-Zip.png",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

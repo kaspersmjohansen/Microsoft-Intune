@@ -114,8 +114,8 @@ Try {
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '26/11/2023'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptDate = '19/05/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -182,7 +182,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
+        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -206,10 +206,10 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        If (!(Get-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V-All').State -eq 'Installed')
+        If (!(Get-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-All' -Online).State -eq 'Enabled')
         {
 	        Write-Log "Enable Hyper-V and Hyper-V Management Tools"
-	        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -Online -NoRestart
+	        Enable-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V -All -Online -NoRestart -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"DISM"+"_"+"Install"+".log") -LogLevel Debug
         }
 
         ##*===============================================
@@ -221,6 +221,11 @@ Try {
         # Add InteractiveUser to the local Hyper-V Administrators group
         Write-Log "Adding Interactive User to the local Hyper-V Administrators group"
         Add-LocalGroupMember -Group "Hyper-V Administrators" -Member S-1-5-4
+
+        If ((Get-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-All' -Online).State -eq 'Enabled')
+        {
+            Show-InstallationRestartPrompt -Countdownseconds 300
+        }
 
         ## Display a message at the end of the install
         #If (-not $useDefaultMsi) {
@@ -257,10 +262,10 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        If ((Get-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V-All').State -eq 'Installed')
+        If ((Get-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-All' -Online).State -eq 'Enabled')
         {
 	        Write-Log "Disable Hyper-V and Hyper-V Management Tools"
-            Disable-WindowsOptionalFeature -Online -FeatureName -Online -FeatureName Microsoft-Hyper-V-All -NoRestart
+            Disable-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V-All -Online -NoRestart -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"DISM"+"_"+"Uninstall"+".log") -LogLevel Debug
         }
 
         ##*===============================================

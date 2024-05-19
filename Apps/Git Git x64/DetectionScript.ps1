@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files\Git"
 $ProgramFile = "git-cmd.exe"
 
 # File version
-$ProgramFileVersion = "2.43.0.windows.1"
+$ProgramFileVersion = "2.45.1.windows.1"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

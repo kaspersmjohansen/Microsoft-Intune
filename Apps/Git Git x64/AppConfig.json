@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Git",
+                    "Product":  "Git",
+                    "Version":  "2.45.1",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"GitForWindows.png",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

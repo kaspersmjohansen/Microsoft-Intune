@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files\Adobe\Acrobat DC\Acrobat"
 $ProgramFile = "Acrobat.exe"
 
 # File version
-$ProgramFileVersion = "23.008.20470"
+$ProgramFileVersion = "24.2.20759.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

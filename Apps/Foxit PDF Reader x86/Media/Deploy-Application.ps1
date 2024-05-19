@@ -109,13 +109,13 @@ Try {
     ## Variables: Application
     [String]$appVendor = 'Foxit'
     [String]$appName = 'PDF Reader'
-    [String]$appVersion = '2023.3.0.23028'
+    [String]$appVersion = ''
     [String]$appArch = 'x86'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
     [String]$appScriptDate = '10/12/2023'
-    [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''

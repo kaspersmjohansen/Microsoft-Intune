@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Royal Apps GmbH",
+                    "Product":  "Royal TS",
+                    "Version":  "7.2.50424",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"RoyalTS.png",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

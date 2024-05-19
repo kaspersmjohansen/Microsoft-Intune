@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files\Microsoft VS Code"
 $ProgramFile = "Code.exe"
 
 # File version
-$ProgramFileVersion = "1.84.2"
+$ProgramFileVersion = "1.89.1"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

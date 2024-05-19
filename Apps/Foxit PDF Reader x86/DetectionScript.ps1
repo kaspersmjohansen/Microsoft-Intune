@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files (x86)\Foxit Software\Foxit PDF Reader"
 $ProgramFile = "FoxitPDFReader.exe"
 
 # File version
-$ProgramFileVersion = "2023.3.0.23028"
+$ProgramFileVersion = "2024.2.1.25153"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

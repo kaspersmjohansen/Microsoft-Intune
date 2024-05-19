@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\Global Secure Access Client"
+$ProgramPath = "C:\Program Files\Global Secure Access Client\TrayApp"
 
 # File to be detected
 $ProgramFile = "GlobalSecureAccessClient.exe"
 
 # File version
-$ProgramFileVersion = "1.7.376..1214"
+$ProgramFileVersion = "1.8.7.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
