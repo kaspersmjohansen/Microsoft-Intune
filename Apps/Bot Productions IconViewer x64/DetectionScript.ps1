@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files\IconViewer"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "iconview.dll"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "3.02.147.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

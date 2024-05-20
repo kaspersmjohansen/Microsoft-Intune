@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "",
-                    "Product":  "",
-                    "Version":  "",
+                    "Vendor":  "Bot Productions",
+                    "Product":  "Iconviewer",
+                    "Version":  "3.02.147.0",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"",
+                    "Icon":"Iconviewer.png",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"

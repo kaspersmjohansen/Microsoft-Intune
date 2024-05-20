@@ -106,15 +106,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = ''
-    [String]$appName = ''
+    [String]$appVendor = 'Bot Production'
+    [String]$appName = 'Iconviewer'
     [String]$appVersion = ''
-    [String]$appArch = ''
+    [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = 'XX/XX/20XX'
-    [String]$appScriptAuthor = '<author name>'
+    [String]$appScriptDate = '20/05/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-
+        Execute-Process -Path 'IconViewer_3.2.147_Machine_X64_exe_en-US.exe' -Parameters '/quiet'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -248,6 +248,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
+        Execute-Process -Path 'C:\Program Files\IconViewer\Setup.exe' -Parameters '/uninstall /quiet'
 
 
         ##*===============================================
