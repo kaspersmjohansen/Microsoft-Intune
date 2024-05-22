@@ -107,13 +107,13 @@ Try {
     ##*===============================================
     ## Variables: Application
     [String]$appVendor = 'Microsoft'
-    [String]$appName = 'Visual C++ 2015-2022 Redistributable'
-    [String]$appVersion = ''
-    [String]$appArch = 'x86'
+    [String]$appName = '.NET Framework'
+    [String]$appVersion = '3.5'
+    [String]$appArch = ''
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '18/05/2024'
+    [String]$appScriptDate = '21/05/2024'
     [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -205,7 +205,11 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Microsoft Visual C++ 2015-2022 Redistributable*.exe' -Parameters '/install /quiet /norestart'
+        If ((Get-WindowsOptionalFeature -FeatureName 'NetFx3' -Online).State -ne 'Enabled')
+        {
+	        Write-Log "Enable .NET Framework 3.5"
+	        Enable-WindowsOptionalFeature -FeatureName NetFx3 -All -Online -NoRestart -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"DISM"+"_"+"Install"+".log") -LogLevel Debug
+        }
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -248,8 +252,12 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path 'C:\ProgramData\Package Cache\{46c3b171-c15c-4137-8e1d-67eeb2985b44}\VC_redist.x86.exe' -Parameters '/uninstall /quiet /norestart'
-        
+        If ((Get-WindowsOptionalFeature -FeatureName 'NetFx3' -Online).State -eq 'Enabled')
+        {
+	        Write-Log "Disable .NET Framework 3.5"
+            Disable-WindowsOptionalFeature -FeatureName NetFx3 -Online -NoRestart -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"DISM"+"_"+"Uninstall"+".log") -LogLevel Debug
+        }
+
 
         ##*===============================================
         ##* POST-UNINSTALLATION

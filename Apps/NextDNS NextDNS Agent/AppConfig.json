@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "NextDNS",
+                    "Product":  "NextDNS Agent",
+                    "Version":  "3.0.1.3",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"nextdnsagent.png",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}
