@@ -13,9 +13,41 @@ param(
     [Parameter(Mandatory = $false)]
     [string]$SetupFile = "Deploy-Application.exe",
     [Parameter(Mandatory = $false)][ValidateSet("Short","UltraShort")]
-    [string]$IntuneAppName = "Short",
-    [switch]$NewApp
+    [string]$IntuneAppName = "Short"    
 )
+
+function Get-GroupId
+{
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$ConnectClientID,
+        [Parameter(Mandatory = $true)]
+        [string]$ConnectClientSecret,
+        $ConnectTenantID,
+        [Parameter(Mandatory = $true)]
+        [string]$GroupName
+    )
+        # Get JWT access token
+        $Body =  @{
+            Grant_Type    = "client_credentials"
+            Scope         = "https://graph.microsoft.com/.default"
+            Client_Id     = $ConnectClientID
+            Client_Secret = $ConnectClientSecret
+        }
+        
+        $Connection = Invoke-RestMethod `
+            -Uri https://login.microsoftonline.com/$ConnectTenantID/oauth2/v2.0/token `
+            -Method POST `
+            -Body $Body
+        
+        #$Token = $connection.access_token
+        $secureToken = ConvertTo-SecureString -String $($Connection.access_token) -AsPlainText -Force
+
+        If (!(Get-Module -ListAvailable -Name Microsoft.Graph.Groups)) { Install-Module Microsoft.Graph.Groups -Force -Scope CurrentUser | Import-Module Microsoft.Graph.Groups | Out-Null }
+        Connect-MgGraph -AccessToken $secureToken -NoWelcome
+
+            Get-MgGroup -Filter "DisplayName eq '$GroupName'" | Select-Object Id
+}
 
 # Get contents of the source path folder
 $AppSources = Get-ChildItem -Path $SourcePath -Directory -ErrorAction Stop
@@ -29,12 +61,12 @@ If (!(Get-Module -ListAvailable -Name Microsoft.Graph.Intune)) { Install-Module 
 #Endregion Module Import
 
 # App registration konfiguration
-# $ClientID = ""
-# $ClientSecret = ""
-# Connect-MSIntuneGraph -TenantID $TenantID -ClientID $ClientID -ClientSecret $ClientSecret | Out-Null
+$ClientID = "58d9e836-34b7-4537-bd98-5ccd930dde2a"
+$ClientSecret = "KVB8Q~ftIBu2t.hxybTfZ0YZpXwke3gmQp3HVcrQ"
+Connect-MSIntuneGraph -TenantID $TenantID -ClientID $ClientID -ClientSecret $ClientSecret | Out-Null
 
 # Connect to MSGraph
-Connect-MSIntuneGraph -TenantID $TenantID
+# Connect-MSIntuneGraph -TenantID $TenantID
 
 #Region convert app to Win32 App
 ForEach ($App in $AppSources)
@@ -169,15 +201,22 @@ ForEach ($App in $AppSources)
                                         }
                                                         
                                         # Configure a Intune Available group if specified                
-                                        If ($AvailableGroup)
-                                        {
-                                            Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose
+                                        If (($RequiredGroup -eq "AllUsers" -or $AvailableGroup -eq "AllUsers") -and ![string]::IsNullOrEmpty($AvailableGroup))
+                                        {   
+                                            Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose
                                         }
-                                            # Configure a Intune required group if specified
-                                            If ($RequiredGroup)
+                                            If (($RequiredGroup -ne "AllDevice" -or $RequiredGroup -ne "AllDevices") -and ![string]::IsNullOrEmpty($RequiredGroup))
                                             {
-                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $RequiredGroup -Intent "required" -Notification "showAll" -Verbose
+                                                Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose                                                    
                                             }
+                                                If (![string]::IsNullOrWhiteSpace($AvailableGroup) -and ($AvailableGroup -ne "AllUsers" -or $AvailableGroup -ne "AllDevices"))
+                                                {
+                                                    Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
+                                                } 
+                                                    If (![string]::IsNullOrWhiteSpace($RequiredGroup) -and ($RequiredGroup -ne "AllUsers" -or $RequiredGroup -ne "AllDevices"))
+                                                    {                                                            
+                                                        Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $RequiredGroup -Intent "required" -Notification "showAll" -Verbose
+                                                    }
                         } 
                 #Endregion Import intunewin to Intune
     }
