@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Google",
-                    "Product":  "Chrome",
-                    "Version":  "125.0.6422.61",
+                    "Vendor":  "Microsoft",
+                    "Product":  ".NET Framework - Offline",
+                    "Version":  "3.5",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"Google-Chrome.png",
+                    "Icon":"net-framework-logo.png",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"
