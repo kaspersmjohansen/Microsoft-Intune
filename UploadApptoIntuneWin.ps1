@@ -84,9 +84,10 @@ ForEach ($App in $AppSources)
         $Vendor = $config.AppConfig.Vendor
         $Product = $config.AppConfig.Product
         $Version = $config.AppConfig.Version
+        $Architecture = $config.AppConfig.Architecture
         
         # Set IntuneWin package folder anem
-        $PackageFolderName = $Vendor + " " + $Product + " " + $Version
+        $PackageFolderName = $Vendor + " " + $Product + " " + $Architecture + " " + $Version
 
             # Set Intune app name
             If ($IntuneAppName -eq "Short")
@@ -161,8 +162,8 @@ ForEach ($App in $AppSources)
                                     $DetectionRuleScript = $config.AppConfig.DetectionScript
                                     $RequirementRuleScript = $config.AppConfig.RequirementScript
                                     $Icon = $config.AppConfig.Icon
-                                    $AvailableGroup = $config.AppConfig.AvailableGroup
-                                    $RequiredGroup = $config.AppConfig.RequiredGroup
+                                    [string]$AvailableGroup = $config.AppConfig.AvailableGroup
+                                    [string]$RequiredGroup = $config.AppConfig.RequiredGroup
 
                                     # Create requirement rule
                                     If ($Architecture -eq "x86x64")
@@ -201,22 +202,26 @@ ForEach ($App in $AppSources)
                                         }
                                                         
                                         # Configure a Intune Available group if specified                
-                                        If (($RequiredGroup -eq "AllUsers" -or $AvailableGroup -eq "AllUsers") -and ![string]::IsNullOrEmpty($AvailableGroup))
+                                        If (($AvailableGroup -eq "AllDevices" -or $AvailableGroup -eq "AllUsers")) #-and ![string]::IsNullOrEmpty($AvailableGroup))
                                         {   
                                             Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose
                                         }
-                                            If (($RequiredGroup -ne "AllDevice" -or $RequiredGroup -ne "AllDevices") -and ![string]::IsNullOrEmpty($RequiredGroup))
+                                            elseif (![string]::IsNullOrEmpty($AvailableGroup))
                                             {
-                                                Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose                                                    
+                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
                                             }
-                                                If (![string]::IsNullOrWhiteSpace($AvailableGroup) -and ($AvailableGroup -ne "AllUsers" -or $AvailableGroup -ne "AllDevices"))
+                                            else
+                                            {}
+                                                If (($RequiredGroup -eq "AllDevices" -or $RequiredGroup -eq "AllUsers")) #-and ![string]::IsNullOrEmpty($RequiredGroup))
                                                 {
-                                                    Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
-                                                } 
-                                                    If (![string]::IsNullOrWhiteSpace($RequiredGroup) -and ($RequiredGroup -ne "AllUsers" -or $RequiredGroup -ne "AllDevices"))
-                                                    {                                                            
-                                                        Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $RequiredGroup -Intent "required" -Notification "showAll" -Verbose
+                                                    Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose                                                    
+                                                }
+                                                    elseif (![string]::IsNullOrEmpty($RequiredGroup))
+                                                    {
+                                                        Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $RequiredGroup -Intent "required" -Notification "showAll" -Verbose    
                                                     }
+                                                    else
+                                                    {}
                         } 
                 #Endregion Import intunewin to Intune
     }
