@@ -1,4 +1,4 @@
-# Detect DisplayName value in application uninstall key
+﻿# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -8,28 +8,22 @@ $RegValueVersionDetect = "False" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "" # equal #equalgreater
+$FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files (x86)\FastTrack Software\Admin By Request\"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "AdminByRequest.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "8.3.0.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
 
 # Application version registry value
 $ProgramRegVersion = ""
-
-# Detect Windows Feature
-$WindowsFeature = "True"
-
-# Windows Feature name
-$WindowsFeatureName = "NetFx3"
 
 # Specific file exists
 If ($FileDetect -eq "True")
@@ -88,15 +82,6 @@ If ($RegValueVersionDetect -eq "equalgreater")
 {
     $RegContent = Get-ItemProperty -Path $ProgramRegKey
     If($RegContent.DisplayVersion -ge $ProgramRegVersion)
-    {
-        Write-Host "Found it!"
-    }
-}
-
-# Windows Feature is enabled
-If ($WindowsFeature -eq "True")
-{
-    If ((Get-WindowsOptionalFeature -Online -FeatureName "$WindowsFeatureName").State -eq 'Enabled')
     {
         Write-Host "Found it!"
     }

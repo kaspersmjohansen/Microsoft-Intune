@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Fasttrack Software",
+                    "Product":  "Admin by Request Workstation",
+                    "Version":  "8.3",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"adminbyrequest.png",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -8,7 +8,7 @@ $RegValueVersionDetect = "False" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+$FileVersionDetect     = "" # equal #equalgreater
 
 # Folder to detect file
 $ProgramPath = ""
@@ -63,13 +63,10 @@ If ($FileVersionDetect -eq "equalgreater")
 # DisplayName exists in $ProgramRegKey
 If ($RegDetect -eq "True")
 {
-    If ($ProgramRegValue -eq "True")
+    $RegContent = Get-ItemProperty -Path $ProgramRegKey
+    If($RegContent.DisplayVersion)
     {
-        $RegContent = Get-ItemProperty -Path $ProgramRegKey
-        If($RegContent.DisplayName)
-        {
-            Write-Host "Found it!"
-        }
+        Write-Host "Found it!"
     }
 }
 
