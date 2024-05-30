@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -8,7 +8,7 @@ $RegValueVersionDetect = "equalgreater" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+$FileVersionDetect     = "" # equal #equalgreater
 
 # Folder to detect file
 $ProgramPath = ""

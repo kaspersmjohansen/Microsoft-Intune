@@ -107,7 +107,7 @@ Try {
     ##*===============================================
     ## Variables: Application
     [String]$appVendor = 'Microsoft'
-    [String]$appName = 'Windows 11 Language Pack - DK'
+    [String]$appName = 'Language Pack - DK'
     [String]$appVersion = ''
     [String]$appArch = ''
     [String]$appLang = 'EN'

@@ -250,10 +250,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Remove-MSIApplications -Name 'LastMile Telemetry(64  bit)' -Exact
-        Remove-MSIApplications -Name 'Global Secure Access Client' -Exact
-        Start-Sleep -Seconds 10
-        Remove-Folder -Path 'C:\Program Files\Global Secure Access Client'
+        Execute-Process -Path 'GlobalSecureAccessInstaller*.exe' -Parameters '/uninstall /quiet'
 
 
         ##*===============================================

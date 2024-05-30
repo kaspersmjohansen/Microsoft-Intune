@@ -213,7 +213,6 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Execute-Process -Path 'C:\Program Files (x86)\NextDNS\NextDNS.exe'
 
         ## Display a message at the end of the install
         # If (-not $useDefaultMsi) {

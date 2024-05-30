@@ -114,7 +114,7 @@ Try {
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '26/11/2024'
+    [String]$appScriptDate = '30/05/2023'
     [String]$appScriptAuthor = 'Kasper Johansen - virtualwarlock.net'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -211,42 +211,42 @@ Try {
 		If (!(Get-WindowsCapability -Online -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0').state -eq 'Installed')
 		{
 			Write-Log "RSAT Active Directory ADDS Tools will be enabled"
-			Add-WindowsCapability -Online -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0' -ErrorAction Stop
+			Add-WindowsCapability -Online -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0' -LimitAccess -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-ADDS"+"_"+"Install"+".log") -LogLevel Debug
 		}
 		If (!(Get-WindowsCapability -Online -Name 'Rsat.CertificateServices.Tools~~~~0.0.1.0').state -eq 'Installed')
 		{
 			Write-Log "RSAT Certificate Services Tools will be enabled"
-			Add-WindowsCapability -Online -Name 'Rsat.CertificateServices.Tools~~~~0.0.1.0' -ErrorAction Stop
+			Add-WindowsCapability -Online -Name 'Rsat.CertificateServices.Tools~~~~0.0.1.0' -LimitAccess -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-ADCS"+"_"+"Install"+".log") -LogLevel Debug
 		}
         If (!(Get-WindowsCapability -Online -Name 'Rsat.DHCP.Tools~~~~0.0.1.0').state -eq 'Installed')
 		{
 			Write-Log "RSAT DHCP Tools will be enabled"
-			Add-WindowsCapability -Online -Name 'Rsat.DHCP.Tools~~~~0.0.1.0' -ErrorAction Stop
+			Add-WindowsCapability -Online -Name 'Rsat.DHCP.Tools~~~~0.0.1.0' -LimitAccess -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-DHCP"+"_"+"Install"+".log") -LogLevel Debug
 		}
         If (!(Get-WindowsCapability -Online -Name 'Rsat.Dns.Tools~~~~0.0.1.0').state -eq 'Installed')
 		{
 			Write-Log "RSAT DNS Tools will be enabled"
-			Add-WindowsCapability -Online -Name 'Rsat.Dns.Tools~~~~0.0.1.0' -ErrorAction Stop
+			Add-WindowsCapability -Online -Name 'Rsat.Dns.Tools~~~~0.0.1.0' -LimitAccess -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-DNS"+"_"+"Installl"+".log") -LogLevel Debug
 		}
         If (!(Get-WindowsCapability -Online -Name 'Rsat.FileServices.Tools~~~~0.0.1.0').state -eq 'Installed')
 		{
 			Write-Log "RSAT File Services Tools will be enabled"
-			Add-WindowsCapability -Online -Name 'Rsat.FileServices.Tools~~~~0.0.1.0' -ErrorAction Stop
+			Add-WindowsCapability -Online -Name 'Rsat.FileServices.Tools~~~~0.0.1.0' -LimitAccess -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-FS"+"_"+"Install"+".log") -LogLevel Debug
 		}
         If (!(Get-WindowsCapability -Online -Name 'Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0').state -eq 'Installed')
 		{
 			Write-Log "RSAT Group Policy Management Tools will be enabled"
-			Add-WindowsCapability -Online -Name 'Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0' -ErrorAction Stop
+			Add-WindowsCapability -Online -Name 'Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0' -LimitAccess -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-GPM"+"_"+"Install"+".log") -LogLevel Debug
 		}
         If (!(Get-WindowsCapability -Online -Name 'Rsat.RemoteDesktop.Services.Tools~~~~0.0.1.0').state -eq 'Installed')
 		{
 			Write-Log "RSAT Remote Desktop Services Tools will be enabled"
-			Add-WindowsCapability -Online -Name 'Rsat.RemoteDesktop.Services.Tools~~~~0.0.1.0' -ErrorAction Stop
+			Add-WindowsCapability -Online -Name 'Rsat.RemoteDesktop.Services.Tools~~~~0.0.1.0' -LimitAccess -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-RDST"+"_"+"Install"+".log") -LogLevel Debug
 		}
         If (!(Get-WindowsCapability -Online -Name 'Rsat.ServerManager.Tools~~~~0.0.1.0').state -eq 'Installed')
 		{
 			Write-Log "RSAT Server Manager will be enabled"
-			Add-WindowsCapability -Online -Name 'Rsat.ServerManager.Tools~~~~0.0.1.0' -ErrorAction Stop
+			Add-WindowsCapability -Online -Name 'Rsat.ServerManager.Tools~~~~0.0.1.0' -LimitAccess -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-SMT"+"_"+"Install"+".log") -LogLevel Debug
 		}
 
         ##*===============================================
@@ -290,14 +290,14 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Remove-WindowsCapability -Online -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0' -ErrorAction Stop
-        Remove-WindowsCapability -Online -Name 'Rsat.CertificateServices.Tools~~~~0.0.1.0' -ErrorAction Stop
-        Remove-WindowsCapability -Online -Name 'Rsat.DHCP.Tools~~~~0.0.1.0' -ErrorAction Stop
-        Remove-WindowsCapability -Online -Name 'Rsat.Dns.Tools~~~~0.0.1.0' -ErrorAction Stop
-        Remove-WindowsCapability -Online -Name 'Rsat.FileServices.Tools~~~~0.0.1.0' -ErrorAction Stop
-        Remove-WindowsCapability -Online -Name 'Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0' -ErrorAction Stop
-        Remove-WindowsCapability -Online -Name 'Rsat.RemoteDesktop.Services.Tools~~~~0.0.1.0' -ErrorAction Stop
-        Remove-WindowsCapability -Online -Name 'Rsat.ServerManager.Tools~~~~0.0.1.0' -ErrorAction Stop
+        Remove-WindowsCapability -Online -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0' -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-ADDS"+"_"+"Uninstall"+".log") -LogLevel Debug
+        Remove-WindowsCapability -Online -Name 'Rsat.CertificateServices.Tools~~~~0.0.1.0' -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-ADCS"+"_"+"Uninstall"+".log") -LogLevel Debug
+        Remove-WindowsCapability -Online -Name 'Rsat.DHCP.Tools~~~~0.0.1.0' -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-DHCP"+"_"+"Uninstall"+".log") -LogLevel Debug
+        Remove-WindowsCapability -Online -Name 'Rsat.Dns.Tools~~~~0.0.1.0' -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-DNS"+"_"+"Uninstall"+".log") -LogLevel Debug
+        Remove-WindowsCapability -Online -Name 'Rsat.FileServices.Tools~~~~0.0.1.0' -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-FS"+"_"+"Uninstall"+".log") -LogLevel Debug    
+        Remove-WindowsCapability -Online -Name 'Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0' -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-GPM"+"_"+"Uninstall"+".log") -LogLevel Debug
+        Remove-WindowsCapability -Online -Name 'Rsat.RemoteDesktop.Services.Tools~~~~0.0.1.0' -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-RDST"+"_"+"Uninstall"+".log") -LogLevel Debug
+        Remove-WindowsCapability -Online -Name 'Rsat.ServerManager.Tools~~~~0.0.1.0' -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"RSAT-SMT"+"_"+"Uninstall"+".log") -LogLevel Debug
 
         ##*===============================================
         ##* POST-UNINSTALLATION

@@ -5,6 +5,7 @@ Google;Chrome;en-us;Google.Chrome;x64;Machine
 Teamviewer GmbH;Teamviewer;en-us;TeamViewer.TeamViewer;x64;Machine
 Igor Pavlov;7-Zip;en-us;7zip.7zip;x64;Machine
 Git;Git;en-us;Git.Git;x64;Machine
+Microsoft;Powershel 7;en-us;Microsoft.PowerShell;x64;Machine
 Microsoft;Teams Classic;en-us;Microsoft.Teams.Classic;x64;Machine
 Microsoft;Visual Studio Code;en-us;Microsoft.VisualStudioCode;x64;Machine
 Microsoft;Visual C++ 2015-2022 Redistributable;en-us;Microsoft.VCRedist.2015+.x86;x86;Machine
@@ -19,9 +20,10 @@ Microsoft;Visual C++ 2008 Redistributable - x86;en-us;Microsoft.VCRedist.2008.x8
 Microsoft;Visual C++ 2008 Redistributable - x64;en-us;Microsoft.VCRedist.2008.x64;x64;Machine
 Microsoft;Visual C++ 2005 Redistributable;en-us;Microsoft.VCRedist.2005.x86;x86;Machine
 Microsoft;Visual C++ 2005 Redistributable (x64);en-us;Microsoft.VCRedist.2005.x64;x64;Machine
-Microsoft;Visual Studio 2010 Tools for Office Runtime;en-us;Microsoft.VSTOR;x64
+Microsoft;Visual Studio 2010 Tools for Office Runtime;en-us;Microsoft.VSTOR;x64;Machine
 Foxit;PDF Reader;en-us;Foxit.FoxitReader;x86;Machine
 dotPDNLLC;Paint.Net;en-us;dotPDNLLC.paintdotnet;x64;Machine
 RoyalApp GmbH;Royal TS;en-us;RoyalApps.RoyalTS.V7;x64;None
 Don Ho;Notepad++;en-us;Notepad++.Notepad++;x64;Machine
 Bot Productions;IconViewer;en:us;BotProductions.IconViewer;x64;Machine
+The Handbrake Team;HandBrake;en-us;HandBrake.HandBrake;x64;Machine

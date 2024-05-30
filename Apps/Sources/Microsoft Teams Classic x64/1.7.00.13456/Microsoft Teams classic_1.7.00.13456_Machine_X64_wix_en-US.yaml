@@ -1,0 +1,130 @@
+PackageIdentifier: Microsoft.Teams.Classic
+PackageVersion: 1.7.00.13456
+Moniker: teams
+Tags:
+- call
+- calling
+- chat
+- collaborate
+- collaboration
+- conferencing
+- meet
+- meeting
+- team
+- teams
+- video
+- video-conferencing
+- voice
+- voip
+- webinar
+PackageLocale: en-US
+Author: Microsoft Corporation
+Copyright: (c) Microsoft Corporation. All rights reserved.
+CopyrightUrl: https://www.microsoft.com/legal/intellectualproperty/trademarks
+Description: Microsoft Teams is the hub for team collaboration in Microsoft 365 that
+  integrates the people, content, and tools your team needs to be more engaged and
+  effective.
+ShortDescription: Chat, Meetings, Calling, Collaboration
+License: Proprietary
+LicenseUrl: https://www.microsoft.com/legal/terms-of-use
+PackageName: Microsoft Teams classic
+PackageUrl: https://www.microsoft.com/microsoft-teams/group-chat-software
+PrivacyUrl: https://privacy.microsoft.com/privacystatement
+Publisher: Microsoft Corporation
+PublisherSupportUrl: https://support.microsoft.com/teams
+PublisherUrl: https://www.microsoft.com/
+Localization:
+- Tags:
+  - teams
+  - voip
+  - "\u4F1A\u8BAE"
+  - "\u534F\u4F5C"
+  - "\u534F\u540C"
+  - "\u56E2\u961F"
+  - "\u5F00\u4F1A"
+  - "\u7535\u8BDD"
+  - "\u7814\u8BA8\u4F1A"
+  - "\u89C6\u9891"
+  - "\u89C6\u9891\u4F1A\u8BAE"
+  - "\u804A\u5929"
+  - "\u8BED\u97F3"
+  - "\u901A\u8BDD"
+  PackageLocale: zh-CN
+  Author: Microsoft Corporation
+  Copyright: (c) Microsoft Corporation. All rights reserved.
+  CopyrightUrl: https://www.microsoft.com/legal/intellectualproperty/trademarks
+  Description: "Microsoft Teams \u662F Microsoft 365 \u4E2D\u7684\u56E2\u961F\u534F\u4F5C\u4E2D\u5FC3,\u6574\u5408\u4E86\u56E2\u961F\u6240\u9700\u7684\u4EBA\u3001\u5185\u5BB9\u548C\u5DE5\u5177,\u8BA9\u56E2\u961F\u66F4\u52A0\u6295\u5165\u548C\u9AD8\u6548\u3002"
+  ShortDescription: "\u804A\u5929\u3001\u4F1A\u8BAE\u3001\u901A\u8BDD\u3001\u534F\u4F5C"
+  License: "\u4E13\u6709\u8F6F\u4EF6"
+  LicenseUrl: https://www.microsoft.com/legal/terms-of-use
+  PackageName: Microsoft Teams classic
+  PackageUrl: https://www.microsoft.com/zh-cn/microsoft-teams/group-chat-software
+  PrivacyUrl: https://privacy.microsoft.com/zh-cn/privacystatement
+  Publisher: Microsoft Corporation
+  PublisherSupportUrl: https://support.microsoft.com/zh-cn/teams
+  PublisherUrl: https://www.microsoft.com/
+Installers:
+- Architecture: x64
+  InstallerType: wix
+  InstallerSha256: 938a8b13b0ec779e8e71fbc985a0afe8e84e71f7378cf09e278fe067aa642f71
+  InstallerUrl: https://statics.teams.cdn.office.net/production-windows-x64/1.7.00.13456/Teams_windows_x64.msi
+  Scope: machine
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: true
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  ProductCode: '{731F6BAA-A986-45A4-8936-7C3AAAAA760B}'
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  AppsAndFeaturesEntries:
+  - DisplayName: Teams Machine-Wide Installer
+    DisplayVersion: 1.7.0.13456
+    ProductCode: '{731F6BAA-A986-45A4-8936-7C3AAAAA760B}'
+    UpgradeCode: '{4009BE0E-5D51-5D91-B94C-D00D7B5FE829}'
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 87
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 112
+    ReturnResponse: diskFull
+  - InstallerReturnCode: 1601
+    ReturnResponse: contactSupport
+  - InstallerReturnCode: 1602
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 1618
+    ReturnResponse: installInProgress
+  - InstallerReturnCode: 1623
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1625
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1628
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1633
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1638
+    ReturnResponse: alreadyInstalled
+  - InstallerReturnCode: 1639
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1640
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1641
+    ReturnResponse: rebootInitiated
+  - InstallerReturnCode: 1643
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1644
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1649
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1650
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1654
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 3010
+    ReturnResponse: rebootRequiredToFinish
+  InstallerSwitches:
+    Silent: /quiet /norestart
+    SilentWithProgress: /passive /norestart
+    Log: /log "<LOGPATH>"
+    InstallLocation: TARGETDIR="<INSTALLPATH>"
+ManifestVersion: 1.6.0
+ManifestType: merged

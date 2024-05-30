@@ -288,7 +288,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        If ((Get-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-Management-Clients' -Online).State -eq 'Installed')
+        If ((Get-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-Management-Clients' -Online).State -eq 'Enabled')
         {
 	        Write-Log "Disable Hyper-V Management Clients"
             Disable-WindowsOptionalFeature -FeatureName 'Microsoft-Hyper-V-Management-Clients' -Online -NoRestart -LogPath $configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"DISM"+"_"+"Uninstall"+".log") -LogLevel Debug

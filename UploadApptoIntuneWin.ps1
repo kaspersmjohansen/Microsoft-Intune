@@ -7,13 +7,15 @@ param(
     [Parameter(Mandatory = $True)]
     [string]$TenantID,
     [Parameter(Mandatory = $false)]
+    [string]$AppRegistrationConfigPath = "$PSScriptRoot\AppRegistrationConfig.json",
+    [Parameter(Mandatory = $false)]
     [string]$InstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType install",
     [Parameter(Mandatory = $false)]
     [string]$UninstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType uninstall",
     [Parameter(Mandatory = $false)]
     [string]$SetupFile = "Deploy-Application.exe",
-    [Parameter(Mandatory = $false)][ValidateSet("Short","UltraShort")]
-    [string]$IntuneAppName = "Short"    
+    [Parameter(Mandatory = $false)][ValidateSet("Normal","Short")]
+    [string]$IntuneAppName = "Normal"    
 )
 
 function Get-GroupId
@@ -61,8 +63,9 @@ If (!(Get-Module -ListAvailable -Name Microsoft.Graph.Intune)) { Install-Module 
 #Endregion Module Import
 
 # App registration konfiguration
-$ClientID = "58d9e836-34b7-4537-bd98-5ccd930dde2a"
-$ClientSecret = "KVB8Q~ftIBu2t.hxybTfZ0YZpXwke3gmQp3HVcrQ"
+$AppRegistrationConfig = Get-Content -Path $($AppRegistrationConfigPath + "\" + "AppRegistrationConfig.json") -Raw -Encoding UTF8 | ConvertFrom-Json
+$ClientID = $AppRegistrationConfig.AppRegistrationConfig.ClientID
+$ClientSecret = $AppRegistrationConfig.AppRegistrationConfig.ClientSecret
 Connect-MSIntuneGraph -TenantID $TenantID -ClientID $ClientID -ClientSecret $ClientSecret | Out-Null
 
 # Connect to MSGraph
@@ -90,12 +93,12 @@ ForEach ($App in $AppSources)
         $PackageFolderName = $Vendor + " " + $Product + " " + $Architecture + " " + $Version
 
             # Set Intune app name
-            If ($IntuneAppName -eq "Short")
+            If ($IntuneAppName -eq "Normal")
             {
                 $AppName = $Vendor + " " + $Product        
             }
 
-            If ($IntuneAppName -eq "UltraShort")
+            If ($IntuneAppName -eq "Short")
             {
                 $AppName = $Product        
             }
@@ -162,8 +165,8 @@ ForEach ($App in $AppSources)
                                     $DetectionRuleScript = $config.AppConfig.DetectionScript
                                     $RequirementRuleScript = $config.AppConfig.RequirementScript
                                     $Icon = $config.AppConfig.Icon
-                                    [string]$AvailableGroup = $config.AppConfig.AvailableGroup
-                                    [string]$RequiredGroup = $config.AppConfig.RequiredGroup
+                                    $AvailableGroup = $config.AppConfig.AvailableGroup
+                                    $RequiredGroup = $config.AppConfig.RequiredGroup
 
                                     # Create requirement rule
                                     If ($Architecture -eq "x86x64")
@@ -195,34 +198,45 @@ ForEach ($App in $AppSources)
                                     If ($RequirementRuleScript)
                                     {
                                         $RequirementRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
-                                        $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -Verbose -UseAzCopy -AdditionalRequirementRule $RequirementRuleScript
+                                        $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy -AdditionalRequirementRule $RequirementRuleScript
                                     } else
                                         {
-                                            $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -Verbose -UseAzCopy
+                                            $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy
                                         }
                                                         
-                                        # Configure a Intune Available group if specified                
-                                        If (($AvailableGroup -eq "AllDevices" -or $AvailableGroup -eq "AllUsers")) #-and ![string]::IsNullOrEmpty($AvailableGroup))
+                                        # Configure a Intune required group if specified                
+                                        If ($RequiredGroup -eq "AllUsers")
                                         {   
-                                            Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose
+                                            Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose
                                         }
-                                            elseif (![string]::IsNullOrEmpty($AvailableGroup))
+                                            elseif ($RequiredGroup -eq "AllDevices")
                                             {
-                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
+                                                Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose    
                                             }
-                                            else
-                                            {}
-                                                If (($RequiredGroup -eq "AllDevices" -or $RequiredGroup -eq "AllUsers")) #-and ![string]::IsNullOrEmpty($RequiredGroup))
+                                                else 
                                                 {
-                                                    Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose                                                    
-                                                }
-                                                    elseif (![string]::IsNullOrEmpty($RequiredGroup))
+                                                    If ($RequiredGroup -notlike "*AllUsers*" -or $RequiredGroup -notlike "*AllDevices*" )
                                                     {
                                                         Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $RequiredGroup -Intent "required" -Notification "showAll" -Verbose    
                                                     }
-                                                    else
-                                                    {}
-                        } 
+                                                }
+                                            # Configure a Intune available group if specified
+                                            If ($AvailableGroup -eq "AllUsers")
+                                            {
+                                                Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose
+                                            }
+                                                elseif ($AvailableGroup -eq "AllDevices")
+                                                {
+                                                    Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose 
+                                                }
+                                                else 
+                                                {
+                                                    If ($AvailableGroup -notlike "*AllUsers*" -or $AvailableGroup -notlike "*AllDevices*" )
+                                                    {
+                                                        Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
+                                                    }
+                                                }
+                            } 
                 #Endregion Import intunewin to Intune
     }
     else {

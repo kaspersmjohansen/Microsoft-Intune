@@ -8,22 +8,28 @@ $RegValueVersionDetect = "False" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+$FileVersionDetect     = "" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files (x86)\FastTrack Software\Admin By Request\"
+$ProgramPath = ""
 
 # File to be detected
-$ProgramFile = "AdminByRequest.exe"
+$ProgramFile = ""
 
 # File version
-$ProgramFileVersion = "8.1.2.0"
+$ProgramFileVersion = ""
 
 # Application uninstall registry key
 $ProgramRegKey = ""
 
-# Application version
+# Application version registry value
 $ProgramRegVersion = ""
+
+# Detect Windows Feature
+$WindowsFeature = "True"
+
+# Windows Feature name
+$WindowsFeatureName = "Microsoft-Hyper-V-Management-Clients"
 
 # Specific file exists
 If ($FileDetect -eq "True")
@@ -70,25 +76,28 @@ If ($RegDetect -eq "True")
 # DisplayVersion equal to $ProgramRegVersion
 If ($RegValueVersionDetect -eq "equal")
 {
-    If ($ProgramRegVersion -eq "True")
+    $RegContent = Get-ItemProperty -Path $ProgramRegKey
+    If($RegContent.DisplayVersion -eq $ProgramRegVersion)
     {
-        $RegContent = Get-ItemProperty -Path $ProgramRegKey
-        If($RegContent.DisplayVersion -eq $ProgramRegVersion)
-        {
-            Write-Host "Found it!"
-        }
+        Write-Host "Found it!"
     }
 }
 
 # DisplayVersion equal to or greater than $ProgramRegVersion
 If ($RegValueVersionDetect -eq "equalgreater")
 {
-    If ($ProgramRegVersion -eq "True")
+    $RegContent = Get-ItemProperty -Path $ProgramRegKey
+    If($RegContent.DisplayVersion -ge $ProgramRegVersion)
     {
-        $RegContent = Get-ItemProperty -Path $ProgramRegKey
-        If($RegContent.DisplayVersion -ge $ProgramRegVersion)
-        {
-            Write-Host "Found it!"
-        }
+        Write-Host "Found it!"
+    }
+}
+
+# Windows Feature is enabled
+If ($WindowsFeature -eq "True")
+{
+    If ((Get-WindowsOptionalFeature -Online -FeatureName "$WindowsFeatureName").State -eq 'Enabled')
+    {
+        Write-Host "Found it!"
     }
 }

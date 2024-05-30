@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'remotehelpinstaller*.exe' -Parameters ' /quiet acceptTerms=1'
+        Execute-Process -Path 'remotehelpinstaller*.exe' -Parameters "/quiet acceptTerms=1 /log `"$configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"Install"+".log")`""
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -248,7 +248,8 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Remove-MSIApplications -Name 'Remote Help' -Exact
+        Execute-Process -Path 'remotehelpinstaller*.exe' -Parameters "/burn.clean.room /uninstall /quiet /log `"$configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"Uninstall"+".log")`""
+        # Remove-MSIApplications -Name 'Remote Help' -Exact
 
         ##*===============================================
         ##* POST-UNINSTALLATION

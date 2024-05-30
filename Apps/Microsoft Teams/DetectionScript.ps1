@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -8,7 +8,7 @@ $RegValueVersionDetect = "False" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+$FileVersionDetect     = "" # equal #equalgreater
 
 # Detect AppX application
 $AppXDetect             = "true"

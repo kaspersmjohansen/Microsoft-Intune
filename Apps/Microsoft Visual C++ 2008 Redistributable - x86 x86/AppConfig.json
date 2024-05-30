@@ -1,7 +1,7 @@
 {
     "AppConfig":{
                     "Vendor":  "Microsoft",
-                    "Product":  "Visual C++ Redistributable 2008 -x86",
+                    "Product":  "Visual C++ Redistributable 2008 - x86",
                     "Version":  "9.0.30729.6161",
                     "Architecture":  "x86x64",
                     "InstallBehavior":"system",

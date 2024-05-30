@@ -2,7 +2,7 @@
     "AppConfig":{
                     "Vendor":  "Microsoft",
                     "Product":  "Teams",
-                    "Version":  "",
+                    "Version":  "1.0",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",

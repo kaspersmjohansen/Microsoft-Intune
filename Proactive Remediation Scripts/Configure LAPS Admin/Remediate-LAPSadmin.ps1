@@ -25,7 +25,7 @@ if (!$AccountMember)
 
 # Detect user and group membership
 $AccountExist = (Get-LocalUser).Name -Contains $AccountName
-$AccountMember = (Get-LocalGroupMember -Name "Administrators").Name -Contains "$env:COMPUTERNAME\$AccountName"
+$AccountMember  = if ($AccountName -in (([ADSI]"WinNT://./$AdminGroupName").psbase.Invoke('Members') | ForEach-Object {$_.GetType().InvokeMember("Name","GetProperty",$Null,$_,$Null)})){$true}else{$false}
 
 If ($AccountExist -and $AccountMember) 
 {
