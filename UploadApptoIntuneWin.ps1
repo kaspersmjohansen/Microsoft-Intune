@@ -15,7 +15,10 @@ param(
     [Parameter(Mandatory = $false)]
     [string]$SetupFile = "Deploy-Application.exe",
     [Parameter(Mandatory = $false)][ValidateSet("Normal","Short")]
-    [string]$IntuneAppName = "Normal"    
+    [string]$IntuneAppName = "Normal",
+    [Parameter(Mandatory = $false)][ValidateSet("New","Update")]
+    [string]$AppStatus = "New"
+
 )
 
 function Get-GroupId
@@ -112,40 +115,15 @@ ForEach ($App in $AppSources)
                 $App = Get-IntuneWin32App | Where-Object {$_.DisplayName -eq "$AppName"}
                 
                 # Skip app, if app exist in Intune and is the same version as source app
-                If ($App -and $App.displayVersion -eq $Version)                
-                {
-                    Write-Verbose "$AppName is the latest version" -Verbose
-                }
-                    # Update app, if app exist in Intune and version is older than source app 
-                    If ($App -and $App.displayVersion -ne $Version)
+                
+                    # Update app
+                    If ($AppStatus -eq "Update")
                     {
-                        Write-Verbose "Updating $($App.DisplayName)" -Verbose
-
-                        # Create Output folder, if not exist
-                        If (!(Test-Path $OutputAppFolder))
+                        If ($App -and $App.displayVersion -ne $Version)
                         {
-                            New-Item -Path $OutputAppFolder -ItemType Directory
-                        }
-                            If (!(Test-Path -Path $OutputFolder))
-                            {
-                                New-Item -Path $OutputFolder -ItemType Directory
-                            }
+                            Write-Verbose "Updating $($App.DisplayName)" -Verbose
 
-                            # Create intunewin file
-                            $Win32AppPackage = New-IntuneWin32AppPackage -SourceFolder $MediaPath -SetupFile $SetupFile -OutputFolder $OutputFolder -Verbose
-
-                            # Get .intunewin package location
-                            $IntuneWinFile = $Win32AppPackage.Path
-
-                                # Update existing app in Intune with new intunewin file and version information
-                                $AppID = $App.ID
-                                Update-IntuneWin32AppPackageFile -ID $AppID -FilePath $IntuneWinFile -ErrorAction Stop
-                                Set-IntuneWin32App -ID $AppID -AppVersion $Version
-                    }
-                        # Import app, if app does not exist in Intune
-                        If (!($App))
-                        {
-                            #Write-Host "Importing $AppNameShort to Intune"
+                            # Create Output folder, if not exist
                             If (!(Test-Path $OutputAppFolder))
                             {
                                 New-Item -Path $OutputAppFolder -ItemType Directory
@@ -154,97 +132,129 @@ ForEach ($App in $AppSources)
                                 {
                                     New-Item -Path $OutputFolder -ItemType Directory
                                 }
-                                    # Create intunewin file
-                                    $Win32AppPackage = New-IntuneWin32AppPackage -SourceFolder $MediaPath -SetupFile $SetupFile -OutputFolder $OutputFolder -Verbose
 
-                                    # Get .intunewin package location
-                                    $IntuneWinFile = $Win32AppPackage.Path
+                                # Create intunewin file
+                                $Win32AppPackage = New-IntuneWin32AppPackage -SourceFolder $MediaPath -SetupFile $SetupFile -OutputFolder $OutputFolder -Verbose
 
-                                    # Set app variables
-                                    $Architecture = $config.AppConfig.Architecture
-                                    $DetectionRuleScript = $config.AppConfig.DetectionScript
-                                    $RequirementRuleScript = $config.AppConfig.RequirementScript
-                                    $Icon = $config.AppConfig.Icon
-                                    $AvailableGroup = $config.AppConfig.AvailableGroup
-                                    $RequiredGroup = $config.AppConfig.RequiredGroup
+                                # Get .intunewin package location
+                                $IntuneWinFile = $Win32AppPackage.Path
 
-                                    # Create requirement rule
-                                    If ($Architecture -eq "x86x64")
+                                    # Update existing app in Intune with new intunewin file and version information
+                                    $AppID = $App.ID
+                                    Update-IntuneWin32AppPackageFile -ID $AppID -FilePath $IntuneWinFile -ErrorAction Stop
+                                    Set-IntuneWin32App -ID $AppID -AppVersion $Version
+                        }
+                    }
+                        # Import app
+                        If ($AppStatus -eq "New")
+                        {
+                            If ($App -and $App.displayVersion -eq $Version)                
+                            {
+                                Write-Verbose "$AppName is at version $Version" -Verbose
+                            }
+                                Elseif ($App -and $App.displayVersion -ne $Version)
+                                {
+                                    #Write-Host "Importing $AppNameShort to Intune"
+                                    If (!(Test-Path $OutputAppFolder))
                                     {
-                                        $Architecture = "All"
+                                        New-Item -Path $OutputAppFolder -ItemType Directory
                                     }
-                                    $RequirementRule = New-IntuneWin32AppRequirementRule -Architecture $Architecture -MinimumSupportedWindowsRelease "W10_22H2"
-
-                                    # Create script based requirement rule
-                                    If ($RequirementRuleScript)
-                                    {
-                                        $RequirementRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
-                                    }
-
-                                    # Create script based detection rule
-                                    $DetectionRule = New-IntuneWin32AppDetectionRuleScript -ScriptFile $($AppRootPath + "\" + $DetectionRuleScript)
-
-                                    # Convert image file to icon
-                                    $Icon = New-IntuneWin32AppIcon -FilePath $($AppRootPath + "\" + $Icon)
-
-                                    # Create custom return code
-                                    # $ReturnCode = New-IntuneWin32AppReturnCode -ReturnCode 1337 -Type "retry"
-
-                                    # Set install and uninstall command line
-                                    # $InstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType install"
-                                    # $UninstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType uninstall"
-
-                                    #-AdditionalRequirementRule $RequirementRuleScript
-                                    If ($RequirementRuleScript)
-                                    {
-                                        $RequirementRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
-                                        $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy -AdditionalRequirementRule $RequirementRuleScript
-                                    } else
+                                        If (!(Test-Path -Path $OutputFolder))
                                         {
-                                            $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy
+                                            New-Item -Path $OutputFolder -ItemType Directory
                                         }
-                                                        
-                                        # Configure a Intune required group if specified
-                                        If ([string]::IsNullOrEmpty($RequiredGroup))
-                                        {
-                                            Write-Verbose "No group configured as required group" -Verbose
-                                        }                
-                                        elseif ($RequiredGroup -eq "AllUsers")
-                                        {   
-                                            Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose
-                                        }
-                                            elseif ($RequiredGroup -eq "AllDevices")
+                                            # Create intunewin file
+                                            $Win32AppPackage = New-IntuneWin32AppPackage -SourceFolder $MediaPath -SetupFile $SetupFile -OutputFolder $OutputFolder -Verbose
+
+                                            # Get .intunewin package location
+                                            $IntuneWinFile = $Win32AppPackage.Path
+
+                                            # Set app variables
+                                            $Architecture = $config.AppConfig.Architecture
+                                            $DetectionRuleScript = $config.AppConfig.DetectionScript
+                                            $RequirementRuleScript = $config.AppConfig.RequirementScript
+                                            $Icon = $config.AppConfig.Icon
+                                            $AvailableGroup = $config.AppConfig.AvailableGroup
+                                            $RequiredGroup = $config.AppConfig.RequiredGroup
+
+                                            # Create requirement rule
+                                            If ($Architecture -eq "x86x64")
                                             {
-                                                Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose    
+                                                $Architecture = "All"
                                             }
-                                                else 
+                                            $RequirementRule = New-IntuneWin32AppRequirementRule -Architecture $Architecture -MinimumSupportedWindowsRelease "W10_22H2"
+
+                                            # Create script based requirement rule
+                                            If ($RequirementRuleScript)
+                                            {
+                                                $RequirementRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
+                                            }
+
+                                            # Create script based detection rule
+                                            $DetectionRule = New-IntuneWin32AppDetectionRuleScript -ScriptFile $($AppRootPath + "\" + $DetectionRuleScript)
+
+                                            # Convert image file to icon
+                                            $Icon = New-IntuneWin32AppIcon -FilePath $($AppRootPath + "\" + $Icon)
+
+                                            # Create custom return code
+                                            # $ReturnCode = New-IntuneWin32AppReturnCode -ReturnCode 1337 -Type "retry"
+
+                                            # Set install and uninstall command line
+                                            # $InstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType install"
+                                            # $UninstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType uninstall"
+
+                                            #-AdditionalRequirementRule $RequirementRuleScript
+                                            If ($RequirementRuleScript)
+                                            {
+                                                $RequirementRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
+                                                $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy -AdditionalRequirementRule $RequirementRuleScript
+                                            } else
                                                 {
-                                                    If (($RequiredGroup -notlike "*AllUsers*" -or $RequiredGroup -notlike "*AllDevices*") -and ![string]::IsNullOrEmpty($RequiredGroup))
+                                                    $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy
+                                                }
+                                                                
+                                                # Configure a Intune required group if specified
+                                                If ([string]::IsNullOrEmpty($RequiredGroup))
+                                                {
+                                                    Write-Verbose "No group configured as required group" -Verbose
+                                                }                
+                                                elseif ($RequiredGroup -eq "AllUsers")
+                                                {   
+                                                    Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose
+                                                }
+                                                    elseif ($RequiredGroup -eq "AllDevices")
                                                     {
-                                                        Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $RequiredGroup -Intent "required" -Notification "showAll" -Verbose    
+                                                        Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "required" -Notification "showAll" -Verbose    
                                                     }
-                                                }
-                                            # Configure a Intune available group if specified
-                                            If ([string]::IsNullOrEmpty($AvailableGroup))
-                                            {
-                                                Write-Verbose "No group configured as assigned group" -Verbose    
-                                            }
-                                            elseif ($AvailableGroup -eq "AllUsers")
-                                            {
-                                                Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose
-                                            }
-                                                elseif ($AvailableGroup -eq "AllDevices")
-                                                {
-                                                    Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose 
-                                                }
-                                                else 
-                                                {
-                                                    If (($AvailableGroup -notlike "*AllUsers*" -or $AvailableGroup -notlike "*AllDevices*") -and ![string]::IsNullOrEmpty($AvailableGroup))
+                                                        else 
+                                                        {
+                                                            If (($RequiredGroup -notlike "*AllUsers*" -or $RequiredGroup -notlike "*AllDevices*") -and ![string]::IsNullOrEmpty($RequiredGroup))
+                                                            {
+                                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $RequiredGroup -Intent "required" -Notification "showAll" -Verbose    
+                                                            }
+                                                        }
+                                                    # Configure a Intune available group if specified
+                                                    If ([string]::IsNullOrEmpty($AvailableGroup))
                                                     {
-                                                        Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
+                                                        Write-Verbose "No group configured as assigned group" -Verbose    
                                                     }
-                                                }
-                            } 
+                                                    elseif ($AvailableGroup -eq "AllUsers")
+                                                    {
+                                                        Add-IntuneWin32AppAssignmentAllUsers -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose
+                                                    }
+                                                        elseif ($AvailableGroup -eq "AllDevices")
+                                                        {
+                                                            Add-IntuneWin32AppAssignmentAllDevices -ID $Win32App.id -Intent "available" -Notification "showAll" -Verbose 
+                                                        }
+                                                        else 
+                                                        {
+                                                            If (($AvailableGroup -notlike "*AllUsers*" -or $AvailableGroup -notlike "*AllDevices*") -and ![string]::IsNullOrEmpty($AvailableGroup))
+                                                            {
+                                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
+                                                            }
+                                                        }
+                                }
+                        } 
                 #Endregion Import intunewin to Intune
     }
     else {

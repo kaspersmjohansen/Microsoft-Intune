@@ -2,7 +2,7 @@
     "AppConfig":{
                     "Vendor":  "Foxit",
                     "Product":  "PDF Reader",
-                    "Version":  "2024.2.2.25170",
+                    "Version":  "2024.2.1.25153",
                     "Architecture":  "x86x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",

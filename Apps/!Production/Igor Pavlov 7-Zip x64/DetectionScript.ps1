@@ -8,16 +8,16 @@ $RegValueVersionDetect = "False" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equal" # equal #equalgreater
+$FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files (x86)\Foxit Software\Foxit PDF Reader"
+$ProgramPath = "C:\Program Files\7-Zip"
 
 # File to be detected
-$ProgramFile = "FoxitPDFReader.exe"
+$ProgramFile = "7zFM.exe"
 
 # File version
-$ProgramFileVersion = "2024.2.2.25170"
+$ProgramFileVersion = "24.06"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

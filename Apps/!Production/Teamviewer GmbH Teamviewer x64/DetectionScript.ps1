@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -8,16 +8,16 @@ $RegValueVersionDetect = "False" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equal" # equal #equalgreater
+$FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files (x86)\Foxit Software\Foxit PDF Reader"
+$ProgramPath = "C:\Program Files\TeamViewer"
 
 # File to be detected
-$ProgramFile = "FoxitPDFReader.exe"
+$ProgramFile = "TeamViewer.exe"
 
 # File version
-$ProgramFileVersion = "2024.2.2.25170"
+$ProgramFileVersion = "15.53.7.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
