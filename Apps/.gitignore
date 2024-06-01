@@ -3,3 +3,4 @@
 *.cab
 **/*.intunewin
 **/*.msix
+!Deploy-Application.exe
