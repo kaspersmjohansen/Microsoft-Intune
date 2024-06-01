@@ -1,6 +1,6 @@
 *.exe
 *.msi
 *.cab
-**/*.intunewin
-**/*.msix
+*.intunewin
+*.msix
 !Deploy-Application.exe
