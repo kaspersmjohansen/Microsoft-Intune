@@ -6,6 +6,7 @@
         </MappedFolder>
         <MappedFolder>
             <HostFolder>C:\temp\virtualwarlock.net\Apps\!Test</HostFolder>
+            <ReadOnly>true</ReadOnly>
         </MappedFolder>
     </MappedFolders>
 </Configuration>
