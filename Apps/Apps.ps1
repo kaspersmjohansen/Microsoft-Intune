@@ -29,16 +29,16 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
         New-Item -Path "$SourceFolder\$AppFolder" -name $Version -ItemType Directory
         If ($Scope -eq "None")
         {
-            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --skip-dependencies --download-directory `"$SourceFolder\$AppFolder\$Version`" --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
         }
         elseif ($Scope -eq "Machine"){
-            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope $Scope --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --skip-dependencies --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope $Scope --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
         }
         elseif ($Scope -eq "User"){
-            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope $Scope --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --skip-dependencies --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope $Scope --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
         }
         else {
-            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope Machine --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
+            Start-Process -FilePath "winget.exe" -ArgumentList "download $AppID --exact --skip-dependencies --download-directory `"$SourceFolder\$AppFolder\$Version`" --scope Machine --accept-package-agreements --accept-source-agreements" -Wait -NoNewWindow
         }
     }
     else {
