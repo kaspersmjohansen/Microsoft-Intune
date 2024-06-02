@@ -2,13 +2,13 @@
 $RegDetect             = "False"
 
 # Detect version value in Displayname
-$RegValueVersionDetect = "False" # equal #equalgreater
+$RegValueVersionDetect = "equalgreater" # equal #equalgreater
 
 # Detect file
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+$FileVersionDetect     = "" # equal #equalgreater
 
 # Folder to detect file
 $ProgramPath = ""
@@ -20,10 +20,10 @@ $ProgramFile = ""
 $ProgramFileVersion = ""
 
 # Application uninstall registry key
-$ProgramRegKey = ""
+$ProgramRegKey = "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FileZilla Server"
 
 # Application version registry value
-$ProgramRegVersion = ""
+$ProgramRegVersion = "1.8.1"
 
 # Specific file exists
 If ($FileDetect -eq "True")
