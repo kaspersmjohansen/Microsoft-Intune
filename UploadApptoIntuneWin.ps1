@@ -152,7 +152,7 @@ ForEach ($App in $AppSources)
                             {
                                 Write-Verbose "$AppName is at version $Version" -Verbose
                             }
-                                Elseif ($App -and $App.displayVersion -ne $Version)
+                                Elseif (!$App)
                                 {
                                     #Write-Host "Importing $AppNameShort to Intune"
                                     If (!(Test-Path $OutputAppFolder))
@@ -253,6 +253,10 @@ ForEach ($App in $AppSources)
                                                                 Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
                                                             }
                                                         }
+                                }
+                                else
+                                {
+                                    Write-Verbose "Something bad happened..." -Verbose    
                                 }
                         } 
                 #Endregion Import intunewin to Intune
