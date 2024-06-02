@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "$env:ProgramFiles\PowerShell\7"
+$ProgramPath = "C:\Program Files\HandBrake"
 
 # File to be detected
-$ProgramFile = "pwsh.exe"
+$ProgramFile = "HandBrake.exe"
 
 # File version
-$ProgramFileVersion = "7.4.2.500"
+$ProgramFileVersion = "1.8.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
