@@ -1,4 +1,4 @@
-$LocalAdmin = Get-LocalUser -Name Administrator
+$LocalAdmin = Get-LocalUser | Where-Object {$_.SID -like "*-500"}
 $LocalAdminStatus = $LocalAdmin.Enabled
 
 If ($LocalAdminStatus -eq "True")
