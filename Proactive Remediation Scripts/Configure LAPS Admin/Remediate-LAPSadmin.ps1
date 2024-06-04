@@ -20,7 +20,7 @@ if (!$AccountMember)
     Write-Host "The user $AccountName is not a member of the local administrators group"
     Write-Host "Adding the user to the local administrators group now"
     Write-Host ""
-    Add-LocalGroupMember -Name Administrators -Member $AccountName
+    Add-LocalGroupMember -Name $AdminGroupName -Member $AccountName
 }
 
 # Detect user and group membership
