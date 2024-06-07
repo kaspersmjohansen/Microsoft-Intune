@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files (x86)\Lenovo\System Update"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "tvsukernel.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "5.08.02.25"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
