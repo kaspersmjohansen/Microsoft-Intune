@@ -7,8 +7,8 @@
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"lenovosystemupdate.png",
-                    "AvailableGroup": "",
+                    "Icon":"SystemUpdate.png",
+                    "AvailableGroup": "AllDevices",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"
                 }

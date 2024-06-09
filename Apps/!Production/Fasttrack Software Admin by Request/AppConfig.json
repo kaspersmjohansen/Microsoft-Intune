@@ -8,7 +8,7 @@
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
                     "Icon":"adminbyrequest.png",
-                    "AvailableGroup": "",
+                    "AvailableGroup": "AllDevices",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"
                 }

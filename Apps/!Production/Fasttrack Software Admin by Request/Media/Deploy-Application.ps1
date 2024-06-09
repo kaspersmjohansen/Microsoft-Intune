@@ -106,14 +106,14 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Lenovo'
-    [String]$appName = 'SystemUpdate'
+    [String]$appVendor = 'Fasttrack Software'
+    [String]$appName = 'Admin by Request Workstation'
     [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '05/06/2024'
+    [String]$appScriptDate = '25/05/2024'
     [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -181,7 +181,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt
+        Show-InstallationWelcome -CloseApps 'iexplore' -CheckDiskSpace
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'system_update_5.08.02.25.exe' -Parameters '/VERYSILENT /NORESTART'
+        Execute-MSI -Action Install -Path 'Admin By Request 8.3 Workstation.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -248,7 +248,8 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path 'C:\Program Files (x86)\Lenovo\System Update\Unins000.exe' -Parameters '/VERYSILENT /NORESTART'
+        Remove-MSIApplications -Name 'Admin By Request Workstation' -Exact
+
 
         ##*===============================================
         ##* POST-UNINSTALLATION
