@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Microsoft",
+                    "Product":  "Windows Language Pack - JP",
+                    "Version":  "1.0",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"LanguagePack.png",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}
