@@ -152,7 +152,7 @@ ForEach ($App in $AppSources)
                             {
                                 Write-Verbose "$AppName is at version $Version" -Verbose
                             }
-                                Elseif (!$App)
+                                Elseif ((!$App) -or ($App -and $App.displayVersion -ne $Version))
                                 {
                                     #Write-Host "Importing $AppNameShort to Intune"
                                     If (!(Test-Path $OutputAppFolder))
