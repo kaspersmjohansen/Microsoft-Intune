@@ -1,4 +1,4 @@
-# Detect DisplayName value in application uninstall key
+﻿# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\Google\Chrome\Application"
+$ProgramPath = "C:\Program Files\Notepad++"
 
 # File to be detected
-$ProgramFile = "chrome.exe"
+$ProgramFile = "notepad++.exe"
 
 # File version
-$ProgramFileVersion = "125.0.6422.61"
+$ProgramFileVersion = "8.6.8"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

@@ -2,7 +2,7 @@
     "AppConfig":{
                     "Vendor":  "Don Ho",
                     "Product":  "Notepad++",
-                    "Version":  "8.6.7",
+                    "Version":  "8.6.8",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",

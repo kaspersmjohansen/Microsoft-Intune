@@ -2,7 +2,7 @@
     "AppConfig":{
                     "Vendor":  "Google",
                     "Product":  "Chrome",
-                    "Version":  "125.0.6422.61",
+                    "Version":  "126.0.6478.57",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",

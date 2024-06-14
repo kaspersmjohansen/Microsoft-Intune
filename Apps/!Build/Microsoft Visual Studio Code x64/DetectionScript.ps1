@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\Notepad++"
+$ProgramPath = "C:\Program Files\Microsoft VS Code"
 
 # File to be detected
-$ProgramFile = "notepad++.exe"
+$ProgramFile = "Code.exe"
 
 # File version
-$ProgramFileVersion = "8.6.7"
+$ProgramFileVersion = "1.90.0s"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

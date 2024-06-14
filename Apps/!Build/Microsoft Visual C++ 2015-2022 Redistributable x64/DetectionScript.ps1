@@ -2,28 +2,28 @@
 $RegDetect             = "False"
 
 # Detect version value in Displayname
-$RegValueVersionDetect = "False" # equal #equalgreater
+$RegValueVersionDetect = "equalgreater" # equal #equalgreater
 
 # Detect file
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+$FileVersionDetect     = "" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\Microsoft VS Code"
+$ProgramPath = ""
 
 # File to be detected
-$ProgramFile = "Code.exe"
+$ProgramFile = ""
 
 # File version
-$ProgramFileVersion = "1.89.1"
+$ProgramFileVersion = ""
 
 # Application uninstall registry key
-$ProgramRegKey = ""
+$ProgramRegKey = "HKLM:SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{c649ede4-f16a-4486-a117-dcc2f2a35165}"
 
 # Application version registry value
-$ProgramRegVersion = ""
+$ProgramRegVersion = "14.40.33807.0"
 
 # Specific file exists
 If ($FileDetect -eq "True")
