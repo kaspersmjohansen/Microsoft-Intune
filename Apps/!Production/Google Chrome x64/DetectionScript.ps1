@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files\Google\Chrome\Application"
 $ProgramFile = "chrome.exe"
 
 # File version
-$ProgramFileVersion = "125.0.6422.142"
+$ProgramFileVersion = "126.0.6478.57"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

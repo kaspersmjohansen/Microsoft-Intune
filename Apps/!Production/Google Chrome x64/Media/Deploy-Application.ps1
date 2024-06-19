@@ -114,7 +114,7 @@ Try {
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '01/06/2024'
+    [String]$appScriptDate = '13/06/2024'
     [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -206,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-MSI Install -Path 'Google Chrome_125.0.6422.142_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart'
+        Execute-MSI Install -Path 'Google Chrome_126.0.6478.57_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION

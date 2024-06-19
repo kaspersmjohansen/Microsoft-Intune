@@ -1,7 +1,7 @@
 {
     "AppConfig":{
                     "Vendor":  "Microsoft",
-                    "Product":  "Windows Language Pack - JP",
+                    "Product":  "Windows 11 Language Pack - JP",
                     "Version":  "1.0",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",

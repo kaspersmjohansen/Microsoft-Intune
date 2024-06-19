@@ -107,13 +107,13 @@ Try {
     ##*===============================================
     ## Variables: Application
     [String]$appVendor = 'Microsoft'
-    [String]$appName = 'Language Pack - JP'
+    [String]$appName = 'Windows 11 Language Pack - JP'
     [String]$appVersion = ''
     [String]$appArch = ''
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '18/05/2024'
+    [String]$appScriptDate = '18/06/2024'
     [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -181,7 +181,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt
+        Show-InstallationWelcome -CloseApps 'iexplore' -CheckDiskSpace
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -205,21 +205,10 @@ Try {
         }
 
         ## <Perform Installation tasks here>
+        
         $LanguageID = "ja-jp"
-        If (!(Get-InstalledLanguage -Language $LanguageID))
-        {
-            Write-Log "Install $LanguageID Windows 11 Language Pack"
-            Install-Language -LanguageID $LanguageID
-            # Set-SystemPreferredUILanguage -Language $LanguageID
-            # Set-WinUILanguageOverride -Language $LanguageID
-
-            # $OldList = Get-WinUserLanguageList
-            # $UserLanguageList = New-WinUserLanguageList -Language $LanguageID
-            # $UserLanguageList += $OldList | where { $_.LanguageTag -ne $LanguageID }
-            # $UserLanguageList | select LanguageTag
-            # Set-WinUserLanguageList -LanguageList $UserLanguageList -Force
-            Set-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters' -Name 'LayerDriver JPN' -Type 'String' -Value 'kbd106.dll'
-        }        
+        Write-Log "Install Windows 11 Language Pack - $LanguageID"
+        Install-Language -LanguageID $LanguageID -Verbose
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -227,10 +216,8 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        If (Get-InstalledLanguage -Language $LanguageID)
-        {
-            Show-InstallationRestartPrompt -Countdownseconds 300
-        }
+        Copy-File -Path "$dirSupportFiles\set-keyboardlayout.ps1" -Destination "$env:ProgramData\KeyboardLayout"
+        Set-ActiveSetup -StubExePath "$env:systemroot\system32\WindowsPowerShell\v1.0\powershell.exe" -Arguments "-executionpolicy bypass -file $env:ProgramData\KeyboardLayout\set-keyboardlayout.ps1" -Description 'Set keyboard layout' -Key 'Keyboard Layout' -ContinueOnError $true -ExecuteForCurrentUser $false
 
         ## Display a message at the end of the install
         # If (-not $useDefaultMsi) {
@@ -265,15 +252,11 @@ Try {
             Execute-MSI @ExecuteDefaultMSISplat
         }
 
-        ## <Perform Uninstallation tasks here>
+        ## <Perform Uninstallation tasks here>        
         $LanguageID = "ja-jp"        
-        If (Get-InstalledLanguage -Language $LanguageID)
-        {
-            Write-Log "Remove $LanguageID Windows 11 Language Pack"
-            Uninstall-Language -Language $LanguageID
-            Uninstall-Language -Language und-jpan
-        }
-
+        Write-Log "Remove Windows 11 Language Pack - $LanguageID"
+        Uninstall-Language -Language $LanguageID
+        Uninstall-Language -Language und-jpan    
 
         ##*===============================================
         ##* POST-UNINSTALLATION
@@ -281,11 +264,11 @@ Try {
         [String]$installPhase = 'Post-Uninstallation'
 
         ## <Perform Post-Uninstallation tasks here>
-        Start-Sleep -Seconds 60
-        If (!(Get-InstalledLanguage -Language $LanguageID))
-        {
-            Show-InstallationRestartPrompt -Countdownseconds 300
-        }
+        # Start-Sleep -Seconds 60
+        # If (!(Get-InstalledLanguage -Language $LanguageID))
+        # {
+        #    Show-InstallationRestartPrompt -Countdownseconds 300
+        # }
 
 
     }
