@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "",
+                    "Product":  "",
+                    "Version":  "",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

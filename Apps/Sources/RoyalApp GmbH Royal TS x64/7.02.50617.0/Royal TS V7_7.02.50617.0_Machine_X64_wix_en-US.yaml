@@ -1,0 +1,82 @@
+PackageIdentifier: RoyalApps.RoyalTS.V7
+PackageVersion: 7.02.50617.0
+Documentations:
+- DocumentLabel: Getting Started
+  DocumentUrl: https://docs.royalapps.com/r2023/index.html?tabs=tab-id-rts
+PackageLocale: en-US
+Copyright: "\xA9 2024 Royal Apps GmbH"
+ShortDescription: Using RDP, VNC, SSH based terminals, S/FTP or web-based interfaces
+License: Proprietary
+LicenseUrl: https://support.royalapps.com/support/solutions/articles/17000074360-general-license-terms-eula-
+PackageName: Royal TS V7
+PackageUrl: https://www.royalapps.com/ts/win/download
+PrivacyUrl: https://www.royalapps.com/ts/win/privacy
+Publisher: Royal Apps GmbH
+PublisherSupportUrl: https://support.royalapps.com/support/home
+PublisherUrl: https://www.royalapps.com/
+PurchaseUrl: https://www.royalapps.com/ts/win/buy
+Installers:
+- Architecture: x64
+  InstallerType: wix
+  InstallerSha256: 51915c1ec3755cc4b630d3dfb25971e4a64f1f4b61905c1b473feb397a321a1d
+  InstallerUrl: https://download.royalapps.com/royalts/royaltsinstaller_7.02.50617.0_x64.msi
+  Scope: machine
+  InstallerLocale: en-US
+  ReleaseDate: 2024-06-17
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  ProductCode: '{4959A733-614C-44E8-AC0D-3E7BCA9E05AC}'
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  AppsAndFeaturesEntries:
+  - DisplayVersion: 7.2.50617.0
+    UpgradeCode: '{4959A733-614C-44E8-AC0D-3E7B5A7375AB}'
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 87
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 112
+    ReturnResponse: diskFull
+  - InstallerReturnCode: 1601
+    ReturnResponse: contactSupport
+  - InstallerReturnCode: 1602
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 1618
+    ReturnResponse: installInProgress
+  - InstallerReturnCode: 1623
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1625
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1628
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1633
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1638
+    ReturnResponse: alreadyInstalled
+  - InstallerReturnCode: 1639
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1640
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1641
+    ReturnResponse: rebootInitiated
+  - InstallerReturnCode: 1643
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1644
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1649
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1650
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1654
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 3010
+    ReturnResponse: rebootRequiredToFinish
+  InstallerSwitches:
+    Silent: /quiet /norestart
+    SilentWithProgress: /passive /norestart
+    Log: /log "<LOGPATH>"
+    InstallLocation: TARGETDIR="<INSTALLPATH>"
+ManifestVersion: 1.6.0
+ManifestType: merged
