@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Adobe",
-                    "Product":  "Acrobat Reader DC",
-                    "Version":  "24.002.20759",
+                    "Vendor":  "",
+                    "Product":  "",
+                    "Version":  "",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"Adobe-AcrobatReader.png",
+                    "Icon":"",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"

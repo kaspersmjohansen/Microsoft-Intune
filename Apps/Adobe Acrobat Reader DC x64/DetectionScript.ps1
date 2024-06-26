@@ -1,4 +1,4 @@
-# Detect DisplayName value in application uninstall key
+﻿# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\Adobe\Acrobat DC\Acrobat"
+$ProgramPath = ""
 
 # File to be detected
-$ProgramFile = "Acrobat.exe"
+$ProgramFile = ""
 
 # File version
-$ProgramFileVersion = "24.2.20759.0"
+$ProgramFileVersion = ""
 
 # Application uninstall registry key
 $ProgramRegKey = ""
