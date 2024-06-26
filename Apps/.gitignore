@@ -5,3 +5,4 @@
 *.msix
 !Deploy-Application.exe
 _Build/
+!ServiceUI.exe
