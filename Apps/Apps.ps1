@@ -1,6 +1,6 @@
 $CSVFile = "$PSScriptRoot\AppsCSV.csv"
 $SourceFolder = "$PSScriptRoot\Sources"
-$DestinationFolder = "$PSScriptRoot"
+$DestinationFolder = "$PSScriptRoot\_Production"
 
 Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
     
