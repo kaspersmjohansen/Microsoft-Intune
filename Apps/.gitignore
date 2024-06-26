@@ -4,3 +4,5 @@
 *.intunewin
 *.msix
 !Deploy-Application.exe
+!ServiceUI.exe
+!_Build/
