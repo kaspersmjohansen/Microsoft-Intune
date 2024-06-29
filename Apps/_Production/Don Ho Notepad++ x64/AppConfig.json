@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Don Ho",
-                    "Product":  "Notepad++",
-                    "Version":  "8.6.8",
+                    "Vendor":  "",
+                    "Product":  "",
+                    "Version":  "",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"NotepadPP.png",
+                    "Icon":"",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"

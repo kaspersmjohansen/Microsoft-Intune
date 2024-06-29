@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Google",
-                    "Product":  "Chrome",
-                    "Version":  "126.0.6478.115",
+                    "Vendor":  "",
+                    "Product":  "",
+                    "Version":  "",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"Google-Chrome.png",
+                    "Icon":"",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"

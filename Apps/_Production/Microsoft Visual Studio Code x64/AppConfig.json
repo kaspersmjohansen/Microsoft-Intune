@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Microsoft",
-                    "Product":  "Visual Studio Code",
-                    "Version":  "1.90.0",
+                    "Vendor":  "",
+                    "Product":  "",
+                    "Version":  "",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"vscode.png",
+                    "Icon":"",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"
