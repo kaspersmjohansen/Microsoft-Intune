@@ -106,15 +106,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Don Ho'
-    [String]$appName = 'Notepad++'
+    [String]$appVendor = ''
+    [String]$appName = ''
     [String]$appVersion = ''
-    [String]$appArch = 'x64'
+    [String]$appArch = ''
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '13/06/2024'
-    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
+    [String]$appScriptDate = 'XX/XX/20XX'
+    [String]$appScriptAuthor = '<author name>'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Notepad++*.exe' -Parameters '/S'
+
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -256,7 +256,7 @@ Try {
         [String]$installPhase = 'Post-Uninstallation'
 
         ## <Perform Post-Uninstallation tasks here>
-        Execute-Process -Path 'C:\Program Files\Notepad++\uninstall.exe' -Parameters '/S'
+
 
     }
     ElseIf ($deploymentType -ieq 'Repair') {

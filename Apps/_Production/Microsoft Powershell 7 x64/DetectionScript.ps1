@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\PowerShell\7"
+$ProgramPath = ""
 
 # File to be detected
-$ProgramFile = "pwsh.exe"
+$ProgramFile = ""
 
 # File version
-$ProgramFileVersion = "7.4.3.500"
+$ProgramFileVersion = ""
 
 # Application uninstall registry key
 $ProgramRegKey = ""

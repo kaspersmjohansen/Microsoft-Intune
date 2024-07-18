@@ -106,15 +106,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Microsoft'
-    [String]$appName = 'Visual C++ 2015-2022 Redistributable'
+    [String]$appVendor = ''
+    [String]$appName = ''
     [String]$appVersion = ''
-    [String]$appArch = 'x86'
+    [String]$appArch = ''
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '18/05/2024'
-    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
+    [String]$appScriptDate = 'XX/XX/20XX'
+    [String]$appScriptAuthor = '<author name>'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -181,7 +181,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -CheckDiskSpace
+        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Microsoft Visual C++ 2015-2022 Redistributable*.exe' -Parameters '/install /quiet /norestart'
+
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -248,8 +248,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path 'C:\ProgramData\Package Cache\{46c3b171-c15c-4137-8e1d-67eeb2985b44}\VC_redist.x86.exe' -Parameters '/uninstall /quiet /norestart'
-        
+
 
         ##*===============================================
         ##* POST-UNINSTALLATION

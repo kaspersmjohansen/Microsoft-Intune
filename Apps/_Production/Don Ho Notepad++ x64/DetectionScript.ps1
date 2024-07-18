@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\Notepad++"
+$ProgramPath = ""
 
 # File to be detected
-$ProgramFile = "notepad++.exe"
+$ProgramFile = ""
 
 # File version
-$ProgramFileVersion = "8.6.8"
+$ProgramFileVersion = ""
 
 # Application uninstall registry key
 $ProgramRegKey = ""

@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Microsoft",
-                    "Product":  "Visual C++ 2015-2022 Redistributable",
-                    "Version":  "14.38.33135.0",
-                    "Architecture":  "x86x64",
+                    "Vendor":  "",
+                    "Product":  "",
+                    "Version":  "",
+                    "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"VisualC++Logo.png",
+                    "Icon":"",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"
