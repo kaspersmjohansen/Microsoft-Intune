@@ -1,5 +1,6 @@
 ﻿Vendor;Product;Language;AppID;Architecture;Scope
 Adobe;Acrobat Reader DC;en-us;Adobe.Acrobat.Reader.64-bit;x64;Machine
+Citrix;Workspace Apps;en-us;Citrix.Workspace;x64;Machine
 Google;Chrome;en-us;Google.Chrome;x64;Machine
 Teamviewer GmbH;Teamviewer;en-us;TeamViewer.TeamViewer;x64;Machine
 Igor Pavlov;7-Zip;en-us;7zip.7zip;x64;Machine
