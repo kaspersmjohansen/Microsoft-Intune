@@ -1,7 +1,7 @@
 $CSVFile = "$PSScriptRoot\AppsCSV.csv"
 $SourceFolder = "$PSScriptRoot\Sources"
 $DestinationFolder = "$PSScriptRoot\_Production"
-$PSADTTemplateFolder = "$PSScriptRoot"
+$PSADTTemplateFolder = "$PSScriptRoot\PSADT Template 3.10.1"
 
 Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
     
@@ -51,7 +51,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
     {
         New-Item -Path $DestinationFolder -Name $AppFolder -ItemType Directory
         #New-Item -Path "$DestinationFolder\$AppFolder" -Name Media -ItemType Directory
-        Copy-Item -Path "$PSADTTemplateFolder\PSADT Template\*" -Recurse -Destination "$DestinationFolder\$AppFolder"
+        Copy-Item -Path "$PSADTTemplateFolder\*" -Recurse -Destination "$DestinationFolder\$AppFolder"
         #Copy-Item -Path "$DestinationFolder\DetectionScript.ps1" -Destination "$DestinationFolder\$AppFolder"
         Get-ChildItem -Path "$SourceFolder\$AppFolder\$Version" | Where-Object {$_.extension -in ".exe",".msi"} | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files"
     }
