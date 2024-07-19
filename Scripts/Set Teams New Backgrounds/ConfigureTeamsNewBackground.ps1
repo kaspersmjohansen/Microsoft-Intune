@@ -6,11 +6,30 @@
 #
 # Place the script in the same directory as the desired background images
 #
-#### 
+####
+Function GenerateFolder($path) {
+    $global:foldPath = $null
+    foreach($foldername in $path.split("\")) {
+        $global:foldPath += ($foldername+"\")
+        if (!(Test-Path $global:foldPath)){
+            New-Item -ItemType Directory -Path $global:foldPath
+            
+        }
+    }
+}
 
+#LogPath
+$DefaultLogPath = "$env:USERPROFILE"
+
+$TestPath = test-path $DefaultLogPath
+if (!($TestPath)){GenerateFolder $DefaultLogPath}
+Start-Transcript -Path "$DefaultLogPath\TeamsImageScript.txt" -Append
+
+<#
 function Get-ScriptDirectory {
     Split-Path -Parent $PSCommandPath
 }
+#>
 
 $outputPath = "$env:LOCALAPPDATA\Packages\MSTeams_8wekyb3d8bbwe\LocalCache\Microsoft\MSTeams\Backgrounds\Uploads"
 If (!(Test-Path -Path $outputPath))
@@ -45,3 +64,7 @@ foreach($image in $images){
     $ThumbName = "$guid`_thumb.jpg"
     Resize-Image -InputFile $image -Width 220 -Height 158 -ProportionalResize $true -OutputFile $outputPath\$ThumbName
 }
+
+New-Item -Path $env:USERPROFILE -Name "Teamsbackground-v1.tag" -ItemType File
+
+Stop-Transcript
