@@ -1,4 +1,4 @@
-# Detect DisplayName value in application uninstall key
+﻿# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\Global Secure Access Client\TrayApp"
+$ProgramPath = "C:\Program Files\Royal TS V7"
 
 # File to be detected
-$ProgramFile = "GlobalSecureAccessClient.exe"
+$ProgramFile = "RoyalTS.exe"
 
 # File version
-$ProgramFileVersion = "1.8.7.0"
+$ProgramFileVersion = "7.2.50703"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

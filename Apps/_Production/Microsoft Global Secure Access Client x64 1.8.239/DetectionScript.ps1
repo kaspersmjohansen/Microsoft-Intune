@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files\Global Secure Access Client\TrayApp"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "GlobalSecureAccessClient.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "1.8.9.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

@@ -2,13 +2,13 @@
     "AppConfig":{
                     "Vendor":  "Microsoft",
                     "Product":  "Global Secure Access Client",
-                    "Version":  "1.87",
+                    "Version":  "1.89.239",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
                     "Icon":"GlobalSecureAccessClient.png",
-                    "AvailableGroup": "",
+                    "AvailableGroup": "AllDevices",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"
                 }

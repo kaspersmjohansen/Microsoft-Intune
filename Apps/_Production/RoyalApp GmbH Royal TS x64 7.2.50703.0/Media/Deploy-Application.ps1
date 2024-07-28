@@ -107,14 +107,14 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Microsoft'
-    [String]$appName = 'Global Secure Access Client'
+    [String]$appVendor = 'Royal Apps GmbH'
+    [String]$appName = 'Royal TS'
     [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '19/05/2024'
+    [String]$appScriptDate = '19/07/2024'
     [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -206,8 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'GlobalSecureAccessInstaller*.exe' -Parameters "/install /quiet /norestart /log `"$configToolkitLogDir\$($appVendor+"_"+$appName+"_"+"Install"+".log")`""
-        
+        Execute-MSI -Action Install -Path 'Royal TS V7_7.2.50703.0_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -250,8 +249,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path 'GlobalSecureAccessInstaller*.exe' -Parameters '/uninstall /quiet'
-
+        Remove-MSIApplications -Name "Royal TS*" -Wildcard
 
         ##*===============================================
         ##* POST-UNINSTALLATION
