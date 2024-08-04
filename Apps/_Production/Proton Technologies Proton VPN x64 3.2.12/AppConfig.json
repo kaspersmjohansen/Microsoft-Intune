@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "",
-                    "Product":  "",
-                    "Version":  "",
+                    "Vendor":  "Proton Technologies",
+                    "Product":  "Proton VPN",
+                    "Version":  "3.2.12",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"",
+                    "Icon":"ProtonVPN.png",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"

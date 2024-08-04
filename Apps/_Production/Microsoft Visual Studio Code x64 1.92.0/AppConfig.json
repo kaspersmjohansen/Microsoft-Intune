@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Proton Technologies",
-                    "Product":  "Proton VPN",
-                    "Version":  "3.2.11",
+                    "Vendor":  "Microsoft",
+                    "Product":  "Visual Studio Code",
+                    "Version":  "1.92.0",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"ProtonVPN.png",
+                    "Icon":"vscode.png",
                     "AvailableGroup": "",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"

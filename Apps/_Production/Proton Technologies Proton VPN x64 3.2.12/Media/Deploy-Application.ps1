@@ -106,15 +106,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = ''
-    [String]$appName = ''
+    [String]$appVendor = 'Proton Technologies'
+    [String]$appName = 'Proton VPN'
     [String]$appVersion = ''
-    [String]$appArch = ''
+    [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = 'XX/XX/20XX'
-    [String]$appScriptAuthor = '<author name>'
+    [String]$appScriptDate = '04/08/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -181,7 +181,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt
+        Show-InstallationWelcome -CloseApps 'iexplore' -CheckDiskSpace
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-
+        Execute-Process -Path 'Proton VPN*.exe' -Parameters '/VERYSILENT /NORESTART /FORCECLOSEAPPLICATIONS'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -213,6 +213,8 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
+        Start-Sleep -Seconds 30
+        Remove-File -Path 'C:\Users\Public\Desktop\Proton VPN.lnk'
 
         ## Display a message at the end of the install
         # If (-not $useDefaultMsi) {
@@ -248,7 +250,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-
+        Execute-Process -Path 'C:\Program Files\Proton\VPN\unins000.exe' -Parameters '/VERYSILENT'
 
         ##*===============================================
         ##* POST-UNINSTALLATION

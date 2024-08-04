@@ -106,15 +106,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = ''
-    [String]$appName = ''
+    [String]$appVendor = 'Microsoft'
+    [String]$appName = 'Visual Studio Code'
     [String]$appVersion = ''
-    [String]$appArch = ''
+    [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = 'XX/XX/20XX'
-    [String]$appScriptAuthor = '<author name>'
+    [String]$appScriptDate = '04/08/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -181,7 +181,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt
+        Show-InstallationWelcome -CloseApps 'iexplore' -CheckDiskSpace
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-
+        Execute-Process -Path 'Microsoft Visual Studio Code*' -Parameters '/VERYSILENT /NORESTART /MERGETASKS=!runcode'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -248,8 +248,8 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-
-
+        Execute-Process -Path "$env:ProgramFiles\Microsoft VS Code\unins000.exe" -Parameters '/VERYSILENT /NORESTART'
+        
         ##*===============================================
         ##* POST-UNINSTALLATION
         ##*===============================================

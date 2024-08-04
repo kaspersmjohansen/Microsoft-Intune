@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files\Proton\VPN"
 $ProgramFile = "ProtonVPN.Launcher.exe"
 
 # File version
-$ProgramFileVersion = "3.2.11.0"
+$ProgramFileVersion = "3.2.12.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

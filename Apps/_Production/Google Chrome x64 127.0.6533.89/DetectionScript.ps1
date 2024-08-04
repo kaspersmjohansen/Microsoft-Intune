@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files\Google\Chrome\Application"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "chrome.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "127.0.6533.89"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
