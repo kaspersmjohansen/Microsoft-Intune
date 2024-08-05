@@ -213,8 +213,10 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Start-Sleep -Seconds 30
-        Remove-File -Path 'C:\Users\Public\Desktop\Proton VPN.lnk'
+        Start-Sleep -Seconds 10
+        Remove-File -Path "$env:PUBLIC\Desktop\Proton VPN.lnk"
+
+        
 
         ## Display a message at the end of the install
         # If (-not $useDefaultMsi) {
