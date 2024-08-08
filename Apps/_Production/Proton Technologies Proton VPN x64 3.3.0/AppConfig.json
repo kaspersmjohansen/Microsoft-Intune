@@ -1,15 +1,15 @@
 {
     "AppConfig":{
-                    "Vendor":  "Microsoft",
-                    "Product":  "Powershell 7",
-                    "Version":  "7.4.4.0",
+                    "Vendor":  "Proton Technologies",
+                    "Product":  "Proton VPN",
+                    "Version":  "3.3.0",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"Microsoft-Powershell.png",
+                    "Icon":"ProtonVPN.png",
                     "AvailableGroup": "AllDevices",
-                    "RequiredGroup": "",
+                    "RequiredGroup": "App-Install-ProtonVPN",
                     "IntuneImport":  "True"
                 }
 }

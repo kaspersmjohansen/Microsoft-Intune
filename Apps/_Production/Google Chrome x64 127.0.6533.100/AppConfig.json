@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Microsoft",
-                    "Product":  "Powershell 7",
-                    "Version":  "7.4.4.0",
+                    "Vendor":  "Google",
+                    "Product":  "Chrome",
+                    "Version":  "127.0.6533.100",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"Microsoft-Powershell.png",
+                    "Icon":"Google-Chrome.png",
                     "AvailableGroup": "AllDevices",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"

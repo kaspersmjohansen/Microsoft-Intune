@@ -1,15 +1,15 @@
 {
     "AppConfig":{
-                    "Vendor":  "Microsoft",
-                    "Product":  "Powershell 7",
-                    "Version":  "7.4.4.0",
+                    "Vendor":  "Git",
+                    "Product":  "Git",
+                    "Version":  "2.46.0",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"Microsoft-Powershell.png",
+                    "Icon":"GitForWindows.png",
                     "AvailableGroup": "AllDevices",
-                    "RequiredGroup": "",
+                    "RequiredGroup": "App-Install-Git-for-Windows",
                     "IntuneImport":  "True"
                 }
 }
