@@ -1,28 +1,28 @@
-﻿# Detect DisplayName value in application uninstall key
-$RegDetect             = "False"
+﻿# Detect if DisplayName registry value exist in application uninstall registry key
+$RegDetect             = "False" # True or False
 
-# Detect version value in Displayname
-$RegValueVersionDetect = "False" # equal #equalgreater
+# Detect DisplayName value version in application uninstall registry key
+$RegValueVersionDetect = "" # equal or equalgreater
 
-# Detect file
-$FileDetect            = "False"
+# Detect if application filename exist in application folder
+$FileDetect            = "False" # True or False
 
-# Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+# Detect application filename version in application folder
+$FileVersionDetect     = "" # equal or equalgreater
 
-# Folder to detect file
+# Application folder
 $ProgramPath = ""
 
-# File to be detected
+# Application filename
 $ProgramFile = ""
 
-# File version
+# Application filename version
 $ProgramFileVersion = ""
 
 # Application uninstall registry key
 $ProgramRegKey = ""
 
-# Application version registry value
+# Application registry value version
 $ProgramRegVersion = ""
 
 # Specific file exists
