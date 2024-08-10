@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = ""
+$ProgramPath = "C:\Program Files (x86)\Citrix\ICA Client"
 
 # File to be detected
-$ProgramFile = ""
+$ProgramFile = "concentr.exe"
 
 # File version
-$ProgramFileVersion = ""
+$ProgramFileVersion = "24.5.10.20"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

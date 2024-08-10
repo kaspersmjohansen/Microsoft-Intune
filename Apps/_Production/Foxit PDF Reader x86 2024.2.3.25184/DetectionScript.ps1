@@ -1,4 +1,4 @@
-# Detect DisplayName value in application uninstall key
+﻿# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -8,16 +8,16 @@ $RegValueVersionDetect = "False" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+$FileVersionDetect     = "equal" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\Microsoft VS Code"
+$ProgramPath = "C:\Program Files (x86)\Foxit Software\Foxit PDF Reader"
 
 # File to be detected
-$ProgramFile = "code.exe"
+$ProgramFile = "FoxitPDFReader.exe"
 
 # File version
-$ProgramFileVersion = "1.92.0"
+$ProgramFileVersion = "2024.2.3.25184"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

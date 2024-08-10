@@ -11,7 +11,7 @@ PSApppDeployToolkit - This script performs the installation or uninstallation of
 
 The script dot-sources the AppDeployToolkitMain.ps1 script which contains the logic and functions required to install or uninstall an application.
 
-PSApppDeployToolkit is licensed under the GNU LGPLv3 License - (C) 2024 PSAppDeployToolkit Team (Sean Lillis, Dan Cunningham and Muhammad Mashwani).
+PSApppDeployToolkit is licensed under the GNU LGPLv3 License - (C) 2023 PSAppDeployToolkit Team (Sean Lillis, Dan Cunningham and Muhammad Mashwani).
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the
 Free Software Foundation, either version 3 of the License, or any later version. This program is distributed in the hope that it will be useful, but
@@ -99,21 +99,22 @@ Try {
     ## Set the script execution policy for this process
     Try {
         Set-ExecutionPolicy -ExecutionPolicy 'ByPass' -Scope 'Process' -Force -ErrorAction 'Stop'
-    } Catch {
+    }
+    Catch {
     }
 
     ##*===============================================
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Microsoft'
-    [String]$appName = 'Visual Studio Code'
+    [String]$appVendor = 'Foxit'
+    [String]$appName = 'PDF Reader'
     [String]$appVersion = ''
-    [String]$appArch = 'x64'
+    [String]$appArch = 'x86'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '04/08/2024'
+    [String]$appScriptDate = '10/08/2024'
     [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -128,8 +129,8 @@ Try {
 
     ## Variables: Script
     [String]$deployAppScriptFriendlyName = 'Deploy Application'
-    [Version]$deployAppScriptVersion = [Version]'3.10.0'
-    [String]$deployAppScriptDate = '03/27/2024'
+    [Version]$deployAppScriptVersion = [Version]'3.9.3'
+    [String]$deployAppScriptDate = '02/05/2023'
     [Hashtable]$deployAppScriptParameters = $PsBoundParameters
 
     ## Variables: Environment
@@ -205,7 +206,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Microsoft Visual Studio Code*' -Parameters '/VERYSILENT /NORESTART /MERGETASKS=!runcode'
+        Execute-Process -Path 'Foxit PDF Reader*.exe' -Parameters '/DisableInternet /noshortcut /lang en /quiet'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -213,11 +214,13 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
+        Remove-File -Path "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Foxit PDF Reader\Activate Plugins.lnk"
+        Remove-File -Path "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Foxit PDF Reader\Uninstall Foxit PDF Reader.lnk"
 
         ## Display a message at the end of the install
-        # If (-not $useDefaultMsi) {
+        #If (-not $useDefaultMsi) {
         #    Show-InstallationPrompt -Message 'You can customize text to appear at the end of an install or remove it completely for unattended installations.' -ButtonRightText 'OK' -Icon Information -NoWait
-        # }
+        #}
     }
     ElseIf ($deploymentType -ieq 'Uninstall') {
         ##*===============================================
@@ -248,14 +251,15 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path "$env:ProgramFiles\Microsoft VS Code\unins000.exe" -Parameters '/VERYSILENT /NORESTART'
-        
+        Remove-MSIApplications -Name "Foxit PDF Reader"
+
         ##*===============================================
         ##* POST-UNINSTALLATION
         ##*===============================================
         [String]$installPhase = 'Post-Uninstallation'
 
         ## <Perform Post-Uninstallation tasks here>
+        Remove-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Foxit Software' -Recurse
 
 
     }

@@ -1,14 +1,14 @@
 {
     "AppConfig":{
-                    "Vendor":  "",
-                    "Product":  "",
-                    "Version":  "",
+                    "Vendor":  "Citrix",
+                    "Product":  "Workspace",
+                    "Version":  "24.5.10.29",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"",
-                    "AvailableGroup": "",
+                    "Icon":"Citrix-WorkspaceApp.png",
+                    "AvailableGroup": "AllDevices",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"
                 }

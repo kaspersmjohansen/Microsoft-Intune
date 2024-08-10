@@ -11,7 +11,7 @@ PSApppDeployToolkit - This script performs the installation or uninstallation of
 
 The script dot-sources the AppDeployToolkitMain.ps1 script which contains the logic and functions required to install or uninstall an application.
 
-PSApppDeployToolkit is licensed under the GNU LGPLv3 License - (C) 2023 PSAppDeployToolkit Team (Sean Lillis, Dan Cunningham and Muhammad Mashwani).
+PSApppDeployToolkit is licensed under the GNU LGPLv3 License - (C) 2024 PSAppDeployToolkit Team (Sean Lillis, Dan Cunningham and Muhammad Mashwani).
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the
 Free Software Foundation, either version 3 of the License, or any later version. This program is distributed in the hope that it will be useful, but
@@ -99,22 +99,21 @@ Try {
     ## Set the script execution policy for this process
     Try {
         Set-ExecutionPolicy -ExecutionPolicy 'ByPass' -Scope 'Process' -Force -ErrorAction 'Stop'
-    }
-    Catch {
+    } Catch {
     }
 
     ##*===============================================
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Foxit'
-    [String]$appName = 'PDF Reader'
+    [String]$appVendor = 'Citrix'
+    [String]$appName = 'Workspace'
     [String]$appVersion = ''
-    [String]$appArch = 'x86'
+    [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '10/12/2023'
+    [String]$appScriptDate = '10/08/2024'
     [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
@@ -129,8 +128,8 @@ Try {
 
     ## Variables: Script
     [String]$deployAppScriptFriendlyName = 'Deploy Application'
-    [Version]$deployAppScriptVersion = [Version]'3.9.3'
-    [String]$deployAppScriptDate = '02/05/2023'
+    [Version]$deployAppScriptVersion = [Version]'3.10.1'
+    [String]$deployAppScriptDate = '05/03/2024'
     [Hashtable]$deployAppScriptParameters = $PsBoundParameters
 
     ## Variables: Environment
@@ -182,7 +181,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt -MinimizeWindows $false -ForceCountdown 300
+        Show-InstallationWelcome -CloseApps 'iexplore' -CheckDiskSpace
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -206,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'Foxit PDF Reader*.exe' -Parameters '/DisableInternet /noshortcut /lang en /quiet'
+        Execute-Process -Path 'Citrix Workspace*.exe' -Parameters '/silent /noreboot /forceinstall AutoUpdateCheck=auto'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -216,9 +215,9 @@ Try {
         ## <Perform Post-Installation tasks here>
 
         ## Display a message at the end of the install
-        #If (-not $useDefaultMsi) {
-        #    Show-InstallationPrompt -Message 'You can customize text to appear at the end of an install or remove it completely for unattended installations.' -ButtonRightText 'OK' -Icon Information -NoWait
-        #}
+        # If (-not $useDefaultMsi) {
+        #     Show-InstallationPrompt -Message 'You can customize text to appear at the end of an install or remove it completely for unattended installations.' -ButtonRightText 'OK' -Icon Information -NoWait
+        # }
     }
     ElseIf ($deploymentType -ieq 'Uninstall') {
         ##*===============================================
@@ -249,7 +248,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Remove-MSIApplications -Name "Foxit PDF Reader"
+        Execute-Process -Path 'Citrix Workspace*.exe' -Parameters '/silent /uninstall /noreboot'
 
         ##*===============================================
         ##* POST-UNINSTALLATION
@@ -257,7 +256,6 @@ Try {
         [String]$installPhase = 'Post-Uninstallation'
 
         ## <Perform Post-Uninstallation tasks here>
-        Remove-RegistryKey -Key 'HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Foxit Software' -Recurse
 
 
     }
