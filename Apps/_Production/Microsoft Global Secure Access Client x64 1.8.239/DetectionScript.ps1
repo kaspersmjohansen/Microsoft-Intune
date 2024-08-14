@@ -17,7 +17,7 @@ $ProgramPath = "C:\Program Files\Global Secure Access Client\TrayApp"
 $ProgramFile = "GlobalSecureAccessClient.exe"
 
 # File version
-$ProgramFileVersion = "1.8.9.0"
+$ProgramFileVersion = "1.8.239.0"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
