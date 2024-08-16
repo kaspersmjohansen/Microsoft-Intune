@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Microsoft",
+                    "Product":  "Desktop Runtime 6",
+                    "Version":  "6.0.33",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"dotnet-6.0-desktopruntime.6.0.32.png",
+                    "AvailableGroup": "AllDevices",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

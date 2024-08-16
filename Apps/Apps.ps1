@@ -52,13 +52,13 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
             If ($ProdApp)
             {
                 Copy-Item -Path "$ProdApp\*" -Recurse -Destination "$DestinationFolder\$AppFolder" -Force
-                Get-ChildItem -Path "$SourceFolder\$SourceFileFolder" | Where-Object {$_.extension -in ".exe",".msi"} | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files" -Force
+                Get-ChildItem -Path "$SourceFolder\$SourceFileFolder\$Version" | Where-Object {$_.extension -in ".exe",".msi"} | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files" -Force
             }
             else
             {
                 Copy-Item -Path "$PSADTTemplateFolder\*" -Recurse -Destination "$DestinationFolder\$AppFolder"
                 #Copy-Item -Path "$DestinationFolder\DetectionScript.ps1" -Destination "$DestinationFolder\$AppFolder"
-                Get-ChildItem -Path "$SourceFolder\$SourceFileFolder" | Where-Object {$_.extension -in ".exe",".msi"} | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files"
+                Get-ChildItem -Path "$SourceFolder\$SourceFileFolder\$Version" | Where-Object {$_.extension -in ".exe",".msi"} | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files"
             }
         }
 
