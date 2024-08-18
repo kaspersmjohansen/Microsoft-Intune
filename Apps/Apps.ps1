@@ -27,6 +27,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
 
     If (!(Test-Path -Path "$SourceFolder\$SourceFileFolder\$Version"))
     {
+        Write-Host "$SourceFileFolder has been updated - Quick! Get it!" -ForegroundColor Yellow
         New-Item -Path "$SourceFolder\$SourceFileFolder" -name $Version -ItemType Directory
         If ($Scope -eq "None")
         {
@@ -47,8 +48,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
         If (!(Test-Path -Path "$DestinationFolder\$AppFolder"))
         {
             New-Item -Path $DestinationFolder -Name $AppFolder -ItemType Directory
-            #New-Item -Path "$DestinationFolder\$AppFolder" -Name Media -ItemType Directory
-            
+                        
             If ($ProdApp)
             {
                 Copy-Item -Path "$ProdApp\*" -Recurse -Destination "$DestinationFolder\$AppFolder" -Force
@@ -57,7 +57,6 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
             else
             {
                 Copy-Item -Path "$PSADTTemplateFolder\*" -Recurse -Destination "$DestinationFolder\$AppFolder"
-                #Copy-Item -Path "$DestinationFolder\DetectionScript.ps1" -Destination "$DestinationFolder\$AppFolder"
                 Get-ChildItem -Path "$SourceFolder\$SourceFileFolder\$Version" | Where-Object {$_.extension -in ".exe",".msi"} | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files"
             }
         }
