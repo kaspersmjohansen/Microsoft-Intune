@@ -1,13 +1,13 @@
 {
     "AppConfig":{
-                    "Vendor":  "Igor Pavlov",
-                    "Product":  "7-Zip",
-                    "Version":  "24.08",
+                    "Vendor":  "Microsoft",
+                    "Product":  "Global Secure Access Client",
+                    "Version":  "2.1.102",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"7-Zip.png",
+                    "Icon":"GlobalSecureAccessClient.png",
                     "AvailableGroup": "AllDevices",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"

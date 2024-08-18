@@ -1,15 +1,15 @@
 {
     "AppConfig":{
-                    "Vendor":  "Igor Pavlov",
-                    "Product":  "7-Zip",
-                    "Version":  "24.08",
+                    "Vendor":  "Microsoft",
+                    "Product":  "Visual Studio Code",
+                    "Version":  "1.92.2",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"7-Zip.png",
+                    "Icon":"vscode.png",
                     "AvailableGroup": "AllDevices",
-                    "RequiredGroup": "",
+                    "RequiredGroup": "App-Install-Visual-Studio-Code",
                     "IntuneImport":  "True"
                 }
 }
