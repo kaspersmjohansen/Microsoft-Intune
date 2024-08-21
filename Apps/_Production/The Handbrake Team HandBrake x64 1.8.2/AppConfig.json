@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "The Handbrake Team",
+                    "Product":  "Handbrake",
+                    "Version":  "1.8.2",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"HandBrake.png",
+                    "AvailableGroup": "AllDevices",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

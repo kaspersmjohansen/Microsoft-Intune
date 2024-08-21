@@ -21,7 +21,7 @@ param(
 
 )
 
-function Get-GroupId
+function Get-Group
 {
     param (
         [Parameter(Mandatory = $true)]
@@ -51,7 +51,7 @@ function Get-GroupId
         If (!(Get-Module -ListAvailable -Name Microsoft.Graph.Groups)) { Install-Module Microsoft.Graph.Groups -Force -Scope CurrentUser | Import-Module Microsoft.Graph.Groups | Out-Null }
         Connect-MgGraph -AccessToken $secureToken -NoWelcome
 
-            Get-MgGroup -Filter "DisplayName eq '$GroupName'" | Select-Object Id
+            Get-MgGroup -Filter "DisplayName eq '$GroupName'"
 }
 
 # Get contents of the source path folder
@@ -230,7 +230,7 @@ ForEach ($App in $AppSources)
                                                         {
                                                             If (($RequiredGroup -notlike "*AllUsers*" -or $RequiredGroup -notlike "*AllDevices*") -and ![string]::IsNullOrEmpty($RequiredGroup))
                                                             {
-                                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $RequiredGroup -Intent "required" -Notification "showAll" -Verbose    
+                                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID ($(Get-Group -ConnectClientID $ClientID -ConnectClientSecret $ClientSecret -ConnectTenantID $TenantID -GroupName $RequiredGroup)).Id -Intent "required" -Notification "showAll" -Verbose    
                                                             }
                                                         }
                                                     # Configure a Intune available group if specified
@@ -250,7 +250,7 @@ ForEach ($App in $AppSources)
                                                         {
                                                             If (($AvailableGroup -notlike "*AllUsers*" -or $AvailableGroup -notlike "*AllDevices*") -and ![string]::IsNullOrEmpty($AvailableGroup))
                                                             {
-                                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID $AvailableGroup -Intent "available" -Notification "showAll" -Verbose    
+                                                                Add-IntuneWin32AppAssignmentGroup -Include -ID $Win32App.id -GroupID ($(Get-Group -ConnectClientID $ClientID -ConnectClientSecret $ClientSecret -ConnectTenantID $TenantID -GroupName $AvailableGroup)).Id -Intent "available" -Notification "showAll" -Verbose    
                                                             }
                                                         }
                                 }

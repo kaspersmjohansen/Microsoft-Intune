@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Microsoft",
+                    "Product":  "Global Secure Access Client",
+                    "Version":  "2.1.102",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"GlobalSecureAccessClient.png",
+                    "AvailableGroup": "AllDevices",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}
