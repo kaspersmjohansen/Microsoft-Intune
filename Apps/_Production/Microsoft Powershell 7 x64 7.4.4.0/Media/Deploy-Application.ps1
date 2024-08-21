@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-MSI -Action Install -Path 'PowerShell_7.4.4.0_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart'
+        Execute-MSI -Action Install -Path 'PowerShell_7.4.4.0_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart USE_MU=1 ENABLE_MU=1'
 
         ##*===============================================
         ##* POST-INSTALLATION
