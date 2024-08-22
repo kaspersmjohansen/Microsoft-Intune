@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Microsoft",
+                    "Product":  "Remote Help",
+                    "Version":  "5.1.1419.0",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"RemoteHelp.png",
+                    "AvailableGroup": "",
+                    "RequiredGroup": "AllDevices",
+                    "IntuneImport":  "True"
+                }
+}
