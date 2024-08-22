@@ -1,0 +1,105 @@
+PackageIdentifier: Microsoft.PowerShell
+PackageVersion: 7.4.5.0
+Moniker: pwsh
+Documentations:
+- DocumentLabel: Product Documentation
+  DocumentUrl: https://learn.microsoft.com/powershell
+- DocumentLabel: FAQ
+  DocumentUrl: https://github.com/PowerShell/PowerShell/blob/master/docs/FAQ.md
+Tags:
+- command-line
+- cross-platform
+- open-source
+- powershell
+- pwsh
+- shell
+PackageLocale: en-US
+Author: Microsoft Corporation
+Copyright: Copyright (c) Microsoft Corporation
+CopyrightUrl: https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt
+Description: 'PowerShell is a cross-platform (Windows, Linux, and macOS) automation
+  and configuration tool/framework that works well with your existing tools and is
+  optimized for dealing with structured data (e.g. JSON, CSV, XML, etc.), REST APIs,
+  and object models.
+
+  It includes a command-line shell, an associated scripting language and a framework
+  for processing cmdlets.'
+ShortDescription: PowerShell is a cross-platform task automation solution made up
+  of a command-line shell, a scripting language, and a configuration management framework.
+  PowerShell runs on Windows, Linux, and macOS.
+License: MIT
+LicenseUrl: https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt
+PackageName: PowerShell
+PackageUrl: https://microsoft.com/PowerShell
+Publisher: Microsoft Corporation
+PublisherSupportUrl: https://github.com/PowerShell/PowerShell/issues
+PublisherUrl: https://github.com/PowerShell/PowerShell/
+ReleaseNotesUrl: https://github.com/PowerShell/PowerShell/releases/tag/v7.4.5
+Installers:
+- Architecture: x64
+  InstallerType: wix
+  InstallerSha256: 4d0286cc70c2e45404ad940ef96394b191da45d7de46340b05c013eef41c1eec
+  InstallerUrl: https://github.com/PowerShell/PowerShell/releases/download/v7.4.5/PowerShell-7.4.5-win-x64.msi
+  Scope: machine
+  ReleaseDate: 2024-08-20
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  MinimumOSVersion: 10.0.17763.0
+  ProductCode: '{C1593F76-F694-448E-AD35-82DDD6203975}'
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  Commands:
+  - pwsh
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 87
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 112
+    ReturnResponse: diskFull
+  - InstallerReturnCode: 1601
+    ReturnResponse: contactSupport
+  - InstallerReturnCode: 1602
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 1618
+    ReturnResponse: installInProgress
+  - InstallerReturnCode: 1623
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1625
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1628
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1633
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1638
+    ReturnResponse: alreadyInstalled
+  - InstallerReturnCode: 1639
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1640
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1641
+    ReturnResponse: rebootInitiated
+  - InstallerReturnCode: 1643
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1644
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1649
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1650
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1654
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 3010
+    ReturnResponse: rebootRequiredToFinish
+  InstallerSwitches:
+    Silent: /quiet /norestart
+    SilentWithProgress: /passive /norestart
+    Log: /log "<LOGPATH>"
+    InstallLocation: TARGETDIR="<INSTALLPATH>"
+  InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+ManifestVersion: 1.6.0
+ManifestType: merged

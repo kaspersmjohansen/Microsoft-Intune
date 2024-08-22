@@ -27,7 +27,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
 
     If (!(Test-Path -Path "$SourceFolder\$SourceFileFolder\$Version"))
     {
-        Write-Host "$SourceFileFolder has been updated - Quick! Get it!" -ForegroundColor Yellow
+        Write-Host "$SourceFileFolder has been updated - Quickly, get it!" -ForegroundColor Yellow
         New-Item -Path "$SourceFolder\$SourceFileFolder" -name $Version -ItemType Directory
         If ($Scope -eq "None")
         {
