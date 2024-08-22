@@ -55,13 +55,14 @@ else {
     }
 }
 
-$images = Get-ChildItem *.jpg
+$images = Get-ChildItem *.jpg, *.png
 foreach($image in $images){
     $guid = New-Guid
+    $fileExtension = (Get-ChildItem -Path $image.FullName).Extension
     Write-Host "Creating Background"
-    Resize-Image -InputFile $image -Width 1920 -Height 1080 -ProportionalResize $true -OutputFile $outputPath\$guid.jpg
+    Resize-Image -InputFile $image -Width 1920 -Height 1080 -ProportionalResize $true -OutputFile $outputPath\$guid$fileExtension
     Write-Host "Creating Background Thumbnail"
-    $ThumbName = "$guid`_thumb.jpg"
+    $ThumbName = "$guid`_thumb$fileExtension"
     Resize-Image -InputFile $image -Width 220 -Height 158 -ProportionalResize $true -OutputFile $outputPath\$ThumbName
 }
 
