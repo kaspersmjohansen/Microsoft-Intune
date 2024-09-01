@@ -2,7 +2,7 @@ $CSVFile = "$PSScriptRoot\AppsCSV.csv"
 $SourceFolder = "$PSScriptRoot\Sources"
 $DestinationFolder = "$PSScriptRoot\_Build"
 $ProductionAppFolder = "$PSScriptRoot\_Production"
-$PSADTTemplateFolder = "$PSScriptRoot\PSADT Template 3.10.1"
+$PSADTTemplateFolder = "$PSScriptRoot\PSADT Template 3.10.2"
 
 Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
     
