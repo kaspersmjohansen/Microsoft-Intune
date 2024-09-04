@@ -15,8 +15,11 @@ $SetLockScreen = "true"
 $WallpaperFileName = "Wallpaper.png"
 $WallpaperPath = "C:\Windows\web\wallpaper\Autopilot"
 $WallpaperStyle = "Fill" # Valid parameters Fill, Fit, Stretch, Tile, Center, Span
+$WallpaperAllowChange = "true" # true #false
+
 $LockscreenFileName = "Wallpaper.png"
 $LockscreenPath = "C:\Windows\web\lockscreen\Autopilot"
+$LockScreenAllowchange = "true"
 
 $LogDir = "$env:ProgramData\Microsoft\Autopilot\Branding"
 $LogFile = "AutopilotBranding-$(Get-Date -Format ddMMyyHHmmss).log"
@@ -109,7 +112,6 @@ If (!(Test-Path -Path "$LockscreenPath"))
 }
 
 # Copy lock screen image to lock screen image folder
-# New-Item -Path "C:\Windows\web\wallpaper" -Name "Autopilot" -ItemType Directory -Force -Verbose
 Copy-Item -Path "$PSScriptRoot\Lockscreen\$LockscreenFileName" -Destination "$LockscreenPath\$LockscreenFileName" -Force -Verbose
 
 # Enforce lock screen image
@@ -125,44 +127,6 @@ If ($LockScreenMandatory -eq "true")
 {
     New-ItemProperty -Path $RegKey -Name "LockScreenImageStatus" -Value "0" -PropertyType "Dword" -Force
 }
-
-
-
-<#
-# Load default user's registry hive
-Start-Process -Filepath "$env:windir\System32\reg.exe" -Argumentlist "load HKLM\TempUser `"C:\Users\Default\NTUSER.DAT`"" -NoNewWindow
-
-Start-Process -Filepath "$env:windir\System32\reg.exe" -Argumentlist "add `"HKLM\TempUser\SOFTWARE\Policies\Microsoft\Windows\Personalization`" /v LockScreenImage /t REG_SZ /d `"$LockscreenPath\$LockscreenFileName`" /f" -NoNewWindow -Verbose
-Start-Process -Filepath "$env:windir\System32\reg.exe" -Argumentlist "add `"HKLM\TempUser\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP`" /v LockScreenImageStatus /t REG_DWORD /d `"1`" /f" -NoNewWindow -Verbose
-Start-Process -Filepath "$env:windir\System32\reg.exe" -Argumentlist "add `"HKLM\TempUser\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP`" /v LockScreenImagePath /t REG_SZ /d `"$LockscreenPath\$LockscreenFileName`" /f" -NoNewWindow -Verbose
-Start-Process -Filepath "$env:windir\System32\reg.exe" -Argumentlist "add `"HKLM\TempUser\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP`" /v LockScreenImageUrl /t REG_SZ /d `"$LockscreenPath\$LockscreenFileName`" /f" -NoNewWindow -Verbose
-
-# Garbage collection. This is needed to avoid corrupting the default user's profile
-[gc]::Collect()
-
-# Unload default user's registry hive
-Start-Process -Filepath "$env:windir\System32\reg.exe" -Argumentlist "unload HKLM\TempUser" -NoNewWindow -Verbose
-#>
-
-<#
-Copy-Item ".\Data\$LockscreenIMG" $LockscreenLocalIMG -Force
-New-ItemProperty -Path $RegKeyPath -Name $LockScreenStatus -Value $StatusValue -PropertyType DWORD -Force
-New-ItemProperty -Path $RegKeyPath -Name $LockScreenPath -Value $LockscreenLocalIMG -PropertyType STRING -Force
-New-ItemProperty -Path $RegKeyPath -Name $LockScreenUrl -Value $LockscreenLocalIMG -PropertyType STRING -Force
-
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization" /V "LockScreenImage" /T REG_SZ /D "\\path\to\image" /F
-
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" /V "LockScreenImageStatus" /T REG_DWORD /D "00000001" /F
-
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" /V "LockScreenImagePath" /T REG_SZ /D "\\path\to\image" /F
-
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" /V "LockScreenImageUrl" /T REG_SZ /D "\\path\to\image" /F
-
-and to prevent changes:
-
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization" /V "NoChangingLockScreen" /T REG_DWORD /D "00000001" /F
-#>
-
 }
 #Endregion
 
