@@ -24,10 +24,17 @@ $LockScreenAllowchange = "true"
 $LogDir = "$env:ProgramData\Microsoft\Autopilot\Branding"
 $LogFile = "AutopilotBranding-$(Get-Date -Format ddMMyyHHmmss).log"
 
+# Create $LogDir folder if it does not exist
+If (!(Test-Path "$LogDir"))
+{
+    New-Item -Path "$LogDir" -ItemType Directory    
+}
+
+# Start transcript log
 Start-Transcript -Path $($LogDir+"\"+$LogFile)
 
 # If we are running as a 32-bit process on an x64 system, re-launch as a 64-bit process
-if ("$env:PROCESSOR_ARCHITEW6432" -ne "ARM64")
+if ($ENV:PROCESSOR_ARCHITEW6432 -eq "AMD64")
 {
     if (Test-Path "$($env:WINDIR)\SysNative\WindowsPowerShell\v1.0\powershell.exe")
     {
