@@ -12,12 +12,12 @@
 $SetWallpaper = "true"
 $SetLockScreen = "true"
 
-$WallpaperFileName = "Wallpaper.png"
+$WallpaperFileName = "Wallpaper.jpg"
 $WallpaperPath = "C:\Windows\web\wallpaper\Autopilot"
 $WallpaperStyle = "Fill" # Valid parameters Fill, Fit, Stretch, Tile, Center, Span
 $WallpaperAllowChange = "true" # true #false
 
-$LockscreenFileName = "Wallpaper.png"
+$LockscreenFileName = "Wallpaper.jpg"
 $LockscreenPath = "C:\Windows\web\lockscreen\Autopilot"
 $LockScreenAllowchange = "true"
 

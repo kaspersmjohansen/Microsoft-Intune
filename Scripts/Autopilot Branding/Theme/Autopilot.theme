@@ -41,7 +41,7 @@ DefaultValue=Windows Default
 DefaultValue.MUI=@main.cpl,-1020
 
 [Control Panel\Desktop]
-Wallpaper=%SystemRoot%\web\wallpaper\Autopilot\Wallpaper.png
+Wallpaper=%SystemRoot%\web\wallpaper\Autopilot\Wallpaper.jpg
 TileWallpaper=0
 WallpaperStyle=10
 Pattern=
