@@ -47,7 +47,7 @@ if(-NOT[string]::IsNullOrEmpty($loggedOnUserSID)) {
         elseif ($items.Where({$_.PSChildName -eq $loggedOnUserSID}).LogonCredsAvailable -ne 1) {
             Write-Output "[Multiple SIDs]: Not good. PIN credential provider NOT found for LoggedOnUserSID. This indicates that the user is not enrolled into WHfB."
             Write-Output "[Multiple SIDs]: Deleting the Windows Hello for Business credentials container for LoggedOnUserSID"
-            Start-Process -FilePath "$env:windir\System32\certutil.exe" -ArgumentList "-deleteHelloContainer" -Wait -Verbose
+            Start-Process -FilePath "$env:windir\System32\certutil.exe" -ArgumentList "-deleteHelloContainer" -Wait -NoNewWindow -Verbose
             exit 0
         }
         else {
@@ -64,7 +64,7 @@ if(-NOT[string]::IsNullOrEmpty($loggedOnUserSID)) {
         elseif (($items.PSChildName -eq $loggedOnUserSID) -AND ($items.LogonCredsAvailable -ne 1)) {
             Write-Output "[Single SID]: Not good. PIN credential provider NOT found for LoggedOnUserSID. This indicates that the user is not enrolled into WHfB."
             Write-Output "[Single SID]: Deleting the Windows Hello for Business credentials container for LoggedOnUserSID"
-            Start-Process -FilePath "$env:windir\System32\certutil.exe" -ArgumentList "-deleteHelloContainer" -Wait -Verbose
+            Start-Process -FilePath "$env:windir\System32\certutil.exe" -ArgumentList "-deleteHelloContainer" -Wait -NoNewWindow -Verbose
             exit 0
         }
         else {
