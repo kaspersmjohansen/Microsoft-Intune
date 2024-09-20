@@ -91,7 +91,10 @@ ForEach ($App in $AppSources)
         $Product = $config.AppConfig.Product
         $Version = $config.AppConfig.Version
         $Architecture = $config.AppConfig.Architecture
+        $IntuneImport = $config.AppConfig.IntuneImport
         
+        If ($IntuneImport -eq "true")
+        {
         # Set IntuneWin package folder anem
         $PackageFolderName = $Vendor + " " + $Product + " " + $Architecture + " " + $Version
 
@@ -258,8 +261,16 @@ ForEach ($App in $AppSources)
                                 {
                                     Write-Verbose "Something bad happened..." -Verbose    
                                 }
-                        } 
-                #Endregion Import intunewin to Intune
+                        }
+        }
+        elseif ($IntuneImport -eq "false")
+        {
+            Write-Host "$($Vendor + " " + $Product) will not be imported to Intune" -ForegroundColor Green
+        }
+        else{
+
+        } 
+        #Endregion Import intunewin to Intune
     }
     else {
             If (!(Test-Path -Path $MediaPath))
