@@ -1,0 +1,120 @@
+PackageIdentifier: Git.Git
+PackageVersion: 2.46.1
+Moniker: git
+Tags:
+- cli
+- command-line
+- commandline
+- cross-platform
+- dvcs
+- foss
+- open-source
+- tool
+- utility
+- vcs
+PackageLocale: en-US
+Author: Johannes Schindelin
+Copyright: Copyright (C) Free Software Foundation, Inc.
+CopyrightUrl: https://raw.githubusercontent.com/git-for-windows/git/main/COPYING
+Description: Git for Windows focuses on offering a lightweight, native set of tools
+  that bring the full feature set of the Git SCM to Windows while providing appropriate
+  user interfaces for experienced Git users and novices alike.
+ShortDescription: Git for Windows focuses on offering a lightweight, native set of
+  tools that bring the full feature set of the Git SCM to Windows while providing
+  appropriate user interfaces for experienced Git users and novices alike.
+License: GPL-2.0
+LicenseUrl: https://raw.githubusercontent.com/git-for-windows/git/main/COPYING
+PackageName: Git
+PackageUrl: https://gitforwindows.org/
+Publisher: The Git Development Community
+PublisherSupportUrl: https://github.com/git-for-windows/git/issues
+PublisherUrl: https://gitforwindows.org/
+ReleaseNotes: 'Changes since Git for Windows v2.46.0 (July 29th 2024)New Features
+
+  - Comes with Git v2.46.1.
+
+  - Comes with Bash v5.2.32.
+
+  - Comes with OpenSSL v3.2.3.
+
+  - Comes with MinTTY v3.7.5.
+
+  - Comes with cURL v8.10.1.
+
+  Bug Fixes
+
+  - The support code enabled via core.WSLCompat did not work well with files stored
+  in subdirectories of the worktree, which has been fixed.
+
+  - When using an askpass helper (e.g. implicitly when running inside VS Code''s internal
+  terminal), Git v2.46.0 would error out with "read error: Invalid argument"; This
+  bug has been fixed.
+
+  Filename | SHA-256
+
+  -------- | -------
+
+  Git-2.46.1-64-bit.exe | ab47dfeb4f5effac44fdc2c11b60ee055477ae752fbd0aaafd91b7b0dedd6396
+
+  Git-2.46.1-32-bit.exe | 8c172998a695923b4bc5ccf29f27a7e6679ccae6f8f50acfe5039d878318f200
+
+  PortableGit-2.46.1-64-bit.7z.exe | 327c09353e27609b376346ca3397aebe8832298f0448b4b9b2e87c9d37423e1c
+
+  PortableGit-2.46.1-32-bit.7z.exe | 84abc0c5d419f5c58629e7d9e7a4bad4bc338e859426baf19c752395091ed804
+
+  MinGit-2.46.1-64-bit.zip | d33b5a5838125aa2e06a917ffa7065831355fc13088abfaab3d0e3403d5928d2
+
+  MinGit-2.46.1-32-bit.zip | 5481b8105295a122936a0c3b52db5befa17c3c417a79f296fa3231e99f6772a8
+
+  MinGit-2.46.1-busybox-64-bit.zip | 9a3bd0fb310262d5cc91e8187602c9d548605cebd4320a83179f9d3ebf5e484d
+
+  MinGit-2.46.1-busybox-32-bit.zip | af304e12aa7724fc78780acf4b1113d8475405557f027345763de9581202b64f
+
+  Git-2.46.1-64-bit.tar.bz2 | e2c9c5d82936fe4b888d3dc349f77dca932dc35b9730ec068f3467797eebcd1f
+
+  Git-2.46.1-32-bit.tar.bz2 | 5b5109fa15e25c376510ac6491d9d65788d3c36c556ad06a9bce30bc92668063'
+ReleaseNotesUrl: https://github.com/git-for-windows/git/releases/tag/v2.46.1.windows.1
+Installers:
+- Architecture: x64
+  InstallerType: inno
+  InstallerSha256: ab47dfeb4f5effac44fdc2c11b60ee055477ae752fbd0aaafd91b7b0dedd6396
+  InstallerUrl: https://github.com/git-for-windows/git/releases/download/v2.46.1.windows.1/Git-2.46.1-64-bit.exe
+  Scope: machine
+  InstallerLocale: en-US
+  ElevationRequirement: elevatesSelf
+  ReleaseDate: 2024-09-18
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  ProductCode: Git_is1
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  Commands:
+  - git
+  AppsAndFeaturesEntries:
+  - DisplayName: Git
+    ProductCode: Git_is1
+    Publisher: The Git Development Community
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 2
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 5
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 8
+    ReturnResponse: rebootRequiredForInstall
+  InstallerSwitches:
+    Custom: /SUPPRESSMSGBOXES /COMPONENTS=icons,ext,gitlfs,assoc,assoc_sh,consolefont,windowsterminal,scalar
+    Silent: /SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART
+    SilentWithProgress: /SP- /SILENT /SUPPRESSMSGBOXES /NORESTART
+    Log: /LOG="<LOGPATH>"
+    InstallLocation: /DIR="<INSTALLPATH>"
+  InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+  Platform:
+  - Windows.Desktop
+ManifestVersion: 1.6.0
+ManifestType: merged
