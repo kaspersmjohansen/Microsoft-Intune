@@ -188,10 +188,10 @@ ForEach ($App in $AppSources)
                                             $RequirementRule = New-IntuneWin32AppRequirementRule -Architecture $Architecture -MinimumSupportedWindowsRelease "W10_22H2"
 
                                             # Create script based requirement rule
-                                            If ($RequirementRuleScript)
-                                            {
-                                                $RequirementRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
-                                            }
+                                            # If ($RequirementRuleScript)
+                                            #{
+                                            #    $RequireRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
+                                            #}
 
                                             # Create script based detection rule
                                             $DetectionRule = New-IntuneWin32AppDetectionRuleScript -ScriptFile $($AppRootPath + "\" + $DetectionRuleScript)
@@ -209,8 +209,8 @@ ForEach ($App in $AppSources)
                                             #-AdditionalRequirementRule $RequirementRuleScript
                                             If ($RequirementRuleScript)
                                             {
-                                                $RequirementRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "ok" -ScriptContext "system" -StringComparisonOperator "equal"
-                                                $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy -AdditionalRequirementRule $RequirementRuleScript
+                                                $RequireRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "OK" -ScriptContext "system" -StringComparisonOperator "equal"
+                                                $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy -AdditionalRequirementRule $RequireRuleScript
                                             } else
                                                 {
                                                     $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy
