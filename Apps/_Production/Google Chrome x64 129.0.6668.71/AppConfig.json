@@ -1,14 +1,14 @@
 {
     "AppConfig":{
-                    "Vendor":  "Teamviewer GmbH",
-                    "Product":  "Teamviewer",
-                    "Version":  "15.53.7.0",
+                    "Vendor":  "Google",
+                    "Product":  "Chrome",
+                    "Version":  "129.0.6668.71",
                     "Architecture":  "x64",
                     "InstallBehavior":"system",
                     "DetectionScript": "DetectionScript.ps1",
                     "RequirementScript": "",
-                    "Icon":"TeamViewer.png",
-                    "AvailableGroup": "",
+                    "Icon":"Google-Chrome.png",
+                    "AvailableGroup": "AllDevices",
                     "RequiredGroup": "",
                     "IntuneImport":  "True"
                 }

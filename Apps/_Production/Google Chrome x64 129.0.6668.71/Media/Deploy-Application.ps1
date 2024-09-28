@@ -106,15 +106,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = ''
-    [String]$appName = ''
+    [String]$appVendor = 'Google'
+    [String]$appName = 'Chrome'
     [String]$appVersion = ''
-    [String]$appArch = ''
+    [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = 'XX/XX/20XX'
-    [String]$appScriptAuthor = '<author name>'
+    [String]$appScriptDate = '26/09/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com '
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -181,7 +181,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'iexplore' -AllowDefer -DeferTimes 3 -CheckDiskSpace -PersistPrompt
+        Show-InstallationWelcome -CloseApps 'iexplore' -CheckDiskSpace
 
         ## Show Progress Message (with the default message)
         Show-InstallationProgress
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-
+        Execute-MSI -Action Install -Path 'Google Chrome_129.0.6668.71_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -213,6 +213,8 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
+        Copy-File -Path "$dirSupportFiles\master_preferences" -Destination "$env:ProgramFiles\Google\Chrome\Application"
+        Remove-File -Path "$env:PUBLIC\Desktop\Google Chrome.lnk"
 
         ## Display a message at the end of the install
         # If (-not $useDefaultMsi) {
@@ -248,7 +250,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-
+        Remove-MSIApplications -Name 'Google Chrome' -Exact
 
         ##*===============================================
         ##* POST-UNINSTALLATION

@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\TeamViewer"
+$ProgramPath = "C:\Program Files\Google\Chrome\Application"
 
 # File to be detected
-$ProgramFile = "TeamViewer.exe"
+$ProgramFile = "chrome.exe"
 
 # File version
-$ProgramFileVersion = "15.53.7.0"
+$ProgramFileVersion = "129.0.6668.71"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
