@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "GIMP",
+                    "Product":  "GIMP for Windows",
+                    "Version":  "2.10.38.0",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"gimp.png",
+                    "AvailableGroup": "AllDevices",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}
