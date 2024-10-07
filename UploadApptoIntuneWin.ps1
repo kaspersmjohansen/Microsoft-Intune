@@ -206,7 +206,7 @@ ForEach ($App in $AppSources)
                                             # $InstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType install"
                                             # $UninstallCommandLine = ".\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe -DeploymentType uninstall"
 
-                                            #-AdditionalRequirementRule $RequirementRuleScript
+                                            # Additional Requirement Rule script
                                             If ($RequirementRuleScript)
                                             {
                                                 $RequireRuleScript = New-IntuneWin32AppRequirementRuleScript -ScriptFile $($AppRootPath + "\" + $RequirementRuleScript) -StringOutputDataType -StringValue "OK" -ScriptContext "system" -StringComparisonOperator "equal"
@@ -215,6 +215,9 @@ ForEach ($App in $AppSources)
                                                 {
                                                     $Win32App = Add-IntuneWin32App -FilePath "$IntuneWinFile" -DisplayName $AppName -Description $AppName -AppVersion $Version -Publisher $Vendor -InstallCommandLine $InstallCommandLine -UninstallCommandLine $UninstallCommandLine -InstallExperience "system" -RestartBehavior "suppress" -DetectionRule $DetectionRule -RequirementRule $RequirementRule -Icon $Icon -AllowAvailableUninstall -Verbose -UseAzCopy
                                                 }
+                                            
+                                            # Configure application category
+                                            # coming soon #
                                                                 
                                                 # Configure a Intune required group if specified
                                                 If ([string]::IsNullOrEmpty($RequiredGroup))
