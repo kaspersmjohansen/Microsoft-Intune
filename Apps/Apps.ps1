@@ -22,7 +22,7 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
 
     If (!(Test-Path -Path "$SourceFolder\$SourceFileFolder"))
     {
-        New-Item -Path $SourceFolder -name $SourceFileFolder -ItemType Directory
+        New-Item -Path $SourceFolder -name $SourceFileFolder -ItemType Directory | Out-Null
     }
 
     If (!(Test-Path -Path "$SourceFolder\$SourceFileFolder\$Version"))
@@ -47,15 +47,19 @@ Import-Csv -Path $CSVFile -Delimiter ";" | ForEach-Object {
         $ProdApp = Get-ChildItem -Path $($ProductionAppFolder+"\"+$Vendor+" "+$Product+"*") | Select-Object -First 1
         If (!(Test-Path -Path "$DestinationFolder\$AppFolder"))
         {
-            New-Item -Path $DestinationFolder -Name $AppFolder -ItemType Directory
-                        
+            New-Item -Path $DestinationFolder -Name $AppFolder -ItemType Directory | Out-Null
+                    
             If ($ProdApp)
             {
+                Write-Host "Coping existing source files from $ProdApp" -ForegroundColor Yellow
+                Write-Host "" 
                 Copy-Item -Path "$ProdApp\*" -Recurse -Destination "$DestinationFolder\$AppFolder" -Force
                 Get-ChildItem -Path "$SourceFolder\$SourceFileFolder\$Version" | Where-Object {$_.extension -in ".exe",".msi"} | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files" -Force
             }
             else
             {
+                Write-Host "Copying source files from $PSADTTemplateFolder" -ForegroundColor Yellow
+                Write-Host "" 
                 Copy-Item -Path "$PSADTTemplateFolder\*" -Recurse -Destination "$DestinationFolder\$AppFolder"
                 Get-ChildItem -Path "$SourceFolder\$SourceFileFolder\$Version" | Where-Object {$_.extension -in ".exe",".msi"} | Copy-Item -Destination "$DestinationFolder\$AppFolder\Media\Files"
             }
