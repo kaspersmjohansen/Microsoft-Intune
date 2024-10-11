@@ -1,4 +1,5 @@
 ﻿Vendor;Product;Language;AppID;Architecture;Scope
+Bitwarden;Bitwarden Desktop;en-us;Bitwarden.Bitwarden;x64;Machine
 Citrix;Workspace App;en-us;Citrix.Workspace;x64;Machine
 Google;Chrome;en-us;Google.Chrome;x64;Machine
 Teamviewer GmbH;Teamviewer;en-us;TeamViewer.TeamViewer;x64;Machine
@@ -30,3 +31,5 @@ Don Ho;Notepad++;en-us;Notepad++.Notepad++;x64;Machine
 Bot Productions;IconViewer;en:us;BotProductions.IconViewer;x64;Machine
 The Handbrake Team;HandBrake;en-us;HandBrake.HandBrake;x64;Machine
 Proton Technologies;Proton VPN;en-us;Proton.ProtonVPN;x64;Machine
+OBS Project;OBS Studio;en-us;OBSProject.OBSStudio;x64;Machine
+Plantronics;Plantronics Hub;en-us;Poly.PlantronicsHub;x64;Machine
