@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\HandBrake"
+$ProgramPath = "C:\Program Files (x86)\Teams Installer"
 
 # File to be detected
-$ProgramFile = "HandBrake.exe"
+$ProgramFile = "Teams.exe"
 
 # File version
-$ProgramFileVersion = "1.8.2.0"
+$ProgramFileVersion = "1.7.00.27757"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

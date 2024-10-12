@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\HandBrake"
+$ProgramPath = "C:\Program Files\Microsoft VS Code"
 
 # File to be detected
-$ProgramFile = "HandBrake.exe"
+$ProgramFile = "code.exe"
 
 # File version
-$ProgramFileVersion = "1.8.2.0"
+$ProgramFileVersion = "1.94.2"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

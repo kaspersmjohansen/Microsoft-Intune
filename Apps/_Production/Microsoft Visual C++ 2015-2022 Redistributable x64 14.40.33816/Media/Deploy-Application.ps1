@@ -106,15 +106,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'The Handbrake Team'
-    [String]$appName = 'Handbrake'
+    [String]$appVendor = 'Microsoft'
+    [String]$appName = 'Visual C++ 2015-2022 Redistributable (x64)'
     [String]$appVersion = ''
-    [String]$appArch = 'x64'
+    [String]$appArch = ''
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
     [String]$appScriptDate = '12/10/2024'
-    [String]$appScriptAuthor = 'Kasper Johanse, Apento - kmj@apento.com'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'HandBrake_*.exe' -Parameters '/S'
+        Execute-Process -Path 'Microsoft Visual C++ 2015-2022 Redistributable (x64)*.exe' -Parameters '/install /quiet /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -213,7 +213,6 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Remove-File -Path "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\HandBrake\Uninstall.lnk"
 
         ## Display a message at the end of the install
         # If (-not $useDefaultMsi) {
@@ -249,7 +248,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path "$env:ProgramFiles\HandBrake\uninst.exe" -Parameters '/S'
+        Execute-Process -Path 'Microsoft Visual C++ 2015-2022 Redistributable (x64)*.exe' -Parameters '/uninstall /quiet /norestart'
 
         ##*===============================================
         ##* POST-UNINSTALLATION

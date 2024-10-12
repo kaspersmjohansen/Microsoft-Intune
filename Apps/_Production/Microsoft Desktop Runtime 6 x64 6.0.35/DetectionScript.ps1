@@ -1,29 +1,29 @@
-﻿# Detect DisplayName value in application uninstall key
-$RegDetect             = "False"
+﻿# Detect if DisplayName registry value exist in application uninstall registry key
+$RegDetect             = "False" # True or False
 
-# Detect version value in Displayname
-$RegValueVersionDetect = "False" # equal #equalgreater
+# Detect DisplayName value version in application uninstall registry key
+$RegValueVersionDetect = "equal" # equal or equalgreater
 
-# Detect file
-$FileDetect            = "False"
+# Detect if application filename exist in application folder
+$FileDetect            = "False" # True or False
 
-# Detect file version 
-$FileVersionDetect     = "equalgreater" # equal #equalgreater
+# Detect application filename version in application folder
+$FileVersionDetect     = "" # equal or equalgreater
 
-# Folder to detect file
-$ProgramPath = "C:\Program Files\HandBrake"
+# Application folder
+$ProgramPath = ""
 
-# File to be detected
-$ProgramFile = "HandBrake.exe"
+# Application filename
+$ProgramFile = ""
 
-# File version
-$ProgramFileVersion = "1.8.2.0"
+# Application filename version
+$ProgramFileVersion = ""
 
 # Application uninstall registry key
-$ProgramRegKey = ""
+$ProgramRegKey = "HKLM:SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{ecb94bc3-963d-412a-b141-8b7c32ef103f}"
 
-# Application version registry value
-$ProgramRegVersion = ""
+# Application registry value version
+$ProgramRegVersion = "6.0.33.33916"
 
 # Specific file exists
 If ($FileDetect -eq "True")

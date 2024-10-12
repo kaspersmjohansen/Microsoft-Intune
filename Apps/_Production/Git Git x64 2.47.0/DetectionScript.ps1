@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\HandBrake"
+$ProgramPath = "C:\Program Files\Git"
 
 # File to be detected
-$ProgramFile = "HandBrake.exe"
+$ProgramFile = "git-cmd.exe"
 
 # File version
-$ProgramFileVersion = "1.8.2.0"
+$ProgramFileVersion = "2.47.0.windows.1"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

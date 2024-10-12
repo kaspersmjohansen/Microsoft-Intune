@@ -1,4 +1,4 @@
-﻿# Detect DisplayName value in application uninstall key
+# Detect DisplayName value in application uninstall key
 $RegDetect             = "False"
 
 # Detect version value in Displayname
@@ -11,13 +11,13 @@ $FileDetect            = "False"
 $FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\HandBrake"
+$ProgramPath = "C:\Program Files\Google\Chrome\Application"
 
 # File to be detected
-$ProgramFile = "HandBrake.exe"
+$ProgramFile = "chrome.exe"
 
 # File version
-$ProgramFileVersion = "1.8.2.0"
+$ProgramFileVersion = "129.0.6668.101"
 
 # Application uninstall registry key
 $ProgramRegKey = ""

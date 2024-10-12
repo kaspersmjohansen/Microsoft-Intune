@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Microsoft",
+                    "Product":  "Desktop Runtime 8",
+                    "Version":  "8.0.10",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"dotnet-desktopruntime.png",
+                    "AvailableGroup": "AllDevices",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}

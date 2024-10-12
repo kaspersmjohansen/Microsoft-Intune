@@ -106,15 +106,15 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'The Handbrake Team'
-    [String]$appName = 'Handbrake'
+    [String]$appVendor = 'Google'
+    [String]$appName = 'Chrome'
     [String]$appVersion = ''
     [String]$appArch = 'x64'
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
     [String]$appScriptDate = '12/10/2024'
-    [String]$appScriptAuthor = 'Kasper Johanse, Apento - kmj@apento.com'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com '
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -205,7 +205,7 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'HandBrake_*.exe' -Parameters '/S'
+        Execute-MSI -Action Install -Path 'Google Chrome_129.0.6668.101_Machine_X64_wix_en-US.msi' -Parameters '/qn /norestart'
 
         ##*===============================================
         ##* POST-INSTALLATION
@@ -213,7 +213,8 @@ Try {
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Remove-File -Path "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\HandBrake\Uninstall.lnk"
+        Copy-File -Path "$dirSupportFiles\master_preferences" -Destination "$env:ProgramFiles\Google\Chrome\Application"
+        Remove-File -Path "$env:PUBLIC\Desktop\Google Chrome.lnk"
 
         ## Display a message at the end of the install
         # If (-not $useDefaultMsi) {
@@ -249,7 +250,7 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path "$env:ProgramFiles\HandBrake\uninst.exe" -Parameters '/S'
+        Remove-MSIApplications -Name 'Google Chrome' -Exact
 
         ##*===============================================
         ##* POST-UNINSTALLATION

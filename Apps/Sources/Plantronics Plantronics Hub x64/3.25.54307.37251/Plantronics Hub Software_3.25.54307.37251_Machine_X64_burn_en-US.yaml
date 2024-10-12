@@ -1,0 +1,85 @@
+PackageIdentifier: Poly.PlantronicsHub
+PackageVersion: 3.25.54307.37251
+Moniker: plantronicshub
+PackageLocale: en-US
+Author: Plantronics, Inc.
+Copyright: "\xA9 2021 Plantronics, Inc. All rights reserved."
+CopyrightUrl: https://www.poly.com/us/en/legal/trademarks
+Description: Allows end-users to customize their settings and get visible status of
+  their Plantronics audio device on their desktop.
+ShortDescription: Allows end-users to customize their settings and get visible status
+  of their Plantronics audio device on their desktop.
+License: Proprietary
+LicenseUrl: https://www.poly.com/us/en/legal/terms
+PackageName: Plantronics Hub Software
+PackageUrl: https://www.poly.com/us/en/support/downloads-apps/hub-desktop
+PrivacyUrl: https://www.poly.com/us/en/legal/privacy
+Publisher: Plantronics, Inc.
+PublisherSupportUrl: https://www.poly.com/us/en/support
+PublisherUrl: https://www.poly.com/us/en
+Installers:
+- Architecture: x64
+  InstallerType: burn
+  InstallerSha256: e386741608604faea8ebb51c8c6bcdbf5493ff006968f0234751745e5ec5cd4c
+  InstallerUrl: https://downloads.poly.com/headsets/PlantronicsHubInstaller.exe
+  Scope: machine
+  InstallerLocale: en-US
+  ReleaseDate: 2023-11-21
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  MinimumOSVersion: 10.0.0.0
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 87
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 112
+    ReturnResponse: diskFull
+  - InstallerReturnCode: 1601
+    ReturnResponse: contactSupport
+  - InstallerReturnCode: 1602
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 1618
+    ReturnResponse: installInProgress
+  - InstallerReturnCode: 1623
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1625
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1628
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1633
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 1638
+    ReturnResponse: alreadyInstalled
+  - InstallerReturnCode: 1639
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1640
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1641
+    ReturnResponse: rebootInitiated
+  - InstallerReturnCode: 1643
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1644
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1649
+    ReturnResponse: blockedByPolicy
+  - InstallerReturnCode: 1650
+    ReturnResponse: invalidParameter
+  - InstallerReturnCode: 1654
+    ReturnResponse: systemNotSupported
+  - InstallerReturnCode: 3010
+    ReturnResponse: rebootRequiredToFinish
+  InstallerSwitches:
+    Silent: /quiet /norestart
+    SilentWithProgress: /passive /norestart
+    Log: /log "<LOGPATH>"
+    InstallLocation: TARGETDIR="<INSTALLPATH>"
+  InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+ManifestVersion: 1.6.0
+ManifestType: merged

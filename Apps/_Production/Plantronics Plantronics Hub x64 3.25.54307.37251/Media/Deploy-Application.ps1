@@ -103,18 +103,18 @@ Try {
     }
 
     ##*===============================================
-    ##* VARIABLE DECLARATION
+    #region VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'The Handbrake Team'
-    [String]$appName = 'Handbrake'
+    [String]$appVendor = 'Plantronics'
+    [String]$appName = 'Plantronics Hub'
     [String]$appVersion = ''
-    [String]$appArch = 'x64'
+    [String]$appArch = ''
     [String]$appLang = 'EN'
     [String]$appRevision = '01'
     [String]$appScriptVersion = '1.0.0'
-    [String]$appScriptDate = '12/10/2024'
-    [String]$appScriptAuthor = 'Kasper Johanse, Apento - kmj@apento.com'
+    [String]$appScriptDate = '10/10/2024'
+    [String]$appScriptAuthor = 'Kasper Johansen, Apento - kmj@apento.com'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
     [String]$installName = ''
@@ -128,8 +128,8 @@ Try {
 
     ## Variables: Script
     [String]$deployAppScriptFriendlyName = 'Deploy Application'
-    [Version]$deployAppScriptVersion = [Version]'3.10.0'
-    [String]$deployAppScriptDate = '03/27/2024'
+    [Version]$deployAppScriptVersion = [Version]'3.10.2'
+    [String]$deployAppScriptDate = '08/13/2024'
     [Hashtable]$deployAppScriptParameters = $PsBoundParameters
 
     ## Variables: Environment
@@ -171,12 +171,12 @@ Try {
     #endregion
     ##* Do not modify section above
     ##*===============================================
-    ##* END VARIABLE DECLARATION
+    #endregion END VARIABLE DECLARATION
     ##*===============================================
 
     If ($deploymentType -ine 'Uninstall' -and $deploymentType -ine 'Repair') {
         ##*===============================================
-        ##* PRE-INSTALLATION
+        ##* MARK: PRE-INSTALLATION
         ##*===============================================
         [String]$installPhase = 'Pre-Installation'
 
@@ -190,7 +190,7 @@ Try {
 
 
         ##*===============================================
-        ##* INSTALLATION
+        ##* MARK: INSTALLATION
         ##*===============================================
         [String]$installPhase = 'Installation'
 
@@ -205,24 +205,25 @@ Try {
         }
 
         ## <Perform Installation tasks here>
-        Execute-Process -Path 'HandBrake_*.exe' -Parameters '/S'
+        Execute-Process -Path 'Plantronics Hub Software*.exe' -Parameters '/install /quiet /norestart'
 
         ##*===============================================
-        ##* POST-INSTALLATION
+        ##* MARK: POST-INSTALLATION
         ##*===============================================
         [String]$installPhase = 'Post-Installation'
 
         ## <Perform Post-Installation tasks here>
-        Remove-File -Path "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\HandBrake\Uninstall.lnk"
+        Start-Sleep -Seconds 30
+        Remove-File -Path "$env:PUBLIC\Desktop\Plantronics Hub.lnk"
 
         ## Display a message at the end of the install
         # If (-not $useDefaultMsi) {
         #    Show-InstallationPrompt -Message 'You can customize text to appear at the end of an install or remove it completely for unattended installations.' -ButtonRightText 'OK' -Icon Information -NoWait
-        # }
+        #}
     }
     ElseIf ($deploymentType -ieq 'Uninstall') {
         ##*===============================================
-        ##* PRE-UNINSTALLATION
+        ##* MARK: PRE-UNINSTALLATION
         ##*===============================================
         [String]$installPhase = 'Pre-Uninstallation'
 
@@ -236,7 +237,7 @@ Try {
 
 
         ##*===============================================
-        ##* UNINSTALLATION
+        ##* MARK: UNINSTALLATION
         ##*===============================================
         [String]$installPhase = 'Uninstallation'
 
@@ -249,10 +250,10 @@ Try {
         }
 
         ## <Perform Uninstallation tasks here>
-        Execute-Process -Path "$env:ProgramFiles\HandBrake\uninst.exe" -Parameters '/S'
+        Remove-MSIApplications -Name 'Plantronics Hub Software' -Exact
 
         ##*===============================================
-        ##* POST-UNINSTALLATION
+        ##* MARK: POST-UNINSTALLATION
         ##*===============================================
         [String]$installPhase = 'Post-Uninstallation'
 
@@ -262,7 +263,7 @@ Try {
     }
     ElseIf ($deploymentType -ieq 'Repair') {
         ##*===============================================
-        ##* PRE-REPAIR
+        ##* MARK: PRE-REPAIR
         ##*===============================================
         [String]$installPhase = 'Pre-Repair'
 
@@ -275,7 +276,7 @@ Try {
         ## <Perform Pre-Repair tasks here>
 
         ##*===============================================
-        ##* REPAIR
+        ##* MARK: REPAIR
         ##*===============================================
         [String]$installPhase = 'Repair'
 
@@ -289,7 +290,7 @@ Try {
         ## <Perform Repair tasks here>
 
         ##*===============================================
-        ##* POST-REPAIR
+        ##* MARK: POST-REPAIR
         ##*===============================================
         [String]$installPhase = 'Post-Repair'
 
@@ -297,9 +298,6 @@ Try {
 
 
     }
-    ##*===============================================
-    ##* END SCRIPT BODY
-    ##*===============================================
 
     ## Call the Exit-Script function to perform final cleanup operations
     Exit-Script -ExitCode $mainExitCode
