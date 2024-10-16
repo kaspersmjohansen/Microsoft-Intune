@@ -190,6 +190,7 @@ Try {
         $SourceURL = "https://officecdn.microsoft.com/pr/wsus/setup.exe"
         Write-Log -Message "Attempting to download latest Office Deployment Tool executable from $SourceURL" -Source 'Download' -LogType 'CMTrace'
         Start-BitsTransfer -Source $SourceURL -Destination "$dirFiles\setup.exe" -TransferType Download
+        Get-FileVersion -File "$dirFiles\setup.exe"
 
         ##*===============================================
         ##* MARK: INSTALLATION
