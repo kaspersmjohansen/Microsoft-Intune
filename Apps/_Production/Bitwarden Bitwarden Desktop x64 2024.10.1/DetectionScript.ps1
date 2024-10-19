@@ -1,28 +1,28 @@
-# Detect DisplayName value in application uninstall key
-$RegDetect             = "False"
+﻿# Detect if DisplayName registry value exist in application uninstall registry key
+$RegDetect             = "False" # True or False
 
-# Detect version value in Displayname
-$RegValueVersionDetect = "False" # equal #equalgreater
+# Detect DisplayName value version in application uninstall registry key
+$RegValueVersionDetect = "" # equal or equalgreater
 
-# Detect file
-$FileDetect            = "False"
+# Detect if application filename exist in application folder
+$FileDetect            = "False" # True or False
 
-# Detect file version 
-$FileVersionDetect     = "equal" # equal #equalgreater
+# Detect application filename version in application folder
+$FileVersionDetect     = "equalsgreater" # equal or equalgreater
 
-# Folder to detect file
-$ProgramPath = "C:\Program Files\7-Zip"
+# Application folder
+$ProgramPath = "C:\Program Files\Bitwarden"
 
-# File to be detected
-$ProgramFile = "7z.exe"
+# Application filename
+$ProgramFile = "Bitwarden.exe"
 
-# File version
-$ProgramFileVersion = "24.08"
+# Application filename version
+$ProgramFileVersion = "2024.10.1"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
 
-# Application version registry value
+# Application registry value version
 $ProgramRegVersion = ""
 
 # Specific file exists

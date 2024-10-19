@@ -8,16 +8,16 @@ $RegValueVersionDetect = "False" # equal #equalgreater
 $FileDetect            = "False"
 
 # Detect file version 
-$FileVersionDetect     = "equal" # equal #equalgreater
+$FileVersionDetect     = "equalgreater" # equal #equalgreater
 
 # Folder to detect file
-$ProgramPath = "C:\Program Files\7-Zip"
+$ProgramPath = "C:\Program Files\Google\Chrome\Application"
 
 # File to be detected
-$ProgramFile = "7z.exe"
+$ProgramFile = "chrome.exe"
 
 # File version
-$ProgramFileVersion = "24.08"
+$ProgramFileVersion = "130.0.6723.59"
 
 # Application uninstall registry key
 $ProgramRegKey = ""
