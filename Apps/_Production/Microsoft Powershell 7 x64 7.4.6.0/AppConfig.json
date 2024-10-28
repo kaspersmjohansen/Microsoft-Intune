@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Microsoft",
+                    "Product":  "Powershell 7",
+                    "Version":  "7.4.6.0",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"Microsoft-Powershell.png",
+                    "AvailableGroup": "AllDevices",
+                    "RequiredGroup": "",
+                    "IntuneImport":  "True"
+                }
+}
