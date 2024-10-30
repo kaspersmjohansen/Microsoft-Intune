@@ -4,7 +4,7 @@
 # https://github.com/stevecapacity/IntunePowershell/tree/main/Autopilot%20Helper%20Scripts
 
 # The script is modified and rewritten to only support Windows wallpaper and Windows lockscreen.
-# The script has been tested in Windows 11 23H2
+# The script has been tested on Windows 11 23H2 and Windows 24H2
 
 # Author: Kasper Johansen, kasperjohansen.net
 
@@ -107,7 +107,6 @@ If ($SetWallpaper -eq "true")
 #Endregion Wallpaper
 
 #Region Lockscreen
-
 If ($SetLockScreen -eq "true")
 {
     $RegKey = "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP"
