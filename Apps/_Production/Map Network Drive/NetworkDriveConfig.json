@@ -1,0 +1,9 @@
+{
+    "NetworkDriveInfo":{
+                    "NetworkDriveLetter":  "Z:",
+                    "NetworkPath":  "\\\\srvtest01.johansen.local\\test share",
+                    "Username":"srvtest01\\testuser",
+                    "Password": "Password1",
+                    "Persistent": "Yes"
+                }
+}
