@@ -215,6 +215,12 @@
                 "Name": "Microsoft.Office.Word",
                 "Remove": true,
                 "RemoveProvisionedPackage": true
+            },
+            {
+                "DisplayName": "Microsoft Windows Web Experience",
+                "Name": "MicrosoftWindows.Client.WebExperience",
+                "Remove": true,
+                "RemoveProvisionedPackage": true
             }
         ]
     },
