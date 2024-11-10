@@ -609,7 +609,7 @@
                 "description": "Download and install OneDriveSetup.exe for all users",
                 "informationURL": "",
                 "minOSbuild": "",
-                "maxOSbuild": "22621",
+                "maxOSbuild": "22631",
                 "downloadUri": "https://go.microsoft.com/fwlink/p/?LinkID=2182910",
                 "filePath": "%TEMP%\\OneDriveSetup.exe",
                 "ArgumentList": "/allusers /silent"

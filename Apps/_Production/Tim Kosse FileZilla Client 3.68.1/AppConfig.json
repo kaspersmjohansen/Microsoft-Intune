@@ -1,0 +1,15 @@
+{
+    "AppConfig":{
+                    "Vendor":  "Tim Kosse",
+                    "Product":  "FileZilla Client",
+                    "Version":  "3.68.1",
+                    "Architecture":  "x64",
+                    "InstallBehavior":"system",
+                    "DetectionScript": "DetectionScript.ps1",
+                    "RequirementScript": "",
+                    "Icon":"FIlezilla.png",
+                    "AvailableGroup": "AllDevices",
+                    "RequiredGroup": "App-Install-FileZilla-Client",
+                    "IntuneImport":  "True"
+                }
+}
