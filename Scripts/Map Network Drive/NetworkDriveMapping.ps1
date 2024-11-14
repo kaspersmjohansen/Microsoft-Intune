@@ -31,7 +31,7 @@
 None at the moment
         
 .VERSION
-    0.9.0
+    1.0.0
 
 .AUTHOR
     Kasper Johansen 
@@ -44,10 +44,12 @@ None at the moment
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
+    14-11-2024 - 1.0.0 - Code cleanup
     04-11-2024 - 0.9.0 - Script is released as is
 
 .CHANGELOG
-    0.9.0 - Initial version
+    0.9.0 - Initial release
+    1.0.0 - Removed a few lines of code used for testing
 #>
 
 param (
@@ -111,18 +113,6 @@ If (!(Test-Path "$LogDir"))
 
 # Start transcript log
 Start-Transcript -Path $($LogDir+"\"+$LogFile)
-
-<#
-# If we are running as a 32-bit process on an x64 system, re-launch as a 64-bit process
-if ($ENV:PROCESSOR_ARCHITEW6432 -eq "AMD64")
-{
-    if (Test-Path "$($env:WINDIR)\SysNative\WindowsPowerShell\v1.0\powershell.exe")
-    {
-        & "$($env:WINDIR)\SysNative\WindowsPowerShell\v1.0\powershell.exe" -ExecutionPolicy bypass -NoProfile -File "$PSCommandPath"
-        Exit $lastexitcode
-    }
-}
-#>
 
 # Get read NetworkDriveConfig.json configuration file
 $Config = Get-Content -Path $ConfigFile -Raw -Encoding UTF8 | ConvertFrom-Json
