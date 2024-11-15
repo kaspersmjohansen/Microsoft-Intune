@@ -1,9 +1,0 @@
-{
-    "NetworkDriveInfo":{
-                    "NetworkDriveLetter":  "Z:",
-                    "NetworkPath":  "\\\\srvfil01.johansen.local\\users$\\kajotest",
-                    "Username":"johansen\\kajotest",
-                    "Password": "Fl0dhest",
-                    "Persistent": "Yes"
-                }
-}

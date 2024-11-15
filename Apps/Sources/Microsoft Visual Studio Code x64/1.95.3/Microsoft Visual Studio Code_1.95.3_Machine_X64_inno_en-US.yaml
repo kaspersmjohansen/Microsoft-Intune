@@ -1,0 +1,54 @@
+PackageIdentifier: Microsoft.VisualStudioCode
+PackageVersion: 1.95.3
+Moniker: vscode
+Icons:
+- IconUrl: https://cdn.winget.microsoft.com/icons/73a4a141be5cca1b2fdbd621bc841c7f592a80052cc1946474b6f071968a390a.ico
+  IconFileType: ico
+  IconResolution: custom
+  IconTheme: default
+  IconSha256: 73a4a141be5cca1b2fdbd621bc841c7f592a80052cc1946474b6f071968a390a
+Tags:
+- developer-tools
+- editor
+PackageLocale: en-US
+ShortDescription: Microsoft Visual Studio Code is a code editor redefined and optimized
+  for building and debugging modern web and cloud applications. Microsoft Visual Studio
+  Code is free and available on your favorite platform - Linux, macOS, and Windows.
+License: Microsoft Software License
+LicenseUrl: https://code.visualstudio.com/license
+PackageName: Microsoft Visual Studio Code
+PackageUrl: https://code.visualstudio.com
+PrivacyUrl: https://privacy.microsoft.com/
+Publisher: Microsoft Corporation
+PublisherUrl: https://www.microsoft.com/
+Installers:
+- Architecture: x64
+  InstallerType: inno
+  InstallerSha256: 2e0bca6ceb39516ee4b8caadd468ad97d86aac49229162a27ad7cb9c69e63b2e
+  InstallerUrl: https://vscode.download.prss.microsoft.com/dbazure/download/stable/f1a4fb101478ce6ec82fe9627c43efbf9e98c813/VSCodeSetup-x64-1.95.3.exe
+  Scope: machine
+  InstallerAbortsTerminal: false
+  InstallLocationRequired: false
+  RequireExplicitUpgrade: false
+  DisplayInstallWarnings: false
+  DownloadCommandProhibited: false
+  ArchiveBinariesDependOnPath: false
+  UpgradeBehavior: install
+  RepairBehavior: unknown
+  Commands:
+  - code
+  ExpectedReturnCodes:
+  - InstallerReturnCode: 2
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 5
+    ReturnResponse: cancelledByUser
+  - InstallerReturnCode: 8
+    ReturnResponse: rebootRequiredForInstall
+  InstallerSwitches:
+    Custom: /mergetasks=!runcode
+    Silent: /SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART
+    SilentWithProgress: /SP- /SILENT /SUPPRESSMSGBOXES /NORESTART
+    Log: /LOG="<LOGPATH>"
+    InstallLocation: /DIR="<INSTALLPATH>"
+ManifestVersion: 1.5.0
+ManifestType: merged

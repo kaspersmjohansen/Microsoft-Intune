@@ -1,7 +1,0 @@
-(device.deviceOSType -eq "Windows") and (device.managementType -eq "MDM") and ((device.deviceId -startsWith "0") or (device.deviceId -startsWith "1"))
-
-(device.deviceOSType -eq "Windows") and (device.managementType -eq "MDM") and ((device.deviceId -startsWith "2") or (device.deviceId -startsWith "3") or (device.deviceId -startsWith "A"))
-
-(device.deviceOSType -eq "Windows") and (device.managementType -eq "MDM") and ((device.deviceId -startsWith "4") or (device.deviceId -startsWith "5") or (device.deviceId -startsWith "6") or (device.deviceId -startsWith "B"))
-
-(device.deviceOSType -eq "Windows") and (device.managementType -eq "MDM") and ((device.deviceId -startsWith "7") or (device.deviceId -startsWith "8") or (device.deviceId -startsWith "9") or (device.deviceId -startsWith "C") or (device.deviceId -startsWith "D") or (device.deviceId -startsWith "E") or (device.deviceId -startsWith "F"))
