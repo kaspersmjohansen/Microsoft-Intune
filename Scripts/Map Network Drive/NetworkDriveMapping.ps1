@@ -4,7 +4,7 @@
  
 .DESCRIPTION
     This script will map a network drive based on the information in the NetworkDriveConfig.json file.
-    The script is initially created to map a network drive on cloud only Windows devices, where the UNC share path is a non AD joined Windows server.
+    The script will map a network drive on cloud only Windows devices, where the UNC share path is a non AD joined Windows server or NAS box.
     If you have the need to map a network drive using a local user name on a non AD joined Windwso server, this is supported with this script.
     Keep in mind that the username and password is NOT encrypted with this solution, which means you should store the NetworkDriverConfig.json file in a secure location.
 
@@ -28,28 +28,27 @@
         Remove an existing network drive mapping, based on the NetworkDriveLetter parameter provided in the NetworkDriveConfig.json file
 
 .NOTES
-None at the moment
+None
         
 .VERSION
     1.0.0
 
 .AUTHOR
     Kasper Johansen 
-    kmj@apento.com
-
-.COMPANYNAME 
-    Apento
+    https://kasperjohansen.net
 
 .COPYRIGHT
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
+    16-11-2024 - 1.0.1 - Script info updated
     14-11-2024 - 1.0.0 - Code cleanup
     04-11-2024 - 0.9.0 - Script is released as is
 
 .CHANGELOG
-    0.9.0 - Initial release
+    1.0.1 - Changed some wording in the description section of the script
     1.0.0 - Removed a few lines of code used for testing
+    0.9.0 - Initial release
 #>
 
 param (
