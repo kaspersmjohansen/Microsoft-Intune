@@ -1,5 +1,5 @@
 # Credit to T-Bone, for the $AccountMember variable - https://tbone.se/2023/10/24/how-to-use-windows-laps-to-secure-local-administrator-accounts/
-$AccountName = "lapsadmin"
+$AccountName = ""
 $AdminGroupSID  = "S-1-5-32-544"
 $AdminGroupName = (Get-LocalGroup -SID $AdminGroupSID).Name
 $AccountExist = (Get-LocalUser).Name -Contains $AccountName
