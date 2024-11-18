@@ -113,7 +113,7 @@ If (!(Test-Path "$LogDir"))
 # Start transcript log
 Start-Transcript -Path $($LogDir+"\"+$LogFile)
 
-# Get read NetworkDriveConfig.json configuration file
+# Read NetworkDriveConfig.json configuration file
 $Config = Get-Content -Path $ConfigFile -Raw -Encoding UTF8 | ConvertFrom-Json
 [string]$ConfNetworkDriveLetter = $Config.NetworkDriveInfo.NetworkDriveLetter
 [string]$ConfNetworkPath = $Config.NetworkDriveInfo.NetworkPath
