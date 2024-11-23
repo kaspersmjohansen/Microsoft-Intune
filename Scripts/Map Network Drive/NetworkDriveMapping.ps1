@@ -41,12 +41,14 @@ None
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
+    23-11-2024 - 1.1.1 - Added configuration file check
     23-11-2024 - 1.1.0 - Added Write-Log function.This function is now doing the logging
     16-11-2024 - 1.0.1 - Script info updated
     14-11-2024 - 1.0.0 - Code cleanup
     04-11-2024 - 0.9.0 - Script is released as is
 
 .CHANGELOG
+    1.1.1 - Added a configuration file check, to verify that the provided config file exist
     1.1.0 - Added Write-Log function and adapted the code to used this function to log events
     1.0.1 - Changed some wording in the description section of the script
     1.0.0 - Removed a few lines of code used for testing
@@ -150,6 +152,27 @@ $Config = Get-Content -Path $ConfigFile -Raw -Encoding UTF8 | ConvertFrom-Json
 [string]$ConfPassword = $Config.NetworkDriveInfo.Password
 [string]$ConfPersistent = $Config.NetworkDriveInfo.Persistent
 
+# Check if config file exists
+If (Test-Path -Path $ConfigFile -PathType Leaf)
+{
+    try {
+        Write-Log -Message "Loading configuration: $ConfigFile" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+        $Config = Get-Content -Path $ConfigFile -Raw -Encoding UTF8 | ConvertFrom-Json
+        Write-Log -Message "Configuration file loaded: $ConfigFile" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+    }
+    catch {
+        Write-Log -Message "Unable to load configuration file: $ConfigFile" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile)
+        Write-Log -Message "Error: $_" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+        Exit 1
+    }
+}
+else {
+    Write-Log -Message "Cannot find configuration file: $ConfigFile" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile)
+    Write-Log -Message "Script exiting" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+    Exit 1
+}
+
+#Region map network drive
 # Map network drive
 If ($NetworkDrive -eq "Create")
 {    
@@ -167,7 +190,10 @@ If ($NetworkDrive -eq "Create")
         Exit 1
     }
 
-    # Create Intune detection file -NetworkDriveMappingTag.tag
+#EndRegion map network drive
+
+#Region Intune detection file
+# Create Intune detection file -NetworkDriveMappingTag.tag
     try {        
         $NetDrv = Get-PSDrive -Name $($ConfNetworkDriveLetter -replace ":","") -ErrorAction Continue
         If ($NetDrv -and ($NetDrv.DisplayRoot -eq "$ConfNetworkPath"))
