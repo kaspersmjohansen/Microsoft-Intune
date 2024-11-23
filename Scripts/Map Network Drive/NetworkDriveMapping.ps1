@@ -41,11 +41,13 @@ None
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
+    23-11-2024 - 1.1.0 - Added Write-Log function.This function is now doing the logging
     16-11-2024 - 1.0.1 - Script info updated
     14-11-2024 - 1.0.0 - Code cleanup
     04-11-2024 - 0.9.0 - Script is released as is
 
 .CHANGELOG
+    1.1.0 - Added Write-Log function and adapted the code to used this function to log events
     1.0.1 - Changed some wording in the description section of the script
     1.0.0 - Removed a few lines of code used for testing
     0.9.0 - Initial release
@@ -62,6 +64,35 @@ param (
         [string]$LogFile = "NetworkDriveMapping-$(Get-Date -Format ddMMyyHHmmss).log"
 )
 
+# Function to write log file
+# Credit goes to Sean McAvinue for this write log function - https://seanmcavinue.net/2024/08/07/a-simple-and-effective-powershell-log-function/
+Function Write-Log {
+    param(
+        [Parameter(Mandatory = $true)]
+        [String]$Message,
+        [Parameter(Mandatory = $true)]
+        [String]$LogFilePath,
+        [Parameter(Mandatory = $true)]
+        [String]$LogType,
+        [Parameter(Mandatory = $false)]
+        [switch]$DebugEnabled = $false
+    )
+    $Date = Get-Date
+    $Message = "$Date - [$LogType] $Message"
+    Add-Content -Path $LogFilePath -Value $Message
+    if ($DebugEnabled) {
+        If ($LogType -eq "Error") {
+            write-host $Message -ForegroundColor Red
+        }
+        elseif ($LogType -eq "Warning") {
+            write-host $Message -ForegroundColor Yellow
+        }
+        else {
+            write-host $Message
+        }
+    }
+}
+
 #Region functions
 function MapNetworkDrive
 {
@@ -74,7 +105,7 @@ function MapNetworkDrive
             [string]$Username,
             [Parameter(Mandatory = $true)]
             [string]$Password,
-            [Parameter(Mandatory = $true)]
+            [Parameter(Mandatory = $true)][ValidateSet("Yes","No")]
             [string]$Persistent,
             [Parameter(Mandatory = $true)][ValidateSet("Create","Remove")]
             [string]$Status
@@ -84,22 +115,22 @@ function MapNetworkDrive
             If ($Persistent -eq "Yes")
             {
                 Write-Verbose "Creating persistent network drive - $LocalPath - $RemotePath"
-                Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath /delete" -NoNewWindow -Wait -RedirectStandardOutput "$env:USERPROFILE\NetworkDriveMapping\netuse-delete-persistent.log"
-                Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath `"$RemotePath`" /user:$Username $Password /Persistent:Yes" -NoNewWindow -Wait -RedirectStandardOutput "$env:USERPROFILE\NetworkDriveMapping\netuse-create-persistent.log"
+                Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath /delete" -NoNewWindow -Wait
+                Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath `"$RemotePath`" /user:$Username $Password /Persistent:Yes" -NoNewWindow -Wait
             }
 
             If ($Persistent -eq "No")
             {
                 Write-Verbose "Creating a non-persistent network drive - $LocalPath - $RemotePath"
-                Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath /delete" -NoNewWindow -Wait -RedirectStandardOutput "$env:USERPROFILE\NetworkDriveMapping\netuse-delete-nonpersistent.log"
-                Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath `"$RemotePath`" /user:$Username $Password /Persistent:No" -NoNewWindow -Wait -RedirectStandardOutput "$env:USERPROFILE\NetworkDriveMapping\netuse-create-nonpersistent.log"
+                Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath /delete" -NoNewWindow -Wait
+                Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath `"$RemotePath`" /user:$Username $Password /Persistent:No" -NoNewWindow -Wait
             }
         }
 
         If ($Status -eq "Remove")
         {
             Write-Verbose "Removing network drive - $LocalPath"
-            Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath /delete" -NoNewWindow -RedirectStandardOutput "$env:USERPROFILE\NetworkDriveMapping\netuse-remove.log"
+            Start-Process -FilePath "$env:windir\system32\cmd.exe" -ArgumentList "/C net use $LocalPath /delete" -NoNewWindow
         }
 }
 #Endregion
@@ -107,11 +138,9 @@ function MapNetworkDrive
 # Create $LogDir folder if it does not exist
 If (!(Test-Path "$LogDir"))
 {
-    New-Item -Path "$LogDir" -ItemType Directory    
+    New-Item -Path "$LogDir" -ItemType Directory -ErrorAction Continue
+    Write-Log -Message "$LogDir created" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
 }
-
-# Start transcript log
-Start-Transcript -Path $($LogDir+"\"+$LogFile)
 
 # Read NetworkDriveConfig.json configuration file
 $Config = Get-Content -Path $ConfigFile -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -121,30 +150,67 @@ $Config = Get-Content -Path $ConfigFile -Raw -Encoding UTF8 | ConvertFrom-Json
 [string]$ConfPassword = $Config.NetworkDriveInfo.Password
 [string]$ConfPersistent = $Config.NetworkDriveInfo.Persistent
 
-MapNetworkDrive -LocalPath $ConfNetworkDriveLetter -RemotePath $ConfNetworkPath -Username $ConfUsername -Password $ConfPassword -Persistent $ConfPersistent -Status $NetworkDrive
-
-#Region create Intune detection file - NetworkDriveMappingTag.tag
+# Map network drive
 If ($NetworkDrive -eq "Create")
-{
-    $NetDrv = Get-PSDrive -Name $($ConfNetworkDriveLetter -replace ":","") -ErrorAction SilentlyContinue
-    If ($NetDrv -and ($NetDrv.DisplayRoot -eq "$ConfNetworkPath"))
-    {
-        # Create a tag file just so Intune knows this was installed
-        Set-Content -Path "$LogDir\NetworkDriveMappingTag.tag" -Value "$ConfNetworkDriveLetter has been mapped"
+{    
+    try {
+        Write-Log -Message "Mapping network drive" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+        Write-Log -Message "Network drive letter: $ConfNetworkDriveLetter" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+        Write-Log -Message "Network drive path: $ConfNetworkPath" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+        Write-Log -Message "Network drive username: $ConfUsername" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+        Write-Log -Message "Network drive persistent: $ConfPersistent" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+        MapNetworkDrive -LocalPath $ConfNetworkDriveLetter -RemotePath $ConfNetworkPath -Username $ConfUsername -Password $ConfPassword -Persistent $ConfPersistent -Status $NetworkDrive
     }
-    else
-    {
-        Write-Host "Network drive is not mapped"
+    catch {
+        Write-Log -Message "Failed to map network drive: $ConfNetworkDriveLetter" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile)
+        Write-Log -Message "Error: $_" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile) 
+        Exit 1
+    }
+
+    # Create Intune detection file -NetworkDriveMappingTag.tag
+    try {        
+        $NetDrv = Get-PSDrive -Name $($ConfNetworkDriveLetter -replace ":","") -ErrorAction Continue
+        If ($NetDrv -and ($NetDrv.DisplayRoot -eq "$ConfNetworkPath"))
+        {
+            Write-Log -Message "Network drive: $ConfNetworkDriveLetter - $ConfNetworkPath mapped successfully" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+            Write-Log -Message "Create tag file: NetworkDriveMappingTag.tag in $Logdir" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+            Set-Content -Path "$LogDir\NetworkDriveMappingTag.tag" -Value "$ConfNetworkDriveLetter has been mapped"
+        }
+        else
+        {
+            Write-Log -Message "Network drive path: $ConfNetworkPath not found" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile)
+        }
+    }
+    catch {
+        Write-Log -Message "Failed to create tag file: NetworkDriveMappingTag.tag - Error: $_" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile)
+        Exit 1
     }
 }
 
 If ($NetworkDrive -eq "Remove") 
 {
-    If (Test-Path -Path "$LogDir\NetworkDriveMappingTag.tag" -ErrorAction SilentlyContinue)
+    try {
+        Write-Log -Message "Removing network drive: $ConfNetworkDriveLetter" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+        MapNetworkDrive -LocalPath $ConfNetworkDriveLetter -RemotePath $ConfNetworkPath -Username $ConfUsername -Password $ConfPassword -Persistent $ConfPersistent -Status $NetworkDrive    }
+    catch {
+        Write-Log -Message "Failed to remove network drive: $ConfNetworkDriveLetter" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile)
+        Write-Log -Message "Error: $_" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile) 
+        Exit 1
+    }
+    
+    If (Test-Path -Path "$LogDir\NetworkDriveMappingTag.tag" -ErrorAction Continue)
     {
-        Remove-Item -Path "$LogDir\NetworkDriveMappingTag.tag" -Verbose
+        try {
+            Write-Log -Message "Removing tag file: NetworkDriveMappingTag.tag in $LogDir" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+            Remove-Item -Path "$LogDir\NetworkDriveMappingTag.tag"
+        }
+        catch {
+            Write-Log -Message "Unable to remove tag file: NetworkDriveMappingTag.tag in $LogDir - Error: $_" -LogType "Error" -LogFilePath $($LogDir+"\"+$LogFile)
+            Exit 1
+        }        
+    }
+    else {
+        Write-Log -Message "Tag file does not exist: NetworkDriveMappingTag.tag in  $LogDir - Error: $_" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
     }
 }
 #Endregion
-
-Stop-Transcript
