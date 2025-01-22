@@ -1,0 +1,10 @@
+{
+    "ScheduledtaskInfo":{
+                    "TaskName":  "LaunchEdgeBrowser",
+                    "TaskDescription":  "Launch Microsoft Edge at logon",
+                    "TaskPath":"\\CustomScheduledTasks",
+                    "TaskAction": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+                    "TaskActionArguments": "--profile-directory=Default",
+                    "TaskActionWorkingDirectory": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application"
+                }
+}
