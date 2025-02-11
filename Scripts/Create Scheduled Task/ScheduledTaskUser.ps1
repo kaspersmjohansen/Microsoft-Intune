@@ -3,7 +3,7 @@
     Script to create a scheduled task
  
 .DESCRIPTION
-    This script will create a scheduled task which executes at user logon. The scheduled task is configured with the local "Users" group security principal.
+    This script will create a scheduled task which executes at user logon. The scheduled task is configured in the context of the user creating the scheduled task.
     The scheduled task is configured using a json file.
 
 .PARAMETER ConfigFile
@@ -51,7 +51,7 @@ param (
         [Parameter(Mandatory = $true)][ValidateSet("Register","Unregister")]
         [string]$TaskStatus,
         [Parameter(Mandatory = $false)]
-        [string]$LogDir = "$env:ProgramData\ScheduledTask",
+        [string]$LogDir = "$env:USERPROFILE\ScheduledTask",
         [Parameter(Mandatory = $false)]
         [string]$LogFile = "ScheduledTask-$(Get-Date -Format ddMMyyHHmmss).log"
 )
@@ -126,13 +126,13 @@ If ($TaskStatus -eq "Register")
 {
 # Find Builtin\Users name on localized Windows
 # Well known SIDs are found here - https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers#well-known-sids
-$GroupName = Get-LocalGroup -SID "S-1-5-32-545"
+# $GroupName = Get-LocalGroup -SID "S-1-5-32-545"
 
 # Define additional variables containing scheduled task action, principal, trigger and settings
 $A = New-ScheduledTaskAction -Execute $TaskAction -Argument $TaskActionArguments -WorkingDirectory $TaskActionWorkingDirectory
-$P = New-ScheduledTaskPrincipal -GroupId $GroupName -RunLevel Limited
+$P = New-ScheduledTaskPrincipal -UserId $env:USERNAME -RunLevel Limited
 $S = New-ScheduledTaskSettingsSet -Compatibility Win8 -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries -DontStopOnIdleEnd
-$T = New-ScheduledTaskTrigger -AtLogon
+$T = New-ScheduledTaskTrigger -AtLogon -User $env:USERNAME
 
 # Cook it all up and create the scheduled task
 $RegSchTaskParameters = @{
@@ -149,11 +149,11 @@ try {
     Write-Log -Message "Registering scheduled task: $TaskName" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
     Write-Log -Message "Scheduled task description: $TaskDescription" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
     Write-Log -Message "Scheduled task path: $TaskPath" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
-    Write-Log -Message "Scheduled task principal: $GroupName" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+    Write-Log -Message "Scheduled task principal: $env:USERNAME" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
     Write-Log -Message "Scheduled task action: $TaskAction" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
     Write-Log -Message "Scheduled task action arguments: $TaskActionArguments" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
     Write-Log -Message "Scheduled task working directory: $TaskActionWorkingDirectory" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
-    Write-Log -Message "Scheduled task trigger: $TaskTrigger" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
+    Write-Log -Message "Scheduled task trigger: at $env:USERNAME logon" -LogType "Info" -LogFilePath $($LogDir+"\"+$LogFile)
     Register-ScheduledTask @RegSchTaskParameters -ErrorAction Stop   
 }
 catch {
