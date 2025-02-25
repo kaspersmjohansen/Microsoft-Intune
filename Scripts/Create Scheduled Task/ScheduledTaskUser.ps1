@@ -38,10 +38,10 @@ Support for multiple json files
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
-    22-01-25 - 1.0.0 - Release to public
+    25-02-2025 - 1.0.0 - Release to public
 
 .CHANGELOG
-    22-01-2024 - 1.0.0 - Release to public
+    25-02-2025 - 1.0.0 - Release to public
 
 #>
 
