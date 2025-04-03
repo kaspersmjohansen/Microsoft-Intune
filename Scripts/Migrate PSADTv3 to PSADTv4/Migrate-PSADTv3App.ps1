@@ -34,10 +34,10 @@
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
-    16-03-2025 - 1.0.0 - Release to public
+    03-04-2025 - 1.0.0 - Release to public
 
 .CHANGELOG
-    16-03-2025 - 1.0.0 - Release to public
+    03-04-2025 - 1.0.0 - Release to public
 #>
 param(
     $SourceAppFolder,
@@ -73,6 +73,12 @@ else
     {
         Install-Module PSAppDeployToolkit.Tools -Force -Scope CurrentUser -AllowPreRelease
         Import-Module PSAppDeployToolkit.Tools
+    }
+
+    If (!(Get-Module -ListAvailable -Name PSAppDeployToolkit))
+    {
+        Install-Module PSAppDeployToolkit -Force -Scope CurrentUser
+        Import-Module PSAppDeployToolkit
     }
 }
 
