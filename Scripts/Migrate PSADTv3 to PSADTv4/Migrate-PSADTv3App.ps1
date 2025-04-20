@@ -13,7 +13,7 @@
     A folder location with 1 or more PSADTv3 apps inside.
 
 .PARAMETER NewAppFolder
-    A folder location for the converted PSADTv4 app
+    A folder location for the new converted PSADTv4 app
 
 .PARAMETER NewAppmediaFolderName
     Creates a containing/media folder inside the NewAppFolder
@@ -21,10 +21,19 @@
 .PARAMETER NewAppLogPath
     Configures the PSADT and MSI log paths in the converted PSADTv4 app
 
+.EXAMPLE
+    .\Migrate-PSADTv3App -SourceAppFolder C:\temp\PSADTv3 -NewAppFolder C:\temp\PSADTv4
+        Migrate all PSADTv3 based applications in the C:\temp\PSADTv3 folder to PSADTv4 in the C:\temp\PSADTv4 folder
+    
+    .\Migrate-PSADTv3App -SourceAppFolder C:\temp\PSADTv3 -NewAppFolder C:\temp\PSADTv4 -NewAppMediaFolderName "Media" -NewAppLogPath "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs"
+        Migrate all PSADTv3 based applications in the C:\temp\PSADTv3 folder to PSADTv4 in the C:\temp\PSADTv4\Media folder 
+        and change the default log location to C:\ProgramData\Microsoft\IntuneManagementExtension\Logs
 
 .NOTES
+None
 
 .TODO
+Nothing
        
 .AUTHOR
     Kasper Johansen 
@@ -34,15 +43,19 @@
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
-    03-04-2025 - 1.0.0 - Release to public
+    20-04-2025 - 1.0.0 - Release to public
 
 .CHANGELOG
-    03-04-2025 - 1.0.0 - Release to public
+    20-04-2025 - 1.0.0 - Release to public
 #>
 param(
+    [Parameter(Mandatory = $true)]
     $SourceAppFolder,
+    [Parameter(Mandatory = $true)]
     $NewAppFolder,
+    [Parameter(Mandatory = $false)]
     $NewAppMediaFolderName,
+    [Parameter(Mandatory = $false)]
     $NewAppLogPath
 )
 
@@ -85,7 +98,7 @@ else
 If (!(Test-Path -Path $NewAppFolder))
 {
     Write-Host "New application folder does not exist: $NewAppFolder" -ForegroundColor Cyan
-    New-Item -Path $NewAppFolder -ItemType Directory
+    New-Item -Path $NewAppFolder -ItemType Directory | Out-Null
 }
 
 # Get app source folder name 
@@ -110,7 +123,7 @@ ForEach ($AppFolder in $SourceAppFolderName)
 
             Write-Host "Copy PSADTv3 app source files to PSADTv4 app location: $NewAppFolder\$AppFolder\Files" -ForegroundColor Cyan
             Copy-Item -Path "$($FilesFolder.FullName)\*" -Destination "$NewAppFolder\$AppFolder\Files" -Recurse
-            Copy-Item -Path "$($SupportFilesFolder.FullName)\*" -Destination "$NewAppFolder\$AppFolder\SupportFiles" -Recurse
+            Copy-Item -Path "$($SupportFilesFolder.FullName)\*" -Destination "$NewAppFolder\$AppFolder\SupportFiles" -Recurse 
 
             # Configure toolkit and MSI log paths if defined in variable
             Write-Host "Update PSADTv4 app toolkit and MSI log paths" -ForegroundColor Cyan
@@ -125,6 +138,9 @@ ForEach ($AppFolder in $SourceAppFolderName)
 
             Write-Host "Move PSADTv4 app files and folders to media folder: $NewAppFolder\$AppFolder\$NewAppMediaFolderName" -ForegroundColor Cyan
             Get-Childitem -Path "$NewAppFolder\$AppFolder" -Exclude $NewAppMediaFolderName | Move-Item -Destination "$NewAppFolder\$AppFolder\$NewAppMediaFolderName"
+
+            # If source app has a containing/media folder, copy any additional files in the source folder to the new converted PSADTv4 app folder
+            Get-Childitem -Path "$SourceAppFolder\$AppFolder" -File | Copy-Item -Destination "$NewAppFolder\$AppFolder"
         }
             else 
             {
