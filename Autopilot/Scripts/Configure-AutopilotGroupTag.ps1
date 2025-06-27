@@ -9,7 +9,10 @@
     Tenant ID you want to connect to.
 
 .PARAMETER UserLocation
-    The location ID country code as shown in Entra. 
+    The location ID country code as shown in Entra.
+    
+.PARAMETER Country
+    The country name as shown in Entra.
 
 .PARAMETER GroupTag
     The group tag you want to apply to the Windows device(s). If left blank, it will clear the group tag on the Windows device.
@@ -17,11 +20,13 @@
 .EXAMPLE
     .\Configure-AutopilotGroupTag.ps1 -TenantID "tenant.com" -UserLocation "DK" -GroupTag "GroupTag"
 
+    .\Configure-AutopilotGroupTag.ps1 -TenantID "tenant.com" -UserCountry "Denmark" -GroupTag "GroupTag"
+
 .NOTES
 
         
 .VERSION
-    0.9.0
+    0.9.1
 
 .AUTHOR
     Kasper Johansen 
@@ -34,16 +39,20 @@
     Feel free to use this as much as you want :)
 
 .RELEASENOTES
+    0.9.1 - Added the UserCountry parameter
     0.9.0 - Initial release
 
 .CHANGELOG
+    0.9-1 - Added support for targetting users based on the country property in Entra, eg. Denmark, Sweden, Germany
 
 #>
 param(
     [Parameter(Mandatory = $true)]
     [string]$TenantId,
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]$UserLocation,
+    [Parameter(Mandatory = $false)]
+    [string]$UserCountry,
     [Parameter(Mandatory = $false)]
     [string]$GroupTag
 )
@@ -84,7 +93,15 @@ ForEach ($Module in $RequiredModules)
 # Connect to MgGraph
 Connect-MgGraph -TenantId $TenantId -Scopes "DeviceManagementConfiguration.ReadWrite.All","DeviceManagementManagedDevices.ReadWrite.All","DeviceManagementServiceConfig.ReadWrite.All","User.Read.All"
 
-$Users = Get-EntraUser -Filter "UsageLocation eq '$UserLocation'"
+If ($UserLocation)
+{
+    $Users = Get-EntraUser -Filter "UsageLocation eq '$UserLocation'"    
+}
+If ($UserCountry)
+{
+    $Users = Get-EntraUser -Filter "Country eq '$UserCountry'"    
+}
+
 ForEach ($User in $Users)
 {
     $UPN = $User.UserPrincipalName
