@@ -1,0 +1,9 @@
+*.exe
+*.msi
+*.cab
+*.intunewin
+*.msix
+!Deploy-Application.exe
+!ServiceUI.exe
+_Build/
+_Dev/
