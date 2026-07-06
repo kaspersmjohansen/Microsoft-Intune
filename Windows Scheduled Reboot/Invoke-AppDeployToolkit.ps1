@@ -88,10 +88,10 @@ param
 # By setting the "AppName" property, Zero-Config MSI will be disabled.
 $adtSession = @{
     # App variables.
-    AppVendor = ''
-    AppName = ''
-    AppVersion = ''
-    AppArch = ''
+    AppVendor = 'kasperjohansen.net'
+    AppName = 'Windows Scheduled Reboot'
+    AppVersion = '1.0'
+    AppArch = 'x64'
     AppLang = 'EN'
     AppRevision = '01'
     AppSuccessExitCodes = @(0)
@@ -99,7 +99,7 @@ $adtSession = @{
     AppProcessesToClose = @()  # Example: @('excel', @{ Name = 'winword'; Description = 'Microsoft Word' })
     AppScriptVersion = '1.0.0'
     AppScriptDate = '2026-07-02'
-    AppScriptAuthor = '<author name>'
+    AppScriptAuthor = 'Kasper Johansen - kasperjohansen.net'
     RequireAdmin = $true
 
     # Install Titles (Only set here to override defaults set by the toolkit).
@@ -126,7 +126,7 @@ function Install-ADTDeployment
 
     ## Show Welcome Message, close processes if specified, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt.
     $saiwParams = @{
-        AllowDefer = $true
+        AllowDefer = $false
         DeferTimes = 3
         CheckDiskSpace = $true
         PersistPrompt = $true
@@ -141,7 +141,7 @@ function Install-ADTDeployment
     Show-ADTInstallationProgress
 
     ## <Perform Pre-Installation tasks here>
-
+    
 
     ##================================================
     ## MARK: Install
@@ -164,21 +164,61 @@ function Install-ADTDeployment
     }
 
     ## <Perform Installation tasks here>
+    [int]$RestartDelayMinutes = '30'
+    $OrgName          = 'Company'
+    $TaskTag          = 'FirstLogonRestart'
 
+    $TaskPath     = "\$OrgName\"
+    $TaskName     = "${TaskTag}"
+    $ScriptDir    = "$env:ProgramData\Microsoft\$OrgName\WindowsScheduledReboot"
+    $ToastScript  = Join-Path "$ScriptDir" "ScheduledReboot.ps1"  
 
+    # Create scriptdir
+    New-ADTFolder -LiteralPath "$ScriptDir"
+
+    # Copy the scheduled reboot script to the script directory
+    Copy-ADTFile -Path "$($adtSession.DirSupportFiles)\ScheduledReboot.ps1" -Destination $(Join-Path "$ScriptDir" "ScheduledReboot.ps1")
+
+    # Register scheduled task
+    # S-1-5-32-545 = BUILTIN\Users. AtLogon + group principal runs in the interactive
+    # session of whichever user logs on, with their full desktop token. Works for
+    # standard users - no elevation required to trigger the logon event.
+    $Action    = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"$ToastScript`" -CountdownMinutes $RestartDelayMinutes"
+    $Trigger   = New-ScheduledTaskTrigger -AtLogon
+    $Trigger.EndBoundary = (Get-Date).AddMinutes(60).ToString("yyyy-MM-ddTHH:mm:ss")
+    $Principal = New-ScheduledTaskPrincipal -GroupId 'S-1-5-32-545' -RunLevel Highest
+    $Settings  = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Minutes 60) -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DeleteExpiredTaskAfter (New-TimeSpan -Seconds 0)
+
+    # Unregister scheduled task, if is exist
+    Unregister-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -Confirm:$false -ErrorAction SilentlyContinue
+
+    # Register scheduled task
+    Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings -Description "Shows restart countdown toast at first user logon after Intune enrollment." -Force | Out-Null
+
+    If (Get-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -ErrorAction SilentlyContinue)
+    {
+        Write-ADTLogEntry -Message "Scheduled task '$TaskName' registered successfully." -Severity 1
+        New-Item -Path "$ScriptDir" -Name "WindowsScheduledReboot.tag" -ItemType File -Force | Out-Null
+    }
+    Else
+    {
+        Write-ADTLogEntry -Message "Failed to register scheduled task '$TaskName'." -Severity 3
+        Exit 69000
+    }
+    
     ##================================================
     ## MARK: Post-Install
     ##================================================
     $adtSession.InstallPhase = "Post-$($adtSession.DeploymentType)"
 
     ## <Perform Post-Installation tasks here>
-
+    
 
     ## Display a message at the end of the install.
-    if (!$adtSession.UseDefaultMsi)
-    {
-        Show-ADTInstallationPrompt -Message 'You can customize text to appear at the end of an install or remove it completely for unattended installations.' -ButtonRightText 'OK' -NoWait
-    }
+    #if (!$adtSession.UseDefaultMsi)
+    #{
+    #    Show-ADTInstallationPrompt -Message 'You can customize text to appear at the end of an install or remove it completely for unattended installations.' -ButtonRightText 'OK' -NoWait
+    #}
 }
 
 function Uninstall-ADTDeployment
@@ -222,7 +262,7 @@ function Uninstall-ADTDeployment
     }
 
     ## <Perform Uninstallation tasks here>
-
+    
 
     ##================================================
     ## MARK: Post-Uninstallation
