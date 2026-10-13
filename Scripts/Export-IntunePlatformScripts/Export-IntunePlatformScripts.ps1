@@ -20,10 +20,9 @@
     .\Export-IntunePlatformScripts.ps1 -OutputPath C:\Temp\IntunePlatformScripts -TenantId contoso.onmicrosoft.com
 
 .NOTES
-    Author  : Kasper M. Johansen | Apento
-    Email   : kmj@apento.com
+    Author  : Kasper Johansen - kasperjohansen.net
     Version : 1.0
-    Date    : 2026-06-29
+    Date    : 2026-10-13
     Requires: Microsoft.Graph.Authentication
 #>
 [CmdletBinding(SupportsShouldProcess)]
