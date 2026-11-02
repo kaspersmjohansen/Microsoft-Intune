@@ -14,8 +14,7 @@
     Exit 1 = remediation failed
 
 .NOTES
-    Author:  Kasper Johansen | Apento
-    Contact: kmj@apento.com
+    Author:  Kasper Johansen - kasperjohansen.net
     Version: 1.0
     Date:    2026-11-02
 #>
